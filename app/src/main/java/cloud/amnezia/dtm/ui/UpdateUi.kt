@@ -12,6 +12,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import kotlinx.coroutines.delay
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +31,7 @@ import java.io.File
 
 /** Проверка обновлений на GitHub: найти → показать что нового → скачать → установить. */
 @Composable
-fun UpdateAction(trigger: @Composable (start: () -> Unit) -> Unit) {
+fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> Unit) -> Unit = {}) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var checking by remember { mutableStateOf(false) }
@@ -39,12 +41,23 @@ fun UpdateAction(trigger: @Composable (start: () -> Unit) -> Unit) {
     var ready by remember { mutableStateOf<File?>(null) }
     var message by remember { mutableStateOf<String?>(null) }
 
+    // Тихая автопроверка: раз в сутки, без окон «нет обновлений» и ошибок сети.
+    if (autoCheck) LaunchedEffect(Unit) {
+        if (!Updater.autoCheckDue(context)) return@LaunchedEffect
+        delay(1500) // не мешаем открытию главного экрана
+        runCatching { Updater.check() }.onSuccess { rel ->
+            Updater.markChecked(context)
+            if (rel != null) found = rel
+        }
+    }
+
     trigger {
         scope.launch {
             checking = true
             val r = runCatching { Updater.check() }
             checking = false
             r.onSuccess { rel ->
+                Updater.markChecked(context)
                 if (rel == null) message = "У вас последняя версия (${BuildConfig.VERSION_NAME})." else found = rel
             }.onFailure { message = "Не удалось проверить обновления. Проверьте интернет.\n\n${it.message}" }
         }
