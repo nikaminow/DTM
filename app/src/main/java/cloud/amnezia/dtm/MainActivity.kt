@@ -96,7 +96,9 @@ class MainActivity : FragmentActivity() {
         }
         stoppedAt = 0
         // Расшифрованные копии живут только пока их смотрят в другом приложении.
-        Crypto.viewDir(this).deleteRecursively()
+        // Не стираем сразу: другое приложение (Telegram и т.п.) может дочитывать отправленный файл.
+        val cutoff = System.currentTimeMillis() - 15 * 60_000L
+        Crypto.viewDir(this).listFiles()?.forEach { if (it.lastModified() < cutoff) it.deleteRecursively() }
     }
 
     override fun onStop() {

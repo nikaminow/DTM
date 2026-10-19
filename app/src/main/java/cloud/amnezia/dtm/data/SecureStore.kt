@@ -92,6 +92,15 @@ object SecureStore {
 
     fun lockedUntil(context: Context): Long = prefs(context).getLong(K_LOCK_UNTIL, 0)
 
+    /** Совпадает ли с основным PIN — без счётчика ошибок и других побочных эффектов. */
+    fun matchesPin(context: Context, pin: String): Boolean {
+        val p = prefs(context)
+        val salt = p.getString(K_PIN_SALT, null) ?: return false
+        val stored = p.getString(K_PIN_HASH, null) ?: return false
+        val candidate = if (p.getInt(K_PIN_VER, 1) >= 2) hash(pin, salt) else legacyHash(pin, salt)
+        return MessageDigest.isEqual(stored.toByteArray(), candidate.toByteArray())
+    }
+
     // ---- Тревожный (ложный) PIN: открывает экран-приманку ----
 
     fun hasDuressPin(context: Context): Boolean = prefs(context).contains(K_DURESS_HASH)
@@ -106,7 +115,7 @@ object SecureStore {
         e.apply()
     }
 
-    private fun isDuress(context: Context, pin: String): Boolean {
+    fun isDuress(context: Context, pin: String): Boolean {
         val p = prefs(context)
         val salt = p.getString(K_DURESS_SALT, null) ?: return false
         val stored = p.getString(K_DURESS_HASH, null) ?: return false

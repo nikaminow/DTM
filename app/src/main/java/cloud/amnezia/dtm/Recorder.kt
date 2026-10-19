@@ -101,18 +101,23 @@ object Recorder {
     }
 
     fun count(context: Context): Int =
-        encDir(context).listFiles()?.map { it.name.substringBefore('_') }?.distinct()?.size ?: 0
+        encDir(context).listFiles()?.filter { it.name.endsWith(".enc") }?.map { f ->
+            // Новые файлы: «сессия_часть»; старые (DTM_дата…) — каждый файл отдельная запись.
+            val prefix = f.name.substringBefore('_')
+            if (prefix.all(Char::isDigit)) prefix else f.name
+        }?.distinct()?.size ?: 0
 
     suspend fun list(context: Context): List<Item> = withContext(Dispatchers.IO) {
         recoverOrphans(context)
         val chunks = encDir(context).listFiles()
             ?.filter { it.isFile && it.name.endsWith(".enc") }
             ?.mapNotNull { f ->
+                // Записи старых версий: без описания или без номера сессии — каждая отдельно.
                 val meta = SecureStore.getString(context, metaKey(f.name))?.let { runCatching { JSONObject(it) }.getOrNull() }
-                    ?: return@mapNotNull null
+                    ?: JSONObject().put("start", f.lastModified()).put("end", f.lastModified()).put("size", f.length())
                 Chunk(
                     file = f,
-                    sessionId = meta.optLong("session"),
+                    sessionId = if (meta.has("session")) meta.optLong("session") else meta.optLong("start", f.lastModified()),
                     part = meta.optInt("part"),
                     startUtc = meta.optLong("start"),
                     endUtc = meta.optLong("end"),

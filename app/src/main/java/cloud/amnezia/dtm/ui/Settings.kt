@@ -236,6 +236,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                                 val src = cloud.amnezia.dtm.CrashLogger.logFile(context)
                                 val out = java.io.File(cloud.amnezia.dtm.data.Crypto.viewDir(context), "crash.txt")
                                 src.copyTo(out, overwrite = true)
+                                cloud.amnezia.dtm.CrashLogger.clear(context) // пункт исчезнет до следующего сбоя
                                 shareFile(context, out, "Отчёт об ошибке")
                             }
                         })
@@ -331,17 +332,23 @@ fun SettingsScreen(onBack: () -> Unit) {
     if (setDuress) {
         var p1 by remember { mutableStateOf("") }
         var p2 by remember { mutableStateOf("") }
-        val sameAsReal = p1.isNotEmpty() && SecureStore.checkPin(context, p1)
-        val valid = p1.length in 4..8 && p1 == p2 && !sameAsReal
+        // Экран входа проверяет PIN по длине основного, поэтому длина должна совпадать.
+        val need = remember { SecureStore.pinLength(context) }
+        var sameAsReal by remember { mutableStateOf(false) }
+        LaunchedEffect(p1) {
+            sameAsReal = p1.length == need && withContext(Dispatchers.Default) { SecureStore.matchesPin(context, p1) }
+        }
+        val valid = p1.length == need && p1 == p2 && !sameAsReal
         AlertDialog(
             onDismissRequest = { setDuress = false },
             title = { Text("Тревожный PIN") },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Этот PIN откроет безобидный блокнот вместо настоящего приложения. Он должен отличаться от основного.",
+                    Text("Этот PIN откроет безобидный блокнот вместо настоящего приложения. " +
+                        "Он должен отличаться от основного и состоять из $need цифр — как основной.",
                         style = MaterialTheme.typography.bodyMedium)
-                    PinField(p1, { p1 = it }, "Тревожный PIN")
-                    PinField(p2, { p2 = it }, "Повторите")
+                    PinField(p1, { if (it.length <= need) p1 = it }, "Тревожный PIN ($need цифр)")
+                    PinField(p2, { if (it.length <= need) p2 = it }, "Повторите")
                     if (sameAsReal) Text("Должен отличаться от основного PIN", color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall)
                 }
@@ -374,8 +381,14 @@ fun SettingsScreen(onBack: () -> Unit) {
                 TextButton(enabled = valid, onClick = {
                     changePin = false
                     scope.launch {
+                        val oldLen = SecureStore.pinLength(context)
+                        val clash = duressSet && withContext(Dispatchers.Default) { SecureStore.isDuress(context, p1) }
                         withContext(Dispatchers.Default) { SecureStore.setPin(context, p1) }
-                        snack.showSnackbar("PIN-код обновлён")
+                        // Тревожный PIN другой длины или совпадающий с новым основным — убираем и предупреждаем.
+                        if (duressSet && (p1.length != oldLen || clash)) {
+                            SecureStore.setDuressPin(context, null); duressSet = false
+                            snack.showSnackbar("PIN-код обновлён. Тревожный PIN сброшен — задайте его заново той же длины")
+                        } else snack.showSnackbar("PIN-код обновлён")
                     }
                 }) { Text("Сохранить") }
             },
