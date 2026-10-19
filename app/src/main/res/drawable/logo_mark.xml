@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Логотип внутри приложения: круглый знак. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+    <group>
+        <clip-path android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0" />
+        <path android:pathData="M0,0h108v108h-108z">
+            <aapt:attr name="android:fillColor">
+                <gradient android:type="linear" android:startX="0" android:startY="0" android:endX="108" android:endY="108"
+                    android:startColor="#FFA6C7B4" android:endColor="#FF527765" />
+            </aapt:attr>
+        </path>    </group>
+    <group android:scaleX="0.92" android:scaleY="0.92" android:pivotX="54" android:pivotY="54">
+        <group android:translateX="-3" android:translateY="3">
+            <group android:rotation="-45" android:pivotX="42" android:pivotY="66">
+                <path android:strokeColor="#FFFFFBF4" android:strokeWidth="7" android:strokeLineCap="round"
+                    android:pathData="M35,56H49A10,10 0,0 1,49,76H35A10,10 0,0 1,35,56Z" />
+            </group>
+            <group android:rotation="-45" android:pivotX="66" android:pivotY="42">
+                <path android:strokeColor="#FFFFFBF4" android:strokeWidth="7" android:strokeLineCap="round"
+                    android:pathData="M69,32H59A10,10 0,0 0,59,52H69" />
+                <path android:strokeColor="#FFFFFBF4" android:strokeWidth="7" android:strokeLineCap="round"
+                    android:pathData="M82.42,32.6A10,10 0,0 1,82.42,51.4" />
+                <path android:strokeColor="#FFF7D6BC" android:strokeWidth="4" android:strokeLineCap="round"
+                    android:pathData="M93,33L97,30M94,42L99,42M93,51L97,54" />
+            </group>
+        </group>
+    </group></vector>

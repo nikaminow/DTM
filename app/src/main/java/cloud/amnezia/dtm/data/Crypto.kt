@@ -30,6 +30,12 @@ object Crypto {
             EncryptedFile.FileEncryptionScheme.AES256_GCM_HKDF_4KB
         ).build()
 
+    /**
+     * Запись строго по очереди: EncryptedFile не умеет перезаписывать файл,
+     * поэтому «удалить → создать» должно быть атомарным, иначе параллельная
+     * запись того же файла падает с «output file already exists».
+     */
+    @Synchronized
     fun encryptStream(context: Context, input: InputStream, dest: File) {
         dest.parentFile?.mkdirs()
         if (dest.exists()) dest.delete()

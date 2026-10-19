@@ -90,20 +90,16 @@ object Updater {
         }
     }
 
-    // ---- Автопроверка: не чаще раза в сутки ----
+    // ---- Автопроверка при входе ----
 
     private const val K_AUTO = "auto_update"
     private const val K_LAST = "last_update_check"
-    private const val INTERVAL = 24 * 3600 * 1000L
 
     fun isAuto(context: Context) = SecureStore.getBool(context, K_AUTO, true)
     fun setAuto(context: Context, v: Boolean) = SecureStore.putBool(context, K_AUTO, v)
 
-    fun autoCheckDue(context: Context): Boolean {
-        if (!isAuto(context)) return false
-        val last = SecureStore.getString(context, K_LAST)?.toLongOrNull() ?: 0L
-        return System.currentTimeMillis() - last > INTERVAL
-    }
+    /** Проверяем при каждом входе в приложение (если не отключено). */
+    fun autoCheckDue(context: Context): Boolean = isAuto(context)
 
     fun markChecked(context: Context) = SecureStore.putString(context, K_LAST, System.currentTimeMillis().toString())
 

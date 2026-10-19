@@ -2,6 +2,8 @@ package cloud.amnezia.dtm.data
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
@@ -34,14 +36,21 @@ object Tracker {
             .sortedBy { it.time }
     }
 
+    // «Прочитать → дописать → сохранить» под замком: быстрые нажатия подряд не теряют
+    // отметки и не пишут файл одновременно.
+    private val moodLock = Mutex()
+    private val logLock = Mutex()
+
     suspend fun addMood(context: Context, value: Int) {
         // Отмечать можно сколько угодно раз в день — на графике берётся среднее за день.
-        val list = moods(context).toMutableList()
-        list.add(MoodEntry(System.currentTimeMillis(), value.coerceIn(1, 3)))
-        withContext(Dispatchers.IO) {
-            val arr = JSONArray()
-            list.sortedBy { it.time }.forEach { arr.put(JSONObject().put("t", it.time).put("v", it.value)) }
-            Crypto.writeText(context, moodFile(context), arr.toString())
+        moodLock.withLock {
+            val list = moods(context).toMutableList()
+            list.add(MoodEntry(System.currentTimeMillis(), value.coerceIn(1, 3)))
+            withContext(Dispatchers.IO) {
+                val arr = JSONArray()
+                list.sortedBy { it.time }.forEach { arr.put(JSONObject().put("t", it.time).put("v", it.value)) }
+                Crypto.writeText(context, moodFile(context), arr.toString())
+            }
         }
         addLog(context, "Отметка состояния", moodWord(value))
     }
@@ -58,7 +67,7 @@ object Tracker {
             .sortedByDescending { it.time }
     }
 
-    suspend fun addLog(context: Context, title: String, detail: String = "") {
+    suspend fun addLog(context: Context, title: String, detail: String = "") = logLock.withLock {
         val existing = logs(context)
         withContext(Dispatchers.IO) {
             val arr = JSONArray()
