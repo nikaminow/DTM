@@ -98,7 +98,8 @@ object Sos {
             return Result(0, targets.size, "Нет разрешения на СМС.")
         }
         var ok = 0; var fail = 0
-        val sms = smsManager(context)
+        val sms = runCatching { smsManager(context) }.getOrNull()
+            ?: return Result(0, targets.size, "СМС недоступны на этом устройстве. Используйте мессенджеры ниже.")
         targets.forEach { c ->
             try {
                 sms.sendMultipartTextMessage(c.phone, null, sms.divideMessage(text), null, null)
@@ -149,7 +150,7 @@ object Sos {
     }
 
     @Suppress("DEPRECATION")
-    private fun smsManager(context: Context): SmsManager =
+    private fun smsManager(context: Context): SmsManager? =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
             context.getSystemService(SmsManager::class.java)
         else SmsManager.getDefault()
