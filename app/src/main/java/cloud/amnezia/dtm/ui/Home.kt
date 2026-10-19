@@ -37,6 +37,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Tune
+import androidx.compose.material.icons.outlined.Air
 import androidx.compose.material.icons.outlined.Bedtime
 import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.Lightbulb
@@ -86,6 +87,7 @@ import java.util.Locale
 /** Блоки главного экрана — их можно скрывать и переставлять. */
 enum class HomeBlock(val title: String) {
     MOOD("Как вы сейчас"),
+    WARM("Тёплые слова"),
     SOS("Сигнал тревоги"),
     QUICK("Быстрые действия"),
     TOOLS("Дневники и практики"),
@@ -169,6 +171,19 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                             lastMood = Tracker.moods(context).lastOrNull()
                         }
                     }
+                    HomeBlock.WARM -> {
+                        var i by remember { mutableIntStateOf(WARM_WORDS.indices.random()) }
+                        SoftCard(
+                            Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
+                            color = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            onClick = { i = (i + 1) % WARM_WORDS.size },
+                        ) {
+                            Text("💚 ${WARM_WORDS[i]}", style = MaterialTheme.typography.titleMedium)
+                            Text("Нажмите, чтобы увидеть ещё", style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f))
+                        }
+                    }
                     HomeBlock.SOS -> SoftCard(
                         Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
                         color = MaterialTheme.colorScheme.tertiaryContainer,
@@ -201,6 +216,10 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             NavTile("Режимы", "дневник режимов", Icons.Outlined.Groups, Modifier.weight(1f)) { go(Route.MODES) }
                             NavTile("СМЭР", "мысли → эмоции", Icons.Outlined.Psychology, Modifier.weight(1f)) { go(Route.SMER) }
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            NavTile("Дыхание", "успокоиться за минуту", Icons.Outlined.Air, Modifier.weight(1f)) { go(Route.BREATH) }
+                            Spacer(Modifier.weight(1f))
                         }
                     }
                     HomeBlock.REALITY -> RealityCard()

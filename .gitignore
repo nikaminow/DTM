@@ -7,7 +7,6 @@ keystore/
 *.apk
 .idea/
 
-.claude/
 *.dtmbak
 *.jks
 *.keystore

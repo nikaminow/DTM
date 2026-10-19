@@ -79,6 +79,7 @@ enum class Route(val label: String, val icon: ImageVector, val selectedIcon: Ima
     DREAMS("Сны", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     MODES("Режимы", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     SMER("СМЭР", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    BREATH("Дыхание", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     SETTINGS("Настройки", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
 }
 
@@ -123,6 +124,7 @@ fun DtmAppUi(requested: Route?, onRequestHandled: () -> Unit, onQuickExit: () ->
                         Route.DREAMS -> DreamScreen(onBack = { route = lastTab })
                         Route.MODES -> ModesScreen(onBack = { route = lastTab })
                         Route.SMER -> SmerScreen(onBack = { route = lastTab })
+                        Route.BREATH -> BreathScreen(onBack = { route = lastTab })
                         Route.SETTINGS -> SettingsScreen(onBack = { route = lastTab })
                     }
                 }
