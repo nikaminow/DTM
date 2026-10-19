@@ -9,6 +9,11 @@
   Android · Kotlin · Jetpack Compose · все данные только на устройстве и зашифрованы
 </p>
 
+<p align="center">
+  <a href="https://nikaminow.github.io/DTM/"><b>Сайт</b></a> ·
+  <a href="https://github.com/nikaminow/DTM/releases/latest/download/DTM.apk"><b>Скачать APK</b></a>
+</p>
+
 ---
 
 ## ⚠️ Важно

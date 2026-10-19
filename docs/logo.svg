@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" role="img" aria-label="DTM">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A6C7B4"/>
+      <stop offset="1" stop-color="#527765"/>
+    </linearGradient>
+  </defs>
+  <circle cx="54" cy="54" r="54" fill="url(#g)"/>
+  <g fill="none" stroke-linecap="round" transform="translate(54 54) scale(0.92) translate(-54 -54) translate(-3 3)">
+    <g transform="rotate(-45 42 66)">
+      <path d="M35,56H49A10,10 0,0 1,49,76H35A10,10 0,0 1,35,56Z" stroke="#FFFBF4" stroke-width="7"/>
+    </g>
+    <g transform="rotate(-45 66 42)">
+      <path d="M69,32H59A10,10 0,0 0,59,52H69" stroke="#FFFBF4" stroke-width="7"/>
+      <path d="M82.42,32.6A10,10 0,0 1,82.42,51.4" stroke="#FFFBF4" stroke-width="7"/>
+      <path d="M93,33L97,30M94,42L99,42M93,51L97,54" stroke="#F7D6BC" stroke-width="4"/>
+    </g>
+  </g>
+</svg>
