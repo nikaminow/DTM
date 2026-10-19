@@ -253,7 +253,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                         "Новые версии публикуются на GitHub", onClick = start)
                 }
                 Row0(Icons.Filled.SystemUpdate, "Предлагать обновления автоматически",
-                    "Раз в сутки при входе. Приложение обращается только к github.com",
+                    "При каждом входе. Приложение обращается только к github.com",
                     trailing = { Switch(autoUpdate, { autoUpdate = it; cloud.amnezia.dtm.data.Updater.setAuto(context, it) }) },
                     onClick = { autoUpdate = !autoUpdate; cloud.amnezia.dtm.data.Updater.setAuto(context, autoUpdate) })
                 Row0(Icons.Filled.Warning, "Важная информация", "Ограничения приложения", onClick = { showDisclaimer = true })

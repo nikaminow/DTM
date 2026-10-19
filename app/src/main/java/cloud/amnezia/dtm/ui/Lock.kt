@@ -136,7 +136,7 @@ fun LockScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.weight(0.6f))
-        Image(painterResource(R.drawable.logo), null, Modifier.size(88.dp).clip(CircleShape))
+        Image(painterResource(R.drawable.logo_mark), null, Modifier.size(88.dp).clip(CircleShape))
         Spacer(Modifier.height(16.dp))
         Text("DTM", style = MaterialTheme.typography.displaySmall, color = cs.onSurface)
         Text("пространство, где вы в безопасности", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)

@@ -58,7 +58,7 @@ fun DisclaimerScreen(onAccept: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Spacer(Modifier.height(24.dp))
-            Image(painterResource(R.drawable.logo), null, Modifier.size(84.dp).clip(CircleShape))
+            Image(painterResource(R.drawable.logo_mark), null, Modifier.size(84.dp).clip(CircleShape))
             Spacer(Modifier.height(16.dp))
             Text("Перед началом", style = MaterialTheme.typography.headlineLarge, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))

@@ -41,7 +41,7 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
     var ready by remember { mutableStateOf<File?>(null) }
     var message by remember { mutableStateOf<String?>(null) }
 
-    // Тихая автопроверка: раз в сутки, без окон «нет обновлений» и ошибок сети.
+    // Тихая автопроверка при каждом входе, без окон «нет обновлений» и ошибок сети.
     if (autoCheck) LaunchedEffect(Unit) {
         if (!Updater.autoCheckDue(context)) return@LaunchedEffect
         delay(1500) // не мешаем открытию главного экрана
