@@ -26,18 +26,56 @@ object Updater {
 
     data class Release(val version: String, val notes: String, val apkUrl: String, val sizeBytes: Long)
 
-    /** null — обновлений нет. Бросает исключение при ошибке сети. */
+    /** Имя APK во вложениях релиза — по нему строится прямая ссылка. */
+    const val ASSET_NAME = "DTM.apk"
+
+    /**
+     * null — обновлений нет. Бросает исключение при ошибке сети.
+     * Версию берём из перенаправления страницы /releases/latest — у неё нет лимита
+     * GitHub API (60 запросов в час на IP, который у мобильных операторов общий).
+     */
     suspend fun check(): Release? = withContext(Dispatchers.IO) {
-        val conn = (URL(API).openConnection() as HttpURLConnection).apply {
+        val tag = latestTagViaWeb() ?: return@withContext null
+        val version = tag.removePrefix("v").trim()
+        if (!isNewer(version, BuildConfig.VERSION_NAME)) return@withContext null
+        // Описание и точное имя APK — из API, если он ответит. Не ответил — не страшно.
+        val api = runCatching { releaseFromApi() }.getOrNull()
+        Release(
+            version = version,
+            notes = api?.notes.orEmpty(),
+            apkUrl = api?.apkUrl?.takeIf { it.isNotEmpty() }
+                ?: "https://github.com/$REPO/releases/download/$tag/$ASSET_NAME",
+            sizeBytes = api?.sizeBytes ?: 0L,
+        )
+    }
+
+    private fun latestTagViaWeb(): String? {
+        val conn = (URL("https://github.com/$REPO/releases/latest").openConnection() as HttpURLConnection).apply {
+            instanceFollowRedirects = false
             connectTimeout = 10_000; readTimeout = 15_000
+            setRequestProperty("User-Agent", "DTM-Android")
+        }
+        try {
+            val code = conn.responseCode
+            if (code == 404) return null // релизов ещё нет
+            if (code !in 300..399) error("GitHub ответил кодом $code")
+            val location = conn.getHeaderField("Location").orEmpty()
+            // …/releases/tag/v5.2 — без релизов GitHub отправляет на /releases
+            return location.substringAfter("/releases/tag/", "").substringBefore('?').ifBlank { null }
+        } finally {
+            conn.disconnect()
+        }
+    }
+
+    private fun releaseFromApi(): Release? {
+        val conn = (URL(API).openConnection() as HttpURLConnection).apply {
+            connectTimeout = 8_000; readTimeout = 10_000
             setRequestProperty("Accept", "application/vnd.github+json")
             setRequestProperty("User-Agent", "DTM-Android")
         }
         try {
-            if (conn.responseCode == 404) return@withContext null // релизов ещё нет
-            if (conn.responseCode != 200) error("GitHub ответил кодом ${conn.responseCode}")
+            if (conn.responseCode != 200) return null
             val json = JSONObject(conn.inputStream.bufferedReader().readText())
-            val version = json.optString("tag_name").removePrefix("v").trim()
             val assets = json.optJSONArray("assets")
             var url = ""; var size = 0L
             if (assets != null) for (i in 0 until assets.length()) {
@@ -46,12 +84,28 @@ object Updater {
                     url = a.optString("browser_download_url"); size = a.optLong("size"); break
                 }
             }
-            if (url.isEmpty() || !isNewer(version, BuildConfig.VERSION_NAME)) null
-            else Release(version, json.optString("body"), url, size)
+            return Release(json.optString("tag_name").removePrefix("v"), json.optString("body"), url, size)
         } finally {
             conn.disconnect()
         }
     }
+
+    // ---- Автопроверка: не чаще раза в сутки ----
+
+    private const val K_AUTO = "auto_update"
+    private const val K_LAST = "last_update_check"
+    private const val INTERVAL = 24 * 3600 * 1000L
+
+    fun isAuto(context: Context) = SecureStore.getBool(context, K_AUTO, true)
+    fun setAuto(context: Context, v: Boolean) = SecureStore.putBool(context, K_AUTO, v)
+
+    fun autoCheckDue(context: Context): Boolean {
+        if (!isAuto(context)) return false
+        val last = SecureStore.getString(context, K_LAST)?.toLongOrNull() ?: 0L
+        return System.currentTimeMillis() - last > INTERVAL
+    }
+
+    fun markChecked(context: Context) = SecureStore.putString(context, K_LAST, System.currentTimeMillis().toString())
 
     /** Скачивает APK, сообщая прогресс от 0 до 1. */
     suspend fun download(context: Context, release: Release, onProgress: (Float) -> Unit): File = withContext(Dispatchers.IO) {

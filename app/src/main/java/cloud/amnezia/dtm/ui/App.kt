@@ -137,6 +137,8 @@ fun DtmAppUi(requested: Route?, onRequestHandled: () -> Unit, onQuickExit: () ->
                     BottomBar(route) { go(it) }
                 }
 
+                UpdateAction(autoCheck = true)
+
                 SnackbarHost(
                     snack,
                     Modifier.align(Alignment.BottomCenter).navigationBarsPadding().padding(bottom = if (route.inBar) 170.dp else 16.dp),

@@ -106,6 +106,7 @@ fun SettingsScreen(onBack: () -> Unit) {
     var nick by remember { mutableStateOf(SecureStore.nick(context)) }
     var editNick by remember { mutableStateOf(false) }
     var showDisclaimer by remember { mutableStateOf(false) }
+    var autoUpdate by remember { mutableStateOf(cloud.amnezia.dtm.data.Updater.isAuto(context)) }
     val bioHardware = remember { activity?.biometricHardware() == true }
 
     LaunchedEffect(Unit) { contacts = withContext(Dispatchers.IO) { Contacts.load(context) } }
@@ -249,8 +250,12 @@ fun SettingsScreen(onBack: () -> Unit) {
             SettingsGroup {
                 UpdateAction { start ->
                     Row0(Icons.Filled.SystemUpdate, "Проверить обновления",
-                        "Новые версии публикуются на GitHub. Проверка — только по нажатию", onClick = start)
+                        "Новые версии публикуются на GitHub", onClick = start)
                 }
+                Row0(Icons.Filled.SystemUpdate, "Предлагать обновления автоматически",
+                    "Раз в сутки при входе. Приложение обращается только к github.com",
+                    trailing = { Switch(autoUpdate, { autoUpdate = it; cloud.amnezia.dtm.data.Updater.setAuto(context, it) }) },
+                    onClick = { autoUpdate = !autoUpdate; cloud.amnezia.dtm.data.Updater.setAuto(context, autoUpdate) })
                 Row0(Icons.Filled.Warning, "Важная информация", "Ограничения приложения", onClick = { showDisclaimer = true })
                 Row0(Icons.Filled.Info, "DTM ${BuildConfig.VERSION_NAME}",
                     "Все данные хранятся только на этом устройстве в зашифрованном виде. Резервное копирование в облако отключено. " +
