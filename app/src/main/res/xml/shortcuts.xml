@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="record"
+        android:enabled="true"
+        android:icon="@drawable/ic_sc_rec"
+        android:shortcutShortLabel="@string/sc_record"
+        android:shortcutLongLabel="@string/sc_record_long">
+        <intent
+            android:action="cloud.amnezia.dtm.action.RECORD"
+            android:targetPackage="cloud.amnezia.dtm"
+            android:targetClass="cloud.amnezia.dtm.MainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="sos"
+        android:enabled="true"
+        android:icon="@drawable/ic_sc_sos"
+        android:shortcutShortLabel="@string/sc_sos"
+        android:shortcutLongLabel="@string/sc_sos_long">
+        <intent
+            android:action="cloud.amnezia.dtm.action.SOS"
+            android:targetPackage="cloud.amnezia.dtm"
+            android:targetClass="cloud.amnezia.dtm.MainActivity" />
+    </shortcut>
+</shortcuts>

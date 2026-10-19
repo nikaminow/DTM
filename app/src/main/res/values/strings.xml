@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DTM</string>
+    <string name="sc_record">Запись</string>
+    <string name="sc_record_long">Начать запись</string>
+    <string name="sc_sos">SOS</string>
+    <string name="sc_sos_long">Сигнал тревоги</string>
+</resources>
