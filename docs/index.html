@@ -208,22 +208,26 @@
 
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
   .reveal.in { opacity: 1; transform: none; }
+  .lang { position: fixed; top: 14px; left: 14px; z-index: 50; display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; box-shadow: var(--shadow); }
+  .lang button { border: 0; background: transparent; cursor: pointer; font: 800 13px/1 "Nunito", sans-serif; color: var(--muted); padding: 7px 12px; border-radius: 999px; }
+  .lang button.on { background: var(--sage); color: var(--bg); }
 </style>
 </head>
 <body>
 
-<button class="exit" id="exit" type="button" title="Мгновенно уйти с сайта (или нажмите Esc)">
-  Быстро уйти <small>Esc</small>
+
+<button class="exit" id="exit" type="button">
+  <span data-en="Quick exit">Быстро уйти</span> <small>Esc</small>
 </button>
 
 <header class="top">
   <div class="wrap nav">
     <a class="brand" href="#"><img src="logo.svg" alt=""> DTM</a>
     <nav>
-      <a href="#features">Возможности</a>
-      <a href="#privacy">Приватность</a>
-      <a href="#install">Установка</a>
-      <a href="#faq">Вопросы</a>
+      <a href="#features" data-en="Features">Возможности</a>
+      <a href="#privacy" data-en="Privacy">Приватность</a>
+      <a href="#install" data-en="Install">Установка</a>
+      <a href="#faq" data-en="FAQ">Вопросы</a>
     </nav>
   </div>
 </header>
@@ -231,32 +235,32 @@
 <main class="wrap">
   <section class="hero">
     <div>
-      <span class="pill">Бесплатно · без рекламы · открытый код</span>
-      <h1>Пространство, где вы <em>в&nbsp;безопасности</em></h1>
-      <p class="lead">DTM помогает людям, которые переживают домашнее насилие: подать сигнал тревоги близким, сохранить доказательства и найти опору в трудную минуту. Всё хранится только на вашем телефоне.</p>
+      <span class="pill" data-en="Free · no ads · open source">Бесплатно · без рекламы · открытый код</span>
+      <h1 data-en="A space where you are <em>safe</em>">Пространство, где вы <em>в&nbsp;безопасности</em></h1>
+      <p class="lead" data-en="DTM helps people experiencing domestic abuse: send an alert to loved ones, keep evidence and find support in a hard moment. Everything stays only on your phone.">DTM помогает людям, которые переживают домашнее насилие: подать сигнал тревоги близким, сохранить доказательства и найти опору в трудную минуту. Всё хранится только на вашем телефоне.</p>
       <div class="cta">
         <a class="btn btn-primary" href="https://github.com/nikaminow/DTM/releases/latest/download/DTM.apk">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
-          Скачать для Android
+          <span data-en="Download for Android">Скачать для Android</span>
         </a>
-        <a class="btn btn-soft" href="https://github.com/nikaminow/DTM">Исходный код</a>
+        <a class="btn btn-soft" href="https://github.com/nikaminow/DTM" data-en="Source code">Исходный код</a>
       </div>
-      <p class="meta">Android 8.0 и новее · обновления приходят прямо в приложение</p>
+      <p class="meta" data-en="Android 8.0+ · updates arrive right inside the app">Android 8.0 и новее · обновления приходят прямо в приложение</p>
     </div>
 
     <div class="phone" aria-hidden="true">
       <div class="screen">
-        <h4>Привет 👋</h4>
-        <p class="sub">Здесь всё под вашим контролем. Ничего не покидает устройство без вашего решения.</p>
-        <div class="m-card"><b>Как вы сейчас?</b>
+        <h4 data-en="Hi 👋">Привет 👋</h4>
+        <p class="sub" data-en="You are in control here. Nothing leaves the device without your decision.">Здесь всё под вашим контролем. Ничего не покидает устройство без вашего решения.</p>
+        <div class="m-card"><b data-en="How are you now?">Как вы сейчас?</b>
           <div class="m-mood"><span>🙁</span><span class="on">😐</span><span>🙂</span></div>
         </div>
-        <div class="m-card m-sos"><i>SOS</i><div><b>Сигнал тревоги</b><small>2 доверенных контакта</small></div></div>
+        <div class="m-card m-sos"><i>SOS</i><div><b data-en="Alert">Сигнал тревоги</b><small data-en="2 trusted contacts">2 доверенных контакта</small></div></div>
         <div class="m-row">
-          <div class="m-tile"><b>Прогресс</b><small>график</small></div>
-          <div class="m-tile"><b>Сны</b><small>дневник снов</small></div>
-          <div class="m-tile"><b>Режимы</b><small>схема-терапия</small></div>
-          <div class="m-tile"><b>СМЭР</b><small>мысли → эмоции</small></div>
+          <div class="m-tile"><b data-en="Progress">Прогресс</b><small data-en="chart">график</small></div>
+          <div class="m-tile"><b data-en="Dreams">Сны</b><small data-en="dream diary">дневник снов</small></div>
+          <div class="m-tile"><b data-en="Modes">Режимы</b><small data-en="schema therapy">схема-терапия</small></div>
+          <div class="m-tile"><b data-en="Thoughts">СМЭР</b><small data-en="thoughts → feelings">мысли → эмоции</small></div>
         </div>
         <div class="m-bar"><span class="on"></span><span></span><span></span><span></span><span></span></div>
       </div>

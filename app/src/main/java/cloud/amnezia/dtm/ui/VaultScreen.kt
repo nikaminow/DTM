@@ -20,6 +20,9 @@ import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.PictureAsPdf
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.UploadFile
+import androidx.compose.material.icons.filled.VerifiedUser
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextButton
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
@@ -56,6 +59,7 @@ fun VaultScreen() {
     var refresh by remember { mutableIntStateOf(0) }
     var busy by remember { mutableStateOf(false) }
     var toDelete by remember { mutableStateOf<Vault.Item?>(null) }
+    var details by remember { mutableStateOf<Vault.Item?>(null) }
     var capturePath by rememberSaveable { mutableStateOf<String?>(null) }
 
     LaunchedEffect(refresh) { items = Vault.list(context) }
@@ -84,7 +88,8 @@ fun VaultScreen() {
         scope.launch {
             busy = true
             val name = "Фото " + SimpleDateFormat("yyyy-MM-dd HH-mm", Locale.US).format(Date()) + ".jpg"
-            val r = runCatching { Vault.importFile(context, f, name) }
+            val loc = runCatching { cloud.amnezia.dtm.Sos.location(context) }.getOrNull()
+            val r = runCatching { Vault.importFile(context, f, name, loc?.latitude, loc?.longitude) }
             busy = false
             if (r.isSuccess) done(1) else snack.showSnackbar("Не удалось сохранить фото")
         }
@@ -136,16 +141,17 @@ fun VaultScreen() {
                     supporting = "${shortDate(d.added)} · ${formatSize(d.size)}",
                     icon = when { d.isImage -> Icons.Filled.Image; d.isPdf -> Icons.Filled.PictureAsPdf; else -> Icons.Filled.Description },
                     onClick = open,
-                    actions = listOf(
-                        MenuAction("Открыть", Icons.Filled.OpenInNew, onClick = open),
-                        MenuAction("Поделиться", Icons.Filled.Share) {
+                    actions = buildList {
+                        add(MenuAction("Открыть", Icons.Filled.OpenInNew, onClick = open))
+                        add(MenuAction("Поделиться", Icons.Filled.Share) {
                             scope.launch {
                                 runCatching { shareFile(context, Vault.decrypt(context, d), "Отправить файл") }
                                     .onFailure { snack.showSnackbar("Не удалось подготовить файл") }
                             }
-                        },
-                        MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = d },
-                    ),
+                        })
+                        if (Vault.stamp(context, d) != null) add(MenuAction("Подлинность", Icons.Filled.VerifiedUser) { details = d })
+                        add(MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = d })
+                    },
                 )
             }
         }
@@ -154,5 +160,31 @@ fun VaultScreen() {
     toDelete?.let { d ->
         ConfirmDialog("Удалить файл?", "«${d.name}» будет удалён без возможности восстановления.", "Удалить",
             onConfirm = { Vault.delete(d); refresh++ }, onDismiss = { toDelete = null })
+    }
+
+    details?.let { d ->
+        val st = Vault.stamp(context, d)
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { details = null },
+            title = { Text("Подлинность фото") },
+            text = {
+                androidx.compose.foundation.layout.Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text("Снято ${prettyDate(st?.time ?: d.added)}", style = MaterialTheme.typography.bodyMedium)
+                    Text(if (st?.networkTime == true) "Время получено из сети (SNTP) — его нельзя подделать настройками телефона."
+                        else "Время устройства (сеть была недоступна).", style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (st?.lat != null && st.lon != null) Text("Координаты: ${"%.5f".format(st.lat)}, ${"%.5f".format(st.lon)}",
+                        style = MaterialTheme.typography.bodyMedium)
+                    Text("SHA-256:", style = MaterialTheme.typography.bodyMedium)
+                    Text(st?.sha256.orEmpty(), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Совпадение отпечатка у переданного файла доказывает, что снимок не редактировали после съёмки.",
+                        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { copyText(context, "SHA-256", st?.sha256.orEmpty()); details = null }) { Text("Копировать отпечаток") }
+            },
+            dismissButton = { TextButton(onClick = { details = null }) { Text("Закрыть") } },
+        )
     }
 }
