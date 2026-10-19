@@ -12,6 +12,7 @@ class DtmApp : Application() {
         Thread {
             runCatching { SecureStore.warmUp(this) }
             runCatching { Crypto.clearTemp(this) }
+            runCatching { kotlinx.coroutines.runBlocking { cloud.amnezia.dtm.data.Reminders.rescheduleAll(this@DtmApp) } }
         }.start()
     }
 }
