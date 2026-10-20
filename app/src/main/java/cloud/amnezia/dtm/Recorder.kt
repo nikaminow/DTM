@@ -147,7 +147,7 @@ object Recorder {
     }
 
     fun newSessionFileName(sessionId: Long): String =
-        "Запись_" + SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(Date(sessionId))
+        tr("Запись_") + SimpleDateFormat("yyyy-MM-dd_HH-mm-ss", Locale.US).format(Date(sessionId))
 
     private fun metaKey(encName: String) = "rec_meta_$encName"
 }

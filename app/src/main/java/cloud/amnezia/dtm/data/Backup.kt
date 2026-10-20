@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import android.net.Uri
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +40,7 @@ object Backup {
     private const val CHUNK = 64 * 1024
     private const val ITERATIONS = 150_000
 
-    class WrongPasswordException : Exception("Неверный пароль или повреждённый файл")
+    class WrongPasswordException : Exception(tr("Неверный пароль или повреждённый файл"))
 
     suspend fun export(context: Context, password: String, out: Uri) = withContext(Dispatchers.IO) {
         val zipFile = File(context.cacheDir, "backup.zip")
@@ -56,7 +58,7 @@ object Backup {
                         zip.closeEntry()
                     }
             }
-            val os = context.contentResolver.openOutputStream(out) ?: error("Не удалось создать файл")
+            val os = context.contentResolver.openOutputStream(out) ?: error(tr("Не удалось создать файл"))
             os.use { encrypt(zipFile, password, it) }
         } finally {
             zipFile.delete()
@@ -66,7 +68,7 @@ object Backup {
     suspend fun restore(context: Context, password: String, uri: Uri) = withContext(Dispatchers.IO) {
         val zipFile = File(context.cacheDir, "restore.zip")
         try {
-            val input = context.contentResolver.openInputStream(uri) ?: error("Не удалось открыть файл")
+            val input = context.contentResolver.openInputStream(uri) ?: error(tr("Не удалось открыть файл"))
             input.use { decrypt(it, password, zipFile) }
             val root = context.filesDir.canonicalPath
             ZipInputStream(BufferedInputStream(zipFile.inputStream())).use { zip ->
@@ -131,8 +133,8 @@ object Backup {
     private fun decrypt(input: InputStream, password: String, outFile: File) {
         val din = DataInputStream(BufferedInputStream(input))
         val magic = ByteArray(MAGIC.length)
-        runCatching { din.readFully(magic) }.onFailure { throw IllegalArgumentException("Это не резервная копия DTM") }
-        if (String(magic, Charsets.US_ASCII) != MAGIC) throw IllegalArgumentException("Это не резервная копия DTM")
+        runCatching { din.readFully(magic) }.onFailure { throw IllegalArgumentException(tr("Это не резервная копия DTM")) }
+        if (String(magic, Charsets.US_ASCII) != MAGIC) throw IllegalArgumentException(tr("Это не резервная копия DTM"))
         val salt = ByteArray(16).also { din.readFully(it) }
         val ivBase = ByteArray(8).also { din.readFully(it) }
         val k = key(password, salt)

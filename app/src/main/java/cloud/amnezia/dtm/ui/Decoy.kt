@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,9 +40,9 @@ fun DecoyScreen() {
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.surface,
-        topBar = { TopAppBar(title = { Text("Заметки") }) },
+        topBar = { TopAppBar(title = { Text(tr("Заметки")) }) },
         floatingActionButton = {
-            FloatingActionButton(onClick = { text = text + "\n" }) { Icon(Icons.Filled.Add, "Добавить") }
+            FloatingActionButton(onClick = { text = text + "\n" }) { Icon(Icons.Filled.Add, tr("Добавить")) }
         },
     ) { p ->
         Box(Modifier.fillMaxSize().padding(p)) {
@@ -48,7 +50,7 @@ fun DecoyScreen() {
                 value = text,
                 onValueChange = { text = it; saveDecoy(context, it) },
                 modifier = Modifier.fillMaxSize().padding(16.dp),
-                placeholder = { Text("Список дел, мысли, заметки…") },
+                placeholder = { Text(tr("Список дел, мысли, заметки…")) },
             )
         }
     }

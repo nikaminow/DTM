@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.tween
@@ -69,20 +71,20 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import cloud.amnezia.dtm.Recorder
 
 enum class Route(val label: String, val icon: ImageVector, val selectedIcon: ImageVector, val inBar: Boolean = true) {
-    HOME("Главное", Icons.Outlined.Home, Icons.Filled.Home),
-    RECORD("Запись", Icons.Outlined.Mic, Icons.Filled.Mic),
-    JOURNAL("Дневник", Icons.Outlined.Book, Icons.Filled.Book),
-    VAULT("Сейф", Icons.Outlined.Lock, Icons.Filled.Lock),
-    SUPPORT("Опора", Icons.Outlined.Spa, Icons.Filled.Spa),
+    HOME(tr("Главное"), Icons.Outlined.Home, Icons.Filled.Home),
+    RECORD(tr("Запись"), Icons.Outlined.Mic, Icons.Filled.Mic),
+    JOURNAL(tr("Дневник"), Icons.Outlined.Book, Icons.Filled.Book),
+    VAULT(tr("Сейф"), Icons.Outlined.Lock, Icons.Filled.Lock),
+    SUPPORT(tr("Опора"), Icons.Outlined.Spa, Icons.Filled.Spa),
     SOS("SOS", Icons.Filled.Shield, Icons.Filled.Shield, inBar = false),
-    PROGRESS("Прогресс", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    DREAMS("Сны", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    MODES("Режимы", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    SMER("СМЭР", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    BREATH("Дыхание", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    CALENDAR("Календарь", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    AUDIOGUIDE("Голосовой гид", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    SETTINGS("Настройки", Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    PROGRESS(tr("Прогресс"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    DREAMS(tr("Сны"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    MODES(tr("Режимы"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    SMER(tr("СМЭР"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    BREATH(tr("Дыхание"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    CALENDAR(tr("Календарь"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    AUDIOGUIDE(tr("Голосовой гид"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    SETTINGS(tr("Настройки"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
 }
 
 /** Одноразовые команды между экранами. */

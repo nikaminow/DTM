@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,8 +23,8 @@ data class SmerEntry(
 object Smer {
 
     val EMOTIONS = listOf(
-        "Тревога", "Страх", "Гнев", "Раздражение", "Обида", "Грусть",
-        "Стыд", "Вина", "Беспомощность", "Одиночество", "Отвращение", "Растерянность",
+        tr("Тревога"), tr("Страх"), tr("Гнев"), tr("Раздражение"), tr("Обида"), tr("Грусть"),
+        tr("Стыд"), tr("Вина"), tr("Беспомощность"), tr("Одиночество"), tr("Отвращение"), tr("Растерянность"),
     )
 
     private fun file(context: Context) = File(context.filesDir, "smer.enc")

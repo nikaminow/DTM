@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -96,7 +98,7 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
         scope.launch {
             busy = true
-            status = "Определяю местоположение…"
+            status = tr("Определяю местоположение…")
             if (SecureStore.isSosRecord(context) && !Recorder.isRecording &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
             ) RecorderService.start(context)
@@ -109,9 +111,9 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
                 if (r.message.isNotEmpty()) append(r.message)
                 if (wa.isNotEmpty() || tg) {
                     if (isNotEmpty()) append("\n")
-                    append("Ниже — мессенджеры: откроется чат с готовым текстом, останется нажать «Отправить».")
+                    append(tr("Ниже — мессенджеры: откроется чат с готовым текстом, останется нажать «Отправить»."))
                 }
-                if (Recorder.isRecording) { if (isNotEmpty()) append("\n"); append("Запись звука включена.") }
+                if (Recorder.isRecording) { if (isNotEmpty()) append("\n"); append(tr("Запись звука включена.")) }
             }
             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
         }
@@ -129,13 +131,13 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
 
     ScreenScaffold(
         title = "SOS",
-        subtitle = "Удерживайте кнопку 1,5 секунды. СМС с геолокацией уйдёт сразу, сообщения в мессенджеры будут готовы к отправке.",
+        subtitle = tr("Удерживайте кнопку 1,5 секунды. СМС с геолокацией уйдёт сразу, сообщения в мессенджеры будут готовы к отправке."),
         onBack = onBack,
         bottomSpace = false,
     ) {
         item {
             Column {
-                Text("Что отправить", style = MaterialTheme.typography.titleSmall, color = cs.primary,
+                Text(tr("Что отправить"), style = MaterialTheme.typography.titleSmall, color = cs.primary,
                     modifier = Modifier.padding(start = 20.dp, bottom = 8.dp))
                 Row(
                     Modifier.horizontalScroll(rememberScrollState()).padding(horizontal = 16.dp),
@@ -180,7 +182,7 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
                         shadowElevation = 6.dp, modifier = Modifier.size(200.dp)) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center) {
                             Text("SOS", style = MaterialTheme.typography.displayMedium)
-                            Text(if (busy) "отправка…" else if (sent) "отправлено" else "удерживайте",
+                            Text(if (busy) tr("отправка…") else if (sent) tr("отправлено") else tr("удерживайте"),
                                 style = MaterialTheme.typography.labelLarge)
                         }
                     }
@@ -191,8 +193,8 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
         item {
             Text(
                 status.ifEmpty {
-                    if (contacts.isEmpty()) "Доверенные контакты не указаны"
-                    else "Получатели: " + contacts.joinToString { it.name.ifBlank { it.phone } }
+                    if (contacts.isEmpty()) tr("Доверенные контакты не указаны")
+                    else tr("Получатели: ") + contacts.joinToString { it.name.ifBlank { it.phone } }
                 },
                 color = if (status.isNotEmpty()) cs.primary else cs.onSurfaceVariant,
                 style = MaterialTheme.typography.bodyLarge,
@@ -204,7 +206,7 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
         if (contacts.isEmpty()) item {
             Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 FilledTonalButton(onClick = openSettings) {
-                    Icon(Icons.Filled.PersonAdd, null); Spacer(Modifier.width(8.dp)); Text("Добавить контакт")
+                    Icon(Icons.Filled.PersonAdd, null); Spacer(Modifier.width(8.dp)); Text(tr("Добавить контакт"))
                 }
             }
         }
@@ -213,16 +215,16 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
         if (text != null) {
             items(wa, key = { "wa" + it.phone }) { c ->
                 Button(
-                    onClick = { if (!Sos.openWhatsApp(context, c, text)) status = "WhatsApp не установлен" },
+                    onClick = { if (!Sos.openWhatsApp(context, c, text)) status = tr("WhatsApp не установлен") },
                     modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(56.dp),
                 ) { Icon(Icons.AutoMirrored.Filled.Send, null); Spacer(Modifier.width(8.dp)); Text("WhatsApp: ${c.name.ifBlank { c.phone }}") }
             }
             if (tg) item {
                 Button(
-                    onClick = { if (!Sos.openTelegram(context, text)) status = "Telegram не установлен. Текст скопирован." },
+                    onClick = { if (!Sos.openTelegram(context, text)) status = tr("Telegram не установлен. Текст скопирован.") },
                     colors = ButtonDefaults.buttonColors(containerColor = cs.secondary, contentColor = cs.onSecondary),
                     modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(56.dp),
-                ) { Icon(Icons.AutoMirrored.Filled.Send, null); Spacer(Modifier.width(8.dp)); Text("Telegram: выбрать чат") }
+                ) { Icon(Icons.AutoMirrored.Filled.Send, null); Spacer(Modifier.width(8.dp)); Text(tr("Telegram: выбрать чат")) }
             }
             if (sent) item {
                 Text(STEP_DONE, color = cs.primary, style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center,
@@ -237,8 +239,8 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
                 shape = MaterialTheme.shapes.large,
             ) {
                 Column(Modifier.padding(18.dp)) {
-                    Text("Если есть угроза жизни", style = MaterialTheme.typography.titleMedium)
-                    Text("Звонок бесплатный, работает без SIM-карты и денег на счёте.",
+                    Text(tr("Если есть угроза жизни"), style = MaterialTheme.typography.titleMedium)
+                    Text(tr("Звонок бесплатный, работает без SIM-карты и денег на счёте."),
                         style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
                     Spacer(Modifier.height(12.dp))
                     OutlinedButton(
@@ -248,7 +250,7 @@ fun SosScreen(onBack: () -> Unit, openSettings: () -> Unit) {
                             }
                         },
                         modifier = Modifier.fillMaxWidth().height(52.dp),
-                    ) { Icon(Icons.Filled.Call, null); Spacer(Modifier.width(8.dp)); Text("Позвонить 112") }
+                    ) { Icon(Icons.Filled.Call, null); Spacer(Modifier.width(8.dp)); Text(tr("Позвонить 112")) }
                 }
             }
         }

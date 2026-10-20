@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.speech.tts.TextToSpeech
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -33,30 +35,30 @@ import java.util.Locale
 private data class Guide(val title: String, val hint: String, val steps: List<String>)
 
 private val GUIDES = listOf(
-    Guide("5-4-3-2-1", "Вернуться в здесь и сейчас", listOf(
-        "Устройтесь поудобнее. Мы сделаем это медленно, вместе.",
-        "Найдите глазами пять предметов вокруг. Назовите каждый про себя.",
-        "Прислушайтесь. Найдите четыре звука — близких или далёких.",
-        "Коснитесь трёх предметов. Почувствуйте, тёплые они или холодные, гладкие или шершавые.",
-        "Найдите два запаха. Любых.",
-        "Обратите внимание на один вкус во рту.",
-        "Сделайте медленный вдох. Вы здесь. Вы в безопасности в этот момент.",
+    Guide("5-4-3-2-1", tr("Вернуться в здесь и сейчас"), listOf(
+        tr("Устройтесь поудобнее. Мы сделаем это медленно, вместе."),
+        tr("Найдите глазами пять предметов вокруг. Назовите каждый про себя."),
+        tr("Прислушайтесь. Найдите четыре звука — близких или далёких."),
+        tr("Коснитесь трёх предметов. Почувствуйте, тёплые они или холодные, гладкие или шершавые."),
+        tr("Найдите два запаха. Любых."),
+        tr("Обратите внимание на один вкус во рту."),
+        tr("Сделайте медленный вдох. Вы здесь. Вы в безопасности в этот момент."),
     )),
-    Guide("Дыхание 4-7-8", "Успокоить тело", listOf(
-        "Сядьте удобно, опустите плечи.",
-        "Медленно вдохните носом на четыре счёта. Раз. Два. Три. Четыре.",
-        "Задержите дыхание. Раз. Два. Три. Четыре. Пять. Шесть. Семь.",
-        "Медленно выдохните ртом на восемь счётов.",
-        "Ещё раз. Вдох на четыре.",
-        "Задержка на семь.",
-        "Выдох на восемь. С каждым выдохом тело расслабляется.",
+    Guide(tr("Дыхание 4-7-8"), tr("Успокоить тело"), listOf(
+        tr("Сядьте удобно, опустите плечи."),
+        tr("Медленно вдохните носом на четыре счёта. Раз. Два. Три. Четыре."),
+        tr("Задержите дыхание. Раз. Два. Три. Четыре. Пять. Шесть. Семь."),
+        tr("Медленно выдохните ртом на восемь счётов."),
+        tr("Ещё раз. Вдох на четыре."),
+        tr("Задержка на семь."),
+        tr("Выдох на восемь. С каждым выдохом тело расслабляется."),
     )),
-    Guide("При флешбэке", "Прошлое осталось в прошлом", listOf(
-        "То, что вы чувствуете, — это воспоминание. Оно уже закончилось.",
-        "Назовите сегодняшнюю дату. Назовите место, где вы сейчас.",
-        "Оглядитесь и найдите пять вещей, которых не было тогда.",
-        "Почувствуйте опору под ногами. Пошевелите пальцами ног.",
-        "Вы выросли. Сейчас вы в безопасности. Это чувство пройдёт.",
+    Guide(tr("При флешбэке"), tr("Прошлое осталось в прошлом"), listOf(
+        tr("То, что вы чувствуете, — это воспоминание. Оно уже закончилось."),
+        tr("Назовите сегодняшнюю дату. Назовите место, где вы сейчас."),
+        tr("Оглядитесь и найдите пять вещей, которых не было тогда."),
+        tr("Почувствуйте опору под ногами. Пошевелите пальцами ног."),
+        tr("Вы выросли. Сейчас вы в безопасности. Это чувство пройдёт."),
     )),
 )
 
@@ -73,7 +75,7 @@ fun AudioGuideScreen(onBack: () -> Unit) {
         var engine: TextToSpeech? = null
         engine = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                engine?.language = Locale("ru")
+                engine?.language = java.util.Locale.getDefault()
                 engine?.setSpeechRate(0.9f)
                 ready = true
             }
@@ -103,8 +105,8 @@ fun AudioGuideScreen(onBack: () -> Unit) {
     fun stop() { tts.stop(); speaking = false; line = -1 }
 
     ScreenScaffold(
-        title = "Голосовой гид",
-        subtitle = "Спокойный голос проведёт вас через упражнение. Руки свободны, можно закрыть глаза.",
+        title = tr("Голосовой гид"),
+        subtitle = tr("Спокойный голос проведёт вас через упражнение. Руки свободны, можно закрыть глаза."),
         onBack = onBack, bottomSpace = false,
     ) {
         item {
@@ -121,14 +123,14 @@ fun AudioGuideScreen(onBack: () -> Unit) {
                         .softClickable(ready) { if (speaking) stop() else play() },
                     contentAlignment = Alignment.Center,
                 ) {
-                    Icon(if (speaking) Icons.Filled.Pause else Icons.Filled.PlayArrow, if (speaking) "Стоп" else "Начать",
+                    Icon(if (speaking) Icons.Filled.Pause else Icons.Filled.PlayArrow, if (speaking) tr("Стоп") else tr("Начать"),
                         tint = if (speaking) cs.onTertiary else cs.onPrimary, modifier = Modifier.size(64.dp))
                 }
             }
         }
         item {
             Text(
-                if (line >= 0) GUIDES[selected].steps[line] else if (!ready) "Готовлю голос…" else "Нажмите, чтобы начать",
+                if (line >= 0) GUIDES[selected].steps[line] else if (!ready) tr("Готовлю голос…") else tr("Нажмите, чтобы начать"),
                 Modifier.fillMaxWidth().padding(horizontal = 28.dp),
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -136,7 +138,7 @@ fun AudioGuideScreen(onBack: () -> Unit) {
             )
         }
         item {
-            if (!ready) Text("Если голос не появился, установите «Синтез речи» в настройках телефона (обычно Google TTS).",
+            if (!ready) Text(tr("Если голос не появился, установите «Синтез речи» в настройках телефона (обычно Google TTS)."),
                 Modifier.fillMaxWidth().padding(24.dp), style = MaterialTheme.typography.bodySmall,
                 color = cs.onSurfaceVariant, textAlign = androidx.compose.ui.text.style.TextAlign.Center)
         }

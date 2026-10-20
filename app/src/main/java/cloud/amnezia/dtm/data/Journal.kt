@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
@@ -22,8 +24,8 @@ data class JournalEntry(
 object Journal {
 
     val KINDS = listOf(
-        "Психологическое", "Физическое", "Угрозы", "Контроль и слежка",
-        "Экономическое", "Сексуализированное", "Другое"
+        tr("Психологическое"), tr("Физическое"), tr("Угрозы"), tr("Контроль и слежка"),
+        tr("Экономическое"), tr("Сексуализированное"), tr("Другое")
     )
 
     private fun file(context: Context) = File(context.filesDir, "journal.enc")

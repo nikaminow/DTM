@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import org.json.JSONArray
 import org.json.JSONObject
@@ -22,7 +24,7 @@ object Contacts {
         if (raw.isNullOrBlank()) {
             // Перенос единственного номера из прошлой версии.
             val old = SecureStore.getSosNumber(context)
-            return if (old.isNotBlank()) listOf(TrustedContact("Контакт", old)) else emptyList()
+            return if (old.isNotBlank()) listOf(TrustedContact(tr("Контакт"), old)) else emptyList()
         }
         return try {
             val arr = JSONArray(raw)

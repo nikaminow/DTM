@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.Manifest
 import android.content.Context
 import android.os.Build
@@ -88,15 +90,15 @@ import java.util.Locale
 
 /** Блоки главного экрана — их можно скрывать и переставлять. */
 enum class HomeBlock(val title: String) {
-    MOOD("Как вы сейчас"),
-    WARM("Тёплые слова"),
-    SOS("Сигнал тревоги"),
-    QUICK("Быстрые действия"),
-    TOOLS("Дневники и практики"),
-    REALITY("Карта реальности"),
-    STATS("Счётчики"),
-    INFO("Ваша реальность имеет значение"),
-    TIPS("Подсказка о быстром доступе"),
+    MOOD(tr("Как вы сейчас")),
+    WARM(tr("Тёплые слова")),
+    SOS(tr("Сигнал тревоги")),
+    QUICK(tr("Быстрые действия")),
+    TOOLS(tr("Дневники и практики")),
+    REALITY(tr("Карта реальности")),
+    STATS(tr("Счётчики")),
+    INFO(tr("Ваша реальность имеет значение")),
+    TIPS(tr("Подсказка о быстром доступе")),
 }
 
 object HomeLayout {
@@ -143,7 +145,7 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
 
     val recLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { res ->
         if (res[Manifest.permission.RECORD_AUDIO] == true) RecorderService.start(context)
-        else scope.launch { snack.showSnackbar("Нужен доступ к микрофону") }
+        else scope.launch { snack.showSnackbar(tr("Нужен доступ к микрофону")) }
     }
     val startRecording = {
         if (Recorder.isRecording) go(Route.RECORD)
@@ -154,12 +156,12 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
     }
 
     ScreenScaffold(
-        title = if (nick.isBlank()) "Привет 👋" else "Привет, $nick 👋",
-        subtitle = "Здесь всё под вашим контролем. Ничего не покидает устройство без вашего решения.",
+        title = if (nick.isBlank()) tr("Привет 👋") else tr("Привет, %1\$s 👋", nick),
+        subtitle = tr("Здесь всё под вашим контролем. Ничего не покидает устройство без вашего решения."),
         actions = {
-            HeaderIcon(Icons.Filled.Tune, "Настроить главный экран") { customize = true }
-            HeaderIcon(Icons.AutoMirrored.Filled.ExitToApp, "Быстрый выход", onQuickExit)
-            HeaderIcon(Icons.Filled.Settings, "Настройки") { go(Route.SETTINGS) }
+            HeaderIcon(Icons.Filled.Tune, tr("Настроить главный экран")) { customize = true }
+            HeaderIcon(Icons.AutoMirrored.Filled.ExitToApp, tr("Быстрый выход"), onQuickExit)
+            HeaderIcon(Icons.Filled.Settings, tr("Настройки")) { go(Route.SETTINGS) }
         },
     ) {
         if (Recorder.isRecording) item(key = "rec") { RecordingBanner { RecorderService.stop(context) } }
@@ -182,7 +184,7 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                             onClick = { i = (i + 1) % WARM_WORDS.size },
                         ) {
                             Text("💚 ${WARM_WORDS[i]}", style = MaterialTheme.typography.titleMedium)
-                            Text("Нажмите, чтобы увидеть ещё", style = MaterialTheme.typography.bodySmall,
+                            Text(tr("Нажмите, чтобы увидеть ещё"), style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f))
                         }
                     }
@@ -196,53 +198,53 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                             SoftIcon(Icons.Filled.Shield, MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.onTertiary, 52.dp)
                             Spacer(Modifier.width(16.dp))
                             Column(Modifier.weight(1f)) {
-                                Text("Сигнал тревоги", style = MaterialTheme.typography.titleLarge)
+                                Text(tr("Сигнал тревоги"), style = MaterialTheme.typography.titleLarge)
                                 Text(
-                                    if (contactCount > 0) "$contactCount ${plural(contactCount, "доверенный контакт", "доверенных контакта", "доверенных контактов")}"
-                                    else "Добавьте доверенный контакт",
+                                    if (contactCount > 0) "$contactCount ${plural(contactCount, tr("доверенный контакт"), tr("доверенных контакта"), tr("доверенных контактов"))}"
+                                    else tr("Добавьте доверенный контакт"),
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
                             }
                         }
                     }
                     HomeBlock.QUICK -> Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        PillButton("Записать", { startRecording() }, Modifier.weight(1f), Icons.Filled.Mic, PillStyle.Soft)
-                        PillButton("Событие", { NavFlags.openJournalEditor = true; go(Route.JOURNAL) }, Modifier.weight(1f),
+                        PillButton(tr("Записать"), { startRecording() }, Modifier.weight(1f), Icons.Filled.Mic, PillStyle.Soft)
+                        PillButton(tr("Событие"), { NavFlags.openJournalEditor = true; go(Route.JOURNAL) }, Modifier.weight(1f),
                             Icons.AutoMirrored.Filled.NoteAdd, PillStyle.Soft)
                     }
                     HomeBlock.TOOLS -> Column(Modifier.padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            NavTile("Прогресс", "график и практики", Icons.Outlined.ShowChart, Modifier.weight(1f)) { go(Route.PROGRESS) }
-                            NavTile("Сны", "дневник снов", Icons.Outlined.Bedtime, Modifier.weight(1f)) { go(Route.DREAMS) }
+                            NavTile(tr("Прогресс"), tr("график и практики"), Icons.Outlined.ShowChart, Modifier.weight(1f)) { go(Route.PROGRESS) }
+                            NavTile(tr("Сны"), tr("дневник снов"), Icons.Outlined.Bedtime, Modifier.weight(1f)) { go(Route.DREAMS) }
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            NavTile("Режимы", "дневник режимов", Icons.Outlined.Groups, Modifier.weight(1f)) { go(Route.MODES) }
-                            NavTile("СМЭР", "мысли → эмоции", Icons.Outlined.Psychology, Modifier.weight(1f)) { go(Route.SMER) }
+                            NavTile(tr("Режимы"), tr("дневник режимов"), Icons.Outlined.Groups, Modifier.weight(1f)) { go(Route.MODES) }
+                            NavTile(tr("СМЭР"), tr("мысли → эмоции"), Icons.Outlined.Psychology, Modifier.weight(1f)) { go(Route.SMER) }
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            NavTile("Дыхание", "успокоиться за минуту", Icons.Outlined.Air, Modifier.weight(1f)) { go(Route.BREATH) }
-                            NavTile("Календарь", "события и напоминания", Icons.Outlined.CalendarMonth, Modifier.weight(1f)) { go(Route.CALENDAR) }
+                            NavTile(tr("Дыхание"), tr("успокоиться за минуту"), Icons.Outlined.Air, Modifier.weight(1f)) { go(Route.BREATH) }
+                            NavTile(tr("Календарь"), tr("события и напоминания"), Icons.Outlined.CalendarMonth, Modifier.weight(1f)) { go(Route.CALENDAR) }
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            NavTile("Голосовой гид", "заземление голосом", Icons.Outlined.RecordVoiceOver, Modifier.weight(1f)) { go(Route.AUDIOGUIDE) }
+                            NavTile(tr("Голосовой гид"), tr("заземление голосом"), Icons.Outlined.RecordVoiceOver, Modifier.weight(1f)) { go(Route.AUDIOGUIDE) }
                             Spacer(Modifier.weight(1f))
                         }
                     }
                     HomeBlock.REALITY -> RealityCard()
                     HomeBlock.STATS -> Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                        StatCard("$recCount", plural(recCount, "запись", "записи", "записей"), Modifier.weight(1f)) { go(Route.RECORD) }
-                        StatCard("$jourCount", plural(jourCount, "событие", "события", "событий"), Modifier.weight(1f)) { go(Route.JOURNAL) }
-                        StatCard("$vaultCount", plural(vaultCount, "документ", "документа", "документов"), Modifier.weight(1f)) { go(Route.VAULT) }
+                        StatCard("$recCount", plural(recCount, tr("запись"), tr("записи"), tr("записей")), Modifier.weight(1f)) { go(Route.RECORD) }
+                        StatCard("$jourCount", plural(jourCount, tr("событие"), tr("события"), tr("событий")), Modifier.weight(1f)) { go(Route.JOURNAL) }
+                        StatCard("$vaultCount", plural(vaultCount, tr("документ"), tr("документа"), tr("документов")), Modifier.weight(1f)) { go(Route.VAULT) }
                     }
                     HomeBlock.INFO -> InfoCard(
-                        Icons.Outlined.Visibility, "Ваша реальность имеет значение",
-                        "Записи, события и документы хранятся зашифрованно, с датой и цифровым отпечатком. " +
-                            "Если кто-то убеждает, что «этого не было», — у вас есть опора.",
+                        Icons.Outlined.Visibility, tr("Ваша реальность имеет значение"),
+                        tr("Записи, события и документы хранятся зашифрованно, с датой и цифровым отпечатком. ") +
+                            tr("Если кто-то убеждает, что «этого не было», — у вас есть опора."),
                     )
                     HomeBlock.TIPS -> InfoCard(
-                        Icons.Outlined.Lightbulb, "Быстрый доступ",
-                        "Удерживайте значок приложения на рабочем столе: «Запись» начнёт запись сразу. " +
-                            "Кнопка ⇥ вверху мгновенно закрывает приложение и убирает его из недавних.",
+                        Icons.Outlined.Lightbulb, tr("Быстрый доступ"),
+                        tr("Удерживайте значок приложения на рабочем столе: «Запись» начнёт запись сразу. ") +
+                            tr("Кнопка ⇥ вверху мгновенно закрывает приложение и убирает его из недавних."),
                     )
                 }
             }
@@ -271,17 +273,17 @@ private fun MoodCard(last: MoodEntry?, onPick: (Int) -> Unit) {
     val cs = MaterialTheme.colorScheme
     SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth(), color = cs.secondaryContainer,
         contentColor = cs.onSecondaryContainer) {
-        Text("Как вы сейчас?", style = MaterialTheme.typography.titleLarge)
+        Text(tr("Как вы сейчас?"), style = MaterialTheme.typography.titleLarge)
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            MoodButton("🙁", "Плохо", last?.value == 1, cs.error, Modifier.weight(1f)) { onPick(1) }
-            MoodButton("😐", "Средне", last?.value == 2, cs.tertiary, Modifier.weight(1f)) { onPick(2) }
-            MoodButton("🙂", "Отлично", last?.value == 3, cs.primary, Modifier.weight(1f)) { onPick(3) }
+            MoodButton("🙁", tr("Плохо"), last?.value == 1, cs.error, Modifier.weight(1f)) { onPick(1) }
+            MoodButton("😐", tr("Средне"), last?.value == 2, cs.tertiary, Modifier.weight(1f)) { onPick(2) }
+            MoodButton("🙂", tr("Отлично"), last?.value == 3, cs.primary, Modifier.weight(1f)) { onPick(3) }
         }
         AnimatedVisibility(last != null, enter = fadeIn() + expandVertically()) {
-            val time = last?.let { SimpleDateFormat("d MMM, HH:mm", Locale("ru")).format(Date(it.time)) }.orEmpty()
+            val time = last?.let { SimpleDateFormat("d MMM, HH:mm", java.util.Locale.getDefault()).format(Date(it.time)) }.orEmpty()
             Text(
-                "Последняя отметка: ${last?.let { Tracker.moodWord(it.value) }.orEmpty()} · $time. Можно отмечать сколько угодно раз.",
+                tr("Последняя отметка: %1\$s · %2\$s. Можно отмечать сколько угодно раз.", last?.let { Tracker.moodWord(it.value) }.orEmpty(), time),
                 style = MaterialTheme.typography.bodySmall, color = cs.onSecondaryContainer.copy(alpha = 0.75f),
                 modifier = Modifier.padding(top = 10.dp),
             )
@@ -335,10 +337,10 @@ fun RecordingBanner(onStop: () -> Unit) {
             SoftIcon(Icons.Filled.Mic, cs.primary, cs.onPrimary, 44.dp)
             Spacer(Modifier.width(12.dp))
             Column(Modifier.weight(1f)) {
-                Text("Идёт запись", style = MaterialTheme.typography.titleMedium)
+                Text(tr("Идёт запись"), style = MaterialTheme.typography.titleMedium)
                 Text(formatDuration(elapsed), style = MaterialTheme.typography.bodyMedium)
             }
-            PillButton("Стоп", onStop, icon = Icons.Filled.Stop, style = PillStyle.Primary)
+            PillButton(tr("Стоп"), onStop, icon = Icons.Filled.Stop, style = PillStyle.Primary)
         }
     }
 }
@@ -357,8 +359,8 @@ private fun HomeCustomizer(initial: List<Pair<HomeBlock, Boolean>>, onDone: (Lis
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Text("Главный экран", style = MaterialTheme.typography.headlineSmall)
-            Text("Включайте нужные блоки и меняйте порядок стрелками.",
+            Text(tr("Главный экран"), style = MaterialTheme.typography.headlineSmall)
+            Text(tr("Включайте нужные блоки и меняйте порядок стрелками."),
                 style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
             Spacer(Modifier.height(4.dp))
             items.forEachIndexed { i, (block, on) ->
@@ -369,17 +371,17 @@ private fun HomeCustomizer(initial: List<Pair<HomeBlock, Boolean>>, onDone: (Lis
                 ) {
                     Text(block.title, style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f),
                         color = if (on) cs.onSurface else cs.onSurfaceVariant)
-                    ArrowBtn(Icons.Filled.KeyboardArrowUp, "Выше", i > 0) {
+                    ArrowBtn(Icons.Filled.KeyboardArrowUp, tr("Выше"), i > 0) {
                         val x = items.removeAt(i); items.add(i - 1, x)
                     }
-                    ArrowBtn(Icons.Filled.KeyboardArrowDown, "Ниже", i < items.lastIndex) {
+                    ArrowBtn(Icons.Filled.KeyboardArrowDown, tr("Ниже"), i < items.lastIndex) {
                         val x = items.removeAt(i); items.add(i + 1, x)
                     }
                     Switch(checked = on, onCheckedChange = { items[i] = block to it })
                 }
             }
             Spacer(Modifier.height(8.dp))
-            PillButton("Готово", { onDone(items.toList()) }, Modifier.fillMaxWidth())
+            PillButton(tr("Готово"), { onDone(items.toList()) }, Modifier.fillMaxWidth())
         }
     }
 }

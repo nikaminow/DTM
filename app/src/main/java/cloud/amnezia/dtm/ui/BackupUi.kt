@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -51,8 +53,8 @@ fun ExportAction(trigger: @Composable (start: () -> Unit) -> Unit) {
         scope.launch {
             busy = true
             message = runCatching { Backup.export(context, password, uri) }.fold(
-                onSuccess = { "Резервная копия сохранена.\n\nХраните файл и пароль в разных местах. Без пароля копию не открыть — восстановить его невозможно." },
-                onFailure = { "Не удалось создать копию: ${it.message}" },
+                onSuccess = { tr("Резервная копия сохранена.\n\nХраните файл и пароль в разных местах. Без пароля копию не открыть — восстановить его невозможно.") },
+                onFailure = { tr("Не удалось создать копию: %1\$s", it.message) },
             )
             password = ""
             busy = false
@@ -62,8 +64,8 @@ fun ExportAction(trigger: @Composable (start: () -> Unit) -> Unit) {
     trigger { askPassword = true }
 
     if (askPassword) PasswordDialog(
-        title = "Пароль для копии",
-        text = "Копия будет зашифрована этим паролем. Запомните его: без пароля восстановить данные нельзя.",
+        title = tr("Пароль для копии"),
+        text = tr("Копия будет зашифрована этим паролем. Запомните его: без пароля восстановить данные нельзя."),
         confirmTwice = true,
         onDismiss = { askPassword = false },
         onConfirm = { pw ->
@@ -73,7 +75,7 @@ fun ExportAction(trigger: @Composable (start: () -> Unit) -> Unit) {
             runCatching { create.launch(name) }
         },
     )
-    if (busy) BusyDialog("Создаю резервную копию…")
+    if (busy) BusyDialog(tr("Создаю резервную копию…"))
     message?.let { InfoDialog(it) { message = null } }
 }
 
@@ -93,8 +95,8 @@ fun RestoreAction(onRestored: () -> Unit, trigger: @Composable (start: () -> Uni
 
     picked?.let { uri ->
         PasswordDialog(
-            title = "Пароль от копии",
-            text = "Введите пароль, который вы задали при создании копии. Данные из копии добавятся к текущим, совпадающие будут заменены.",
+            title = tr("Пароль от копии"),
+            text = tr("Введите пароль, который вы задали при создании копии. Данные из копии добавятся к текущим, совпадающие будут заменены."),
             confirmTwice = false,
             onDismiss = { picked = null },
             onConfirm = { pw ->
@@ -105,14 +107,14 @@ fun RestoreAction(onRestored: () -> Unit, trigger: @Composable (start: () -> Uni
                     busy = false
                     success = r.isSuccess
                     message = r.fold(
-                        onSuccess = { "Данные восстановлены. Приложение перезапустится — войдите с PIN-кодом из копии." },
-                        onFailure = { it.message ?: "Не удалось восстановить" },
+                        onSuccess = { tr("Данные восстановлены. Приложение перезапустится — войдите с PIN-кодом из копии.") },
+                        onFailure = { it.message ?: tr("Не удалось восстановить") },
                     )
                 }
             },
         )
     }
-    if (busy) BusyDialog("Восстанавливаю данные…")
+    if (busy) BusyDialog(tr("Восстанавливаю данные…"))
     message?.let { InfoDialog(it) { message = null; if (success) onRestored() } }
 }
 
@@ -130,16 +132,16 @@ private fun PasswordDialog(
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(text, style = MaterialTheme.typography.bodyMedium)
-                PwField(p1, { p1 = it }, if (confirmTwice) "Пароль (от 6 символов)" else "Пароль")
+                PwField(p1, { p1 = it }, if (confirmTwice) tr("Пароль (от 6 символов)") else tr("Пароль"))
                 if (confirmTwice) {
-                    PwField(p2, { p2 = it }, "Повторите пароль")
-                    if (p2.isNotEmpty() && p1 != p2) Text("Пароли не совпадают", color = MaterialTheme.colorScheme.error,
+                    PwField(p2, { p2 = it }, tr("Повторите пароль"))
+                    if (p2.isNotEmpty() && p1 != p2) Text(tr("Пароли не совпадают"), color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall)
                 }
             }
         },
-        confirmButton = { TextButton(enabled = valid, onClick = { onConfirm(p1) }) { Text("Продолжить") } },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Отмена") } },
+        confirmButton = { TextButton(enabled = valid, onClick = { onConfirm(p1) }) { Text(tr("Продолжить")) } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(tr("Отмена")) } },
     )
 }
 
@@ -174,6 +176,6 @@ private fun InfoDialog(text: String, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         text = { Text(text) },
-        confirmButton = { TextButton(onClick = onDismiss) { Text("Понятно") } },
+        confirmButton = { TextButton(onClick = onDismiss) { Text(tr("Понятно")) } },
     )
 }

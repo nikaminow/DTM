@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -58,8 +60,8 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
             checking = false
             r.onSuccess { rel ->
                 Updater.markChecked(context)
-                if (rel == null) message = "У вас последняя версия (${BuildConfig.VERSION_NAME})." else found = rel
-            }.onFailure { message = "Не удалось проверить обновления. Проверьте интернет.\n\n${it.message}" }
+                if (rel == null) message = tr("У вас последняя версия (%1\$s).", BuildConfig.VERSION_NAME) else found = rel
+            }.onFailure { message = tr("Не удалось проверить обновления. Проверьте интернет.\n\n%1\$s", it.message) }
         }
     }
 
@@ -67,8 +69,8 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
         if (Updater.canInstall(context)) Updater.install(context, apk)
         else {
             ready = apk
-            message = "Чтобы установить обновление, разрешите DTM установку приложений. " +
-                "Откроются настройки — включите переключатель и вернитесь, затем нажмите «Проверить обновления» ещё раз."
+            message = tr("Чтобы установить обновление, разрешите DTM установку приложений. ") +
+                tr("Откроются настройки — включите переключатель и вернитесь, затем нажмите «Проверить обновления» ещё раз.")
             Updater.openInstallPermission(context)
         }
     }
@@ -76,17 +78,17 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
     if (checking) AlertDialog(
         onDismissRequest = {}, confirmButton = {},
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
-        text = { Text("Проверяю обновления…") },
+        text = { Text(tr("Проверяю обновления…")) },
     )
 
     found?.let { rel ->
         AlertDialog(
             onDismissRequest = { found = null },
-            title = { Text("Доступна версия ${rel.version}") },
+            title = { Text(tr("Доступна версия %1\$s", rel.version)) },
             text = {
                 Column(Modifier.heightIn(max = 360.dp).verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Сейчас установлена ${BuildConfig.VERSION_NAME}. Данные сохранятся.",
+                    Text(tr("Сейчас установлена %1\$s. Данные сохранятся.", BuildConfig.VERSION_NAME),
                         style = MaterialTheme.typography.bodyMedium)
                     if (rel.notes.isNotBlank()) Text(rel.notes, style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -102,18 +104,18 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
                         val r = runCatching { Updater.download(context, rel) { progress = it } }
                         downloading = false
                         r.onSuccess { installOrAsk(it) }
-                            .onFailure { message = "Не удалось скачать обновление: ${it.message}" }
+                            .onFailure { message = tr("Не удалось скачать обновление: %1\$s", it.message) }
                     }
-                }) { Text("Скачать и установить") }
+                }) { Text(tr("Скачать и установить")) }
             },
-            dismissButton = { TextButton(onClick = { found = null }) { Text("Позже") } },
+            dismissButton = { TextButton(onClick = { found = null }) { Text(tr("Позже")) } },
         )
     }
 
     if (downloading) AlertDialog(
         onDismissRequest = {}, confirmButton = {},
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false),
-        title = { Text("Скачиваю обновление") },
+        title = { Text(tr("Скачиваю обновление")) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
@@ -126,7 +128,7 @@ fun UpdateAction(autoCheck: Boolean = false, trigger: @Composable (start: () -> 
         AlertDialog(
             onDismissRequest = { message = null },
             text = { Text(it) },
-            confirmButton = { TextButton(onClick = { message = null }) { Text("Понятно") } },
+            confirmButton = { TextButton(onClick = { message = null }) { Text(tr("Понятно")) } },
         )
     }
 }

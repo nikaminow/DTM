@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateDpAsState
@@ -101,7 +103,7 @@ fun LockScreen(
                     withContext(Dispatchers.Default) { SecureStore.setPin(context, full) }
                     onUnlocked()
                 }
-                else -> { firstPin = null; fail("PIN-коды не совпали. Попробуйте ещё раз") }
+                else -> { firstPin = null; fail(tr("PIN-коды не совпали. Попробуйте ещё раз")) }
             }
         } else scope.launch {
             checking = true
@@ -112,21 +114,21 @@ fun LockScreen(
                 2 -> onDuress()
                 else -> {
                     lockedUntil = SecureStore.lockedUntil(context)
-                    fail(if (lockedUntil > System.currentTimeMillis()) "Слишком много попыток" else "Неверный PIN-код")
+                    fail(if (lockedUntil > System.currentTimeMillis()) tr("Слишком много попыток") else tr("Неверный PIN-код"))
                 }
             }
         }
     }
 
     val title = when {
-        setupMode && firstPin == null -> "Придумайте PIN-код"
-        setupMode -> "Повторите PIN-код"
-        else -> "Введите PIN-код"
+        setupMode && firstPin == null -> tr("Придумайте PIN-код")
+        setupMode -> tr("Повторите PIN-код")
+        else -> tr("Введите PIN-код")
     }
     val hint = when {
-        locked -> "Повторить можно через ${((lockedUntil - now) / 1000) + 1} с"
+        locked -> tr("Повторить можно через %1\$s с", ((lockedUntil - now) / 1000) + 1)
         message.isNotEmpty() -> message
-        setupMode && firstPin == null -> "6 цифр — их будете знать только вы"
+        setupMode && firstPin == null -> tr("6 цифр — их будете знать только вы")
         else -> ""
     }
 
@@ -139,7 +141,7 @@ fun LockScreen(
         Image(painterResource(R.drawable.logo_mark), null, Modifier.size(88.dp).clip(CircleShape))
         Spacer(Modifier.height(16.dp))
         Text("DTM", style = MaterialTheme.typography.displaySmall, color = cs.onSurface)
-        Text("пространство, где вы в безопасности", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+        Text(tr("пространство, где вы в безопасности"), style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
         Spacer(Modifier.height(36.dp))
         Text(title, style = MaterialTheme.typography.titleMedium, color = cs.onSurface)
         Spacer(Modifier.height(20.dp))
@@ -166,7 +168,7 @@ fun LockScreen(
         // После переустановки можно сразу вернуть данные из резервной копии.
         if (setupMode && firstPin == null) {
             RestoreAction(onRestored = onRestored) { start ->
-                androidx.compose.material3.TextButton(onClick = start) { Text("Восстановить из резервной копии") }
+                androidx.compose.material3.TextButton(onClick = start) { Text(tr("Восстановить из резервной копии")) }
             }
         }
         Spacer(Modifier.weight(0.4f))
@@ -200,11 +202,11 @@ private fun Keypad(enabled: Boolean, onDigit: (Char) -> Unit, onDelete: () -> Un
         }
         Row(horizontalArrangement = Arrangement.spacedBy(22.dp)) {
             if (onBiometric != null) Key(true, filled = false, onClick = onBiometric) {
-                Icon(Icons.Filled.Fingerprint, "Вход по отпечатку", tint = cs.primary, modifier = Modifier.size(32.dp))
+                Icon(Icons.Filled.Fingerprint, tr("Вход по отпечатку"), tint = cs.primary, modifier = Modifier.size(32.dp))
             } else Spacer(Modifier.size(78.dp))
             Key(enabled, onClick = { onDigit('0') }) { Text("0", style = MaterialTheme.typography.headlineMedium) }
             Key(enabled, filled = false, onClick = onDelete) {
-                Icon(Icons.AutoMirrored.Outlined.Backspace, "Стереть", tint = cs.onSurfaceVariant)
+                Icon(Icons.AutoMirrored.Outlined.Backspace, tr("Стереть"), tint = cs.onSurfaceVariant)
             }
         }
     }

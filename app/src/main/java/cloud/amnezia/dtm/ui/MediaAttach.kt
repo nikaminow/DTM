@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
@@ -78,7 +80,7 @@ fun AttachmentsEditor(atts: SnapshotStateList<String>) {
         if (ok && path != null) {
             val f = File(path)
             if (f.exists() && f.length() > 0) scope.launch {
-                atts.add(JournalMedia.importFile(context, f, "Фото " + stamp() + ".jpg"))
+                atts.add(JournalMedia.importFile(context, f, tr("Фото ") + stamp() + ".jpg"))
             } else f.delete()
         }
     }
@@ -96,29 +98,29 @@ fun AttachmentsEditor(atts: SnapshotStateList<String>) {
         val ok = runCatching { r.stop() }.isSuccess
         r.runCatching { release() }
         if (ok && f.length() > 0) scope.launch {
-            atts.add(JournalMedia.importFile(context, f, "Заметка " + stamp() + ".m4a"))
+            atts.add(JournalMedia.importFile(context, f, tr("Заметка ") + stamp() + ".m4a"))
         } else f.delete()
     }
 
     Column(Modifier.fillMaxWidth()) {
-        Text("Вложения", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+        Text(tr("Вложения"), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            AddChip("Камера", Icons.Filled.PhotoCamera) {
+            AddChip(tr("Камера"), Icons.Filled.PhotoCamera) {
                 val f = File(Crypto.captureDir(context), "cap_${System.currentTimeMillis()}.jpg")
                 capturePath = f.absolutePath
                 val uri = FileProvider.getUriForFile(context, "cloud.amnezia.dtm.fileprovider", f)
                 runCatching { camera.launch(uri) }
             }
-            AddChip("Файл", Icons.Filled.UploadFile) {
+            AddChip(tr("Файл"), Icons.Filled.UploadFile) {
                 runCatching { picker.launch(arrayOf("image/*", "video/*", "audio/*")) }
             }
             if (recording) {
                 AssistChip(onClick = { stopVoice() },
-                    label = { Text("Стоп") },
+                    label = { Text(tr("Стоп")) },
                     leadingIcon = { Icon(Icons.Filled.Stop, null, Modifier.size(18.dp), tint = MaterialTheme.colorScheme.error) })
             } else {
-                AddChip("Голос", Icons.Filled.Mic) {
+                AddChip(tr("Голос"), Icons.Filled.Mic) {
                     if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)
                         startVoice(context) { rec, file -> recorder = rec; recFile = file; recording = true }
                     else micPerm.launch(Manifest.permission.RECORD_AUDIO)
@@ -162,7 +164,7 @@ private fun AttChip(att: JournalMedia.Att, onRemove: () -> Unit) {
                 modifier = Modifier.clickableOpen(scope, context, att))
             Spacer(Modifier.width(4.dp))
             Box(Modifier.size(24.dp).clickableRemove(onRemove), contentAlignment = Alignment.Center) {
-                Icon(Icons.Filled.Close, "Убрать", Modifier.size(16.dp), tint = cs.onSurfaceVariant)
+                Icon(Icons.Filled.Close, tr("Убрать"), Modifier.size(16.dp), tint = cs.onSurfaceVariant)
             }
         }
     }

@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
@@ -24,7 +26,7 @@ import java.io.File
 data class CalEvent(val id: Long, val time: Long, val title: String, val note: String, val remindMin: Int)
 
 object CalendarStore {
-    val REMIND = listOf(-1 to "Без напоминания", 0 to "В момент события", 15 to "За 15 минут", 60 to "За час", 1440 to "За день")
+    val REMIND = listOf(-1 to tr("Без напоминания"), 0 to tr("В момент события"), 15 to tr("За 15 минут"), 60 to tr("За час"), 1440 to tr("За день"))
 
     private val lock = Mutex()
     private fun file(context: Context) = File(context.filesDir, "calendar.enc")
@@ -89,14 +91,14 @@ object Reminders {
 
     fun show(context: Context, id: Long, title: String, min: Int) {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        nm.createNotificationChannel(NotificationChannel(CHANNEL, "Напоминания", NotificationManager.IMPORTANCE_DEFAULT))
+        nm.createNotificationChannel(NotificationChannel(CHANNEL, tr("Напоминания"), NotificationManager.IMPORTANCE_DEFAULT))
         val open = PendingIntent.getActivity(context, 7, Intent(context, MainActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
-        val whenText = when (min) { 0 -> "Сейчас"; 15 -> "Через 15 минут"; 60 -> "Через час"; 1440 -> "Завтра"; else -> "Скоро" }
+        val whenText = when (min) { 0 -> tr("Сейчас"); 15 -> tr("Через 15 минут"); 60 -> tr("Через час"); 1440 -> tr("Завтра"); else -> tr("Скоро") }
         val public = Notification.Builder(context, CHANNEL).setSmallIcon(R.drawable.ic_stat_bell)
-            .setContentTitle("DTM").setContentText("Напоминание").build()
+            .setContentTitle("DTM").setContentText(tr("Напоминание")).build()
         val n = Notification.Builder(context, CHANNEL)
             .setSmallIcon(R.drawable.ic_stat_bell)
-            .setContentTitle(title.ifBlank { "Напоминание" })
+            .setContentTitle(title.ifBlank { tr("Напоминание") })
             .setContentText(whenText)
             .setContentIntent(open)
             .setAutoCancel(true)

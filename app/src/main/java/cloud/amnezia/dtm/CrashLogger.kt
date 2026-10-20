@@ -33,8 +33,8 @@ object CrashLogger {
         val text = buildString {
             appendLine("DTM ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})")
             appendLine("Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
-            appendLine("Устройство: ${android.os.Build.MANUFACTURER} ${android.os.Build.MODEL}")
-            appendLine("Время: ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(Date())}")
+            appendLine(tr("Устройство: %1\$s %2\$s", android.os.Build.MANUFACTURER, android.os.Build.MODEL))
+            appendLine(tr("Время: %1\$s", SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(Date())))
             appendLine()
             appendLine(sw.toString())
         }

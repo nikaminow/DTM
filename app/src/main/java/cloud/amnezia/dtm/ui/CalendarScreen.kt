@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.Manifest
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -67,7 +69,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-private val RU = Locale("ru")
+private val RU = java.util.Locale.getDefault()
 
 private fun dayStart(ms: Long) = Calendar.getInstance().apply {
     timeInMillis = ms; set(Calendar.HOUR_OF_DAY, 0); set(Calendar.MINUTE, 0); set(Calendar.SECOND, 0); set(Calendar.MILLISECOND, 0)
@@ -91,24 +93,24 @@ fun CalendarScreen(onBack: () -> Unit) {
     val daysWith = remember(events) { events.map { dayStart(it.time) }.toSet() }
     val dayEvents = events.filter { dayStart(it.time) == selected }
 
-    ScreenScaffold(title = "Календарь", subtitle = "Свои события и напоминания. Всё хранится зашифрованно на телефоне.", onBack = onBack) {
+    ScreenScaffold(title = tr("Календарь"), subtitle = tr("Свои события и напоминания. Всё хранится зашифрованно на телефоне."), onBack = onBack) {
         item {
             SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    HeaderIcon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, "Назад") {
+                    HeaderIcon(Icons.AutoMirrored.Filled.KeyboardArrowLeft, tr("Назад")) {
                         month = Calendar.getInstance().apply { timeInMillis = month; add(Calendar.MONTH, -1) }.timeInMillis
                     }
                     Text(
                         SimpleDateFormat("LLLL yyyy", RU).format(Date(month)).replaceFirstChar { it.uppercase() },
                         style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f).padding(start = 12.dp),
                     )
-                    HeaderIcon(Icons.AutoMirrored.Filled.KeyboardArrowRight, "Вперёд") {
+                    HeaderIcon(Icons.AutoMirrored.Filled.KeyboardArrowRight, tr("Вперёд")) {
                         month = Calendar.getInstance().apply { timeInMillis = month; add(Calendar.MONTH, 1) }.timeInMillis
                     }
                 }
                 Spacer(Modifier.height(12.dp))
                 Row(Modifier.fillMaxWidth()) {
-                    listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс").forEach {
+                    listOf(tr("Пн"), tr("Вт"), tr("Ср"), tr("Чт"), tr("Пт"), tr("Сб"), tr("Вс")).forEach {
                         Text(it, Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, color = cs.onSurfaceVariant,
                             textAlign = androidx.compose.ui.text.style.TextAlign.Center)
                     }
@@ -150,7 +152,7 @@ fun CalendarScreen(onBack: () -> Unit) {
             Row(Modifier.padding(horizontal = 20.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(SimpleDateFormat("d MMMM, EEEE", RU).format(Date(selected)), style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.weight(1f))
-                PillButton("Добавить", {
+                PillButton(tr("Добавить"), {
                     val t = Calendar.getInstance().apply {
                         timeInMillis = selected; set(Calendar.HOUR_OF_DAY, 12)
                     }.timeInMillis
@@ -159,7 +161,7 @@ fun CalendarScreen(onBack: () -> Unit) {
             }
         }
         if (dayEvents.isEmpty()) item {
-            Text("В этот день событий нет", Modifier.padding(horizontal = 20.dp), color = cs.onSurfaceVariant)
+            Text(tr("В этот день событий нет"), Modifier.padding(horizontal = 20.dp), color = cs.onSurfaceVariant)
         }
         items(dayEvents, key = { it.id }) { e ->
             ItemCard(
@@ -169,8 +171,8 @@ fun CalendarScreen(onBack: () -> Unit) {
                 icon = Icons.Filled.Event,
                 onClick = { editing = e },
                 actions = listOf(
-                    MenuAction("Изменить", Icons.Filled.Edit) { editing = e },
-                    MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = e },
+                    MenuAction(tr("Изменить"), Icons.Filled.Edit) { editing = e },
+                    MenuAction(tr("Удалить"), Icons.Filled.Delete, destructive = true) { toDelete = e },
                 ),
             )
         }
@@ -184,7 +186,7 @@ fun CalendarScreen(onBack: () -> Unit) {
         }
     }
     toDelete?.let { e ->
-        ConfirmDialog("Удалить событие?", "«${e.title}» будет удалено вместе с напоминанием.", "Удалить",
+        ConfirmDialog(tr("Удалить событие?"), tr("«%1\$s» будет удалено вместе с напоминанием.", e.title), tr("Удалить"),
             onConfirm = { scope.launch { CalendarStore.delete(context, e); tick++ } }, onDismiss = { toDelete = null })
     }
 }
@@ -205,15 +207,15 @@ private fun EventEditor(initial: CalEvent, onDismiss: () -> Unit, onSave: (CalEv
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(SimpleDateFormat("d MMMM yyyy", RU).format(Date(time)), style = MaterialTheme.typography.headlineSmall)
-            OutlinedTextField(title, { title = it }, label = { Text("Что запланировано") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(note, { note = it }, label = { Text("Заметка") }, minLines = 2, modifier = Modifier.fillMaxWidth())
-            PillButton("Время: " + SimpleDateFormat("HH:mm", RU).format(Date(time)), { pickTime = true },
+            OutlinedTextField(title, { title = it }, label = { Text(tr("Что запланировано")) }, singleLine = true, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(note, { note = it }, label = { Text(tr("Заметка")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            PillButton(tr("Время: ") + SimpleDateFormat("HH:mm", RU).format(Date(time)), { pickTime = true },
                 Modifier.fillMaxWidth(), Icons.Filled.Schedule, PillStyle.Ghost)
-            Text("Напоминание", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+            Text(tr("Напоминание"), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 CalendarStore.REMIND.forEach { (m, label) -> SoftChip(label, remind == m) { remind = m } }
             }
-            PillButton("Сохранить", { onSave(initial.copy(title = title.trim(), note = note.trim(), time = time, remindMin = remind)) },
+            PillButton(tr("Сохранить"), { onSave(initial.copy(title = title.trim(), note = note.trim(), time = time, remindMin = remind)) },
                 Modifier.fillMaxWidth(), enabled = title.isNotBlank())
         }
     }
@@ -230,9 +232,9 @@ private fun EventEditor(initial: CalEvent, onDismiss: () -> Unit, onSave: (CalEv
                         timeInMillis = time; set(Calendar.HOUR_OF_DAY, st.hour); set(Calendar.MINUTE, st.minute); set(Calendar.SECOND, 0)
                     }.timeInMillis
                     pickTime = false
-                }) { Text("Готово") }
+                }) { Text(tr("Готово")) }
             },
-            dismissButton = { TextButton(onClick = { pickTime = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { pickTime = false }) { Text(tr("Отмена")) } },
         )
     }
 }

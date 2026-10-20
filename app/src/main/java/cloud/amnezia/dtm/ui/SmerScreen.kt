@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -62,34 +64,34 @@ fun SmerScreen(onBack: () -> Unit) {
     }
 
     ScreenScaffold(
-        title = "Дневник СМЭР",
-        subtitle = "Ситуация → Мысли → Эмоции → Реакции тела и поведения. Помогает увидеть, как мысль запускает чувство и действие.",
+        title = tr("Дневник СМЭР"),
+        subtitle = tr("Ситуация → Мысли → Эмоции → Реакции тела и поведения. Помогает увидеть, как мысль запускает чувство и действие."),
         onBack = onBack,
     ) {
         item {
             FilledTonalButton(
                 onClick = { editing = SmerEntry(System.currentTimeMillis(), System.currentTimeMillis(), "", "", emptyList(), "", "") },
                 modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(56.dp),
-            ) { Icon(Icons.Filled.Psychology, null); Spacer(Modifier.width(8.dp)); Text("Новая запись") }
+            ) { Icon(Icons.Filled.Psychology, null); Spacer(Modifier.width(8.dp)); Text(tr("Новая запись")) }
         }
         if (entries != null && list.isEmpty()) item {
-            InfoCard(Icons.Filled.Psychology, "Пример",
-                "Ситуация: стою в пробке в автобусе.\n" +
-                    "Мысли: «Если ещё постоим — я запаникую, все заметят и решат, что я псих».\n" +
-                    "Эмоции: тревога.\n" +
-                    "Тело: жар в груди, тремор, сердцебиение.\n" +
-                    "Поведение: звоню брату, отвлекаюсь разговором.")
+            InfoCard(Icons.Filled.Psychology, tr("Пример"),
+                tr("Ситуация: стою в пробке в автобусе.\n") +
+                    tr("Мысли: «Если ещё постоим — я запаникую, все заметят и решат, что я псих».\n") +
+                    tr("Эмоции: тревога.\n") +
+                    tr("Тело: жар в груди, тремор, сердцебиение.\n") +
+                    tr("Поведение: звоню брату, отвлекаюсь разговором."))
         }
         items(list, key = { it.id }) { e ->
             ItemCard(
-                overline = (e.emotions.joinToString(", ").ifBlank { "Эмоции не указаны" }) + " · " + shortDate(e.time),
-                headline = e.situation.ifBlank { "Без описания ситуации" },
-                supporting = if (e.thoughts.isNotBlank()) "Мысли: ${e.thoughts}" else "",
+                overline = (e.emotions.joinToString(", ").ifBlank { tr("Эмоции не указаны") }) + " · " + shortDate(e.time),
+                headline = e.situation.ifBlank { tr("Без описания ситуации") },
+                supporting = if (e.thoughts.isNotBlank()) tr("Мысли: %1\$s", e.thoughts) else "",
                 icon = Icons.Filled.Psychology,
                 onClick = { editing = e },
                 actions = listOf(
-                    MenuAction("Изменить", Icons.Filled.Edit) { editing = e },
-                    MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = e },
+                    MenuAction(tr("Изменить"), Icons.Filled.Edit) { editing = e },
+                    MenuAction(tr("Удалить"), Icons.Filled.Delete, destructive = true) { toDelete = e },
                 ),
             )
         }
@@ -101,7 +103,7 @@ fun SmerScreen(onBack: () -> Unit) {
             onDismiss = { editing = null })
     }
     toDelete?.let { e ->
-        ConfirmDialog("Удалить запись?", "Запись будет удалена без возможности восстановления.", "Удалить",
+        ConfirmDialog(tr("Удалить запись?"), tr("Запись будет удалена без возможности восстановления."), tr("Удалить"),
             onConfirm = { persist(list.filter { it.id != e.id }) }, onDismiss = { toDelete = null })
     }
 }
@@ -123,17 +125,17 @@ private fun SmerEditor(initial: SmerEntry, isNew: Boolean, onSave: (SmerEntry) -
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(if (isNew) "Новая запись СМЭР" else "Запись СМЭР", style = MaterialTheme.typography.headlineSmall)
+            Text(if (isNew) tr("Новая запись СМЭР") else tr("Запись СМЭР"), style = MaterialTheme.typography.headlineSmall)
 
-            Text("С — Ситуация", style = MaterialTheme.typography.titleSmall, color = cs.primary)
-            OutlinedTextField(situation, { situation = it }, placeholder = { Text("Что произошло, где, когда") },
+            Text(tr("С — Ситуация"), style = MaterialTheme.typography.titleSmall, color = cs.primary)
+            OutlinedTextField(situation, { situation = it }, placeholder = { Text(tr("Что произошло, где, когда")) },
                 minLines = 2, modifier = Modifier.fillMaxWidth())
 
-            Text("М — Мысли", style = MaterialTheme.typography.titleSmall, color = cs.primary)
-            OutlinedTextField(thoughts, { thoughts = it }, placeholder = { Text("Что пронеслось в голове? Запишите дословно") },
+            Text(tr("М — Мысли"), style = MaterialTheme.typography.titleSmall, color = cs.primary)
+            OutlinedTextField(thoughts, { thoughts = it }, placeholder = { Text(tr("Что пронеслось в голове? Запишите дословно")) },
                 minLines = 3, modifier = Modifier.fillMaxWidth())
 
-            Text("Э — Эмоции", style = MaterialTheme.typography.titleSmall, color = cs.primary)
+            Text(tr("Э — Эмоции"), style = MaterialTheme.typography.titleSmall, color = cs.primary)
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 (Smer.EMOTIONS + emotions.filter { it !in Smer.EMOTIONS }).forEach { em ->
                     FilterChip(
@@ -145,20 +147,20 @@ private fun SmerEditor(initial: SmerEntry, isNew: Boolean, onSave: (SmerEntry) -
             }
             OutlinedTextField(
                 customEmotion, { customEmotion = it },
-                placeholder = { Text("Другая эмоция") }, singleLine = true, modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text(tr("Другая эмоция")) }, singleLine = true, modifier = Modifier.fillMaxWidth(),
                 trailingIcon = {
                     androidx.compose.material3.TextButton(
                         onClick = { val t = customEmotion.trim(); if (t.isNotEmpty() && t !in emotions) emotions.add(t); customEmotion = "" },
                         enabled = customEmotion.isNotBlank(),
-                    ) { Text("Добавить") }
+                    ) { Text(tr("Добавить")) }
                 },
             )
 
-            Text("Р — Реакции", style = MaterialTheme.typography.titleSmall, color = cs.primary)
-            OutlinedTextField(body, { body = it }, label = { Text("Тело") },
-                placeholder = { Text("Жар, дрожь, напряжение, сердцебиение…") }, minLines = 2, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(behavior, { behavior = it }, label = { Text("Поведение") },
-                placeholder = { Text("Что вы сделали или захотелось сделать") }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            Text(tr("Р — Реакции"), style = MaterialTheme.typography.titleSmall, color = cs.primary)
+            OutlinedTextField(body, { body = it }, label = { Text(tr("Тело")) },
+                placeholder = { Text(tr("Жар, дрожь, напряжение, сердцебиение…")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(behavior, { behavior = it }, label = { Text(tr("Поведение")) },
+                placeholder = { Text(tr("Что вы сделали или захотелось сделать")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
 
             Button(
                 onClick = {
@@ -167,7 +169,7 @@ private fun SmerEditor(initial: SmerEntry, isNew: Boolean, onSave: (SmerEntry) -
                 },
                 enabled = situation.isNotBlank() || thoughts.isNotBlank(),
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Сохранить") }
+            ) { Text(tr("Сохранить")) }
         }
     }
 }

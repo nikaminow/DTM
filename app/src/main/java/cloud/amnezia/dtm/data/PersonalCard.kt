@@ -12,7 +12,7 @@ import java.io.File
  */
 object PersonalCard {
 
-    val TEMPLATE = """
+    val TEMPLATE get() = cloud.amnezia.dtm.tr("""
         Сейчас мне кажется, что я виноват и поступаю жестоко. Но это не так.
         Так говорит моя травма, а не реальность.
 
@@ -21,7 +21,7 @@ object PersonalCard {
 
         Держать дистанцию — это не злость, это необходимая самооборона.
         Я имею полное право не отвечать, чтобы сохранить себя.
-    """.trimIndent()
+    """.trimIndent())
 
     private fun file(context: Context) = File(context.filesDir, "reality_card.enc")
 

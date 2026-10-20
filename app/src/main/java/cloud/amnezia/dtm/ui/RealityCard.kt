@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -69,8 +71,8 @@ fun RealityCard() {
                 IconBadge(Icons.Filled.SelfImprovement, cs.primary, cs.onPrimary)
                 Spacer(Modifier.width(14.dp))
                 Column(Modifier.weight(1f)) {
-                    Text("Карта реальности", style = MaterialTheme.typography.titleMedium)
-                    Text("Прочитайте, когда накрывает вина", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+                    Text(tr("Карта реальности"), style = MaterialTheme.typography.titleMedium)
+                    Text(tr("Прочитайте, когда накрывает вина"), style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
                 }
             }
             Spacer(Modifier.height(14.dp))
@@ -78,17 +80,17 @@ fun RealityCard() {
                 Text(saved, style = MaterialTheme.typography.bodyLarge)
                 Spacer(Modifier.height(12.dp))
                 OutlinedButton(onClick = { editing = true }) {
-                    Icon(Icons.Filled.Edit, null, Modifier.width(18.dp)); Spacer(Modifier.width(8.dp)); Text("Изменить")
+                    Icon(Icons.Filled.Edit, null, Modifier.width(18.dp)); Spacer(Modifier.width(8.dp)); Text(tr("Изменить"))
                 }
             } else {
                 Text(
-                    "Составьте текст, который напомнит вам правду в трудный момент: что держать дистанцию — " +
-                        "это защита, а не жестокость. Можно начать с готового примера и переписать под себя.",
+                    tr("Составьте текст, который напомнит вам правду в трудный момент: что держать дистанцию — ") +
+                        tr("это защита, а не жестокость. Можно начать с готового примера и переписать под себя."),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Spacer(Modifier.height(12.dp))
                 Button(onClick = { editing = true }) {
-                    Icon(Icons.Filled.AutoAwesome, null, Modifier.width(18.dp)); Spacer(Modifier.width(8.dp)); Text("Создать карту")
+                    Icon(Icons.Filled.AutoAwesome, null, Modifier.width(18.dp)); Spacer(Modifier.width(8.dp)); Text(tr("Создать карту"))
                 }
             }
         }
@@ -114,21 +116,21 @@ private fun RealityCardEditor(initial: String, onSave: (String) -> Unit, onDismi
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text("Карта реальности", style = MaterialTheme.typography.headlineSmall)
-            Text("Пишите от первого лица, своими словами. Этот текст видите только вы.",
+            Text(tr("Карта реальности"), style = MaterialTheme.typography.headlineSmall)
+            Text(tr("Пишите от первого лица, своими словами. Этот текст видите только вы."),
                 style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             OutlinedTextField(
                 value = value, onValueChange = { value = it },
                 modifier = Modifier.fillMaxWidth(), minLines = 8,
-                label = { Text("Текст карты") },
+                label = { Text(tr("Текст карты")) },
             )
-            TextButton(onClick = { value = PersonalCard.TEMPLATE }) { Text("Вернуть пример") }
+            TextButton(onClick = { value = PersonalCard.TEMPLATE }) { Text(tr("Вернуть пример")) }
             Button(
                 onClick = { onSave(value.trim()) },
                 enabled = value.isNotBlank(),
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Сохранить") }
-            Text("Это упражнение из схема-терапии, а не медицинская помощь. Если накрывают тяжёлые мысли — загляните в «Телефоны».",
+            ) { Text(tr("Сохранить")) }
+            Text(tr("Это упражнение из схема-терапии, а не медицинская помощь. Если накрывают тяжёлые мысли — загляните в «Телефоны»."),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Start)
         }

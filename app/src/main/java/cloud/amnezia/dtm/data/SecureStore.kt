@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
@@ -29,7 +31,7 @@ object SecureStore {
     private const val K_THEME = "theme_mode"
     private const val K_DYNAMIC = "dynamic_color"
 
-    const val DEFAULT_SOS_TEXT = "Мне нужна помощь. Это сигнал тревоги."
+    val DEFAULT_SOS_TEXT = tr("Мне нужна помощь. Это сигнал тревоги.")
 
     @Volatile private var cached: SharedPreferences? = null
 

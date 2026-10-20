@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -39,12 +41,12 @@ import cloud.amnezia.dtm.R
 
 /** Пункты дисклеймера — показываются при первом запуске и в настройках. */
 val DISCLAIMER_POINTS = listOf(
-    "DTM — вспомогательный инструмент. Он помогает, но не может гарантировать безопасность.",
-    "Приложение не гарантирует 100% отправку сигналов SOS и сообщений. Доставка зависит от связи, " +
-        "разрешений и настроек телефона, а также от работы SMS, WhatsApp и Telegram.",
-    "DTM не заменяет работу с психотерапевтом, психологом или врачом и не является медицинской помощью.",
-    "При угрозе жизни звоните 112.",
-    "Данные хранятся только на этом устройстве. Чтобы не потерять их, делайте резервные копии в настройках.",
+    tr("DTM — вспомогательный инструмент. Он помогает, но не может гарантировать безопасность."),
+    tr("Приложение не гарантирует 100% отправку сигналов SOS и сообщений. Доставка зависит от связи, ") +
+        tr("разрешений и настроек телефона, а также от работы SMS, WhatsApp и Telegram."),
+    tr("DTM не заменяет работу с психотерапевтом, психологом или врачом и не является медицинской помощью."),
+    tr("При угрозе жизни звоните 112."),
+    tr("Данные хранятся только на этом устройстве. Чтобы не потерять их, делайте резервные копии в настройках."),
 )
 
 @Composable
@@ -60,9 +62,9 @@ fun DisclaimerScreen(onAccept: () -> Unit) {
             Spacer(Modifier.height(24.dp))
             Image(painterResource(R.drawable.logo_mark), null, Modifier.size(84.dp).clip(CircleShape))
             Spacer(Modifier.height(16.dp))
-            Text("Перед началом", style = MaterialTheme.typography.headlineLarge, color = cs.onSurface)
+            Text(tr("Перед началом"), style = MaterialTheme.typography.headlineLarge, color = cs.onSurface)
             Spacer(Modifier.height(6.dp))
-            Text("Пожалуйста, прочитайте — это важно", style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant)
+            Text(tr("Пожалуйста, прочитайте — это важно"), style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant)
             Spacer(Modifier.height(20.dp))
 
             SoftCard(Modifier.fillMaxWidth()) {
@@ -90,11 +92,11 @@ fun DisclaimerScreen(onAccept: () -> Unit) {
                     contentAlignment = Alignment.Center,
                 ) { if (agreed) Icon(Icons.Filled.Check, null, tint = cs.onPrimary, modifier = Modifier.size(18.dp)) }
                 Spacer(Modifier.width(12.dp))
-                Text("Мне понятно, что DTM — вспомогательный инструмент",
+                Text(tr("Мне понятно, что DTM — вспомогательный инструмент"),
                     style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
             }
             Spacer(Modifier.height(18.dp))
-            PillButton("Продолжить", onAccept, Modifier.fillMaxWidth(), enabled = agreed)
+            PillButton(tr("Продолжить"), onAccept, Modifier.fillMaxWidth(), enabled = agreed)
             Spacer(Modifier.height(24.dp))
         }
     }

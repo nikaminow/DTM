@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -63,34 +65,34 @@ fun ModesScreen(onBack: () -> Unit) {
     fun persist(l: List<ModeEntry>) { entries = l.sortedByDescending { it.time }; scope.launch { Modes.save(context, entries!!) } }
 
     ScreenScaffold(
-        title = "Дневник режимов",
-        subtitle = "Какой режим включился, что его запустило и что ответил бы Здоровый Взрослый. Из схема-терапии.",
+        title = tr("Дневник режимов"),
+        subtitle = tr("Какой режим включился, что его запустило и что ответил бы Здоровый Взрослый. Из схема-терапии."),
         onBack = onBack,
         actions = {
-            androidx.compose.material3.IconButton(onClick = { showHelp = true }) { Icon(Icons.Outlined.Info, "О режимах") }
+            androidx.compose.material3.IconButton(onClick = { showHelp = true }) { Icon(Icons.Outlined.Info, tr("О режимах")) }
         },
     ) {
         item {
             FilledTonalButton(
                 onClick = { editing = ModeEntry(System.currentTimeMillis(), System.currentTimeMillis(), emptyList(), "", "", "") },
                 modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(56.dp),
-            ) { Icon(Icons.Filled.Groups, null); Spacer(Modifier.width(8.dp)); Text("Отметить режим") }
+            ) { Icon(Icons.Filled.Groups, null); Spacer(Modifier.width(8.dp)); Text(tr("Отметить режим")) }
         }
         if (entries != null && list.isEmpty()) item {
-            InfoCard(Icons.Filled.Groups, "Записей пока нет",
-                "Замечайте, когда внутри включается «режим» — например, Карающий Родитель или Отстранённый Защитник. " +
-                    "Называя режим, легче вернуть управление Здоровому Взрослому. Нажмите ⓘ вверху для описаний.")
+            InfoCard(Icons.Filled.Groups, tr("Записей пока нет"),
+                tr("Замечайте, когда внутри включается «режим» — например, Карающий Родитель или Отстранённый Защитник. ") +
+                    tr("Называя режим, легче вернуть управление Здоровому Взрослому. Нажмите ⓘ вверху для описаний."))
         }
         items(list, key = { it.id }) { e ->
             ItemCard(
-                overline = e.modes.joinToString(" · ").ifBlank { "Режим не выбран" } + " · " + shortDate(e.time),
-                headline = e.trigger.ifBlank { "Без описания ситуации" },
-                supporting = if (e.healthyAdult.isNotBlank()) "Здоровый Взрослый: ${e.healthyAdult}" else "",
+                overline = e.modes.joinToString(" · ").ifBlank { tr("Режим не выбран") } + " · " + shortDate(e.time),
+                headline = e.trigger.ifBlank { tr("Без описания ситуации") },
+                supporting = if (e.healthyAdult.isNotBlank()) tr("Здоровый Взрослый: %1\$s", e.healthyAdult) else "",
                 icon = Icons.Filled.Groups,
                 onClick = { editing = e },
                 actions = listOf(
-                    MenuAction("Изменить", Icons.Filled.Edit) { editing = e },
-                    MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = e },
+                    MenuAction(tr("Изменить"), Icons.Filled.Edit) { editing = e },
+                    MenuAction(tr("Удалить"), Icons.Filled.Delete, destructive = true) { toDelete = e },
                 ),
             )
         }
@@ -102,7 +104,7 @@ fun ModesScreen(onBack: () -> Unit) {
             onDismiss = { editing = null })
     }
     toDelete?.let { e ->
-        ConfirmDialog("Удалить запись?", "Запись будет удалена без возможности восстановления.", "Удалить",
+        ConfirmDialog(tr("Удалить запись?"), tr("Запись будет удалена без возможности восстановления."), tr("Удалить"),
             onConfirm = { persist(list.filter { it.id != e.id }) }, onDismiss = { toDelete = null })
     }
     if (showHelp) ModesHelp { showHelp = false }
@@ -124,7 +126,7 @@ private fun ModeEditor(initial: ModeEntry, isNew: Boolean, onSave: (ModeEntry) -
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(if (isNew) "Какой режим включился?" else "Режим", style = MaterialTheme.typography.headlineSmall)
+            Text(if (isNew) tr("Какой режим включился?") else tr("Режим"), style = MaterialTheme.typography.headlineSmall)
             Modes.GROUPS.forEach { group ->
                 Text(group, style = MaterialTheme.typography.titleSmall, color = cs.primary)
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -137,17 +139,17 @@ private fun ModeEditor(initial: ModeEntry, isNew: Boolean, onSave: (ModeEntry) -
                     }
                 }
             }
-            OutlinedTextField(trigger, { trigger = it }, label = { Text("Что запустило режим") },
-                placeholder = { Text("Ситуация, слова, событие") }, minLines = 2, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(voice, { voice = it }, label = { Text("Что он говорит или делает") },
-                placeholder = { Text("Мысли, чувства, побуждения этого режима") }, minLines = 2, modifier = Modifier.fillMaxWidth())
-            OutlinedTextField(ha, { ha = it }, label = { Text("Ответ Здорового Взрослого") },
-                placeholder = { Text("Что сказал бы заботливый и мудрый взрослый?") }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(trigger, { trigger = it }, label = { Text(tr("Что запустило режим")) },
+                placeholder = { Text(tr("Ситуация, слова, событие")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(voice, { voice = it }, label = { Text(tr("Что он говорит или делает")) },
+                placeholder = { Text(tr("Мысли, чувства, побуждения этого режима")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(ha, { ha = it }, label = { Text(tr("Ответ Здорового Взрослого")) },
+                placeholder = { Text(tr("Что сказал бы заботливый и мудрый взрослый?")) }, minLines = 2, modifier = Modifier.fillMaxWidth())
             Button(
                 onClick = { onSave(initial.copy(modes = selected.toList(), trigger = trigger.trim(), voice = voice.trim(), healthyAdult = ha.trim())) },
                 enabled = selected.isNotEmpty() || trigger.isNotBlank(),
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Сохранить") }
+            ) { Text(tr("Сохранить")) }
         }
     }
 }
@@ -161,7 +163,7 @@ private fun ModesHelp(onDismiss: () -> Unit) {
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            Text("Режимы", style = MaterialTheme.typography.headlineSmall)
+            Text(tr("Режимы"), style = MaterialTheme.typography.headlineSmall)
             Modes.GROUPS.forEach { group ->
                 Text(group, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
                 Modes.CATALOG.filter { it.group == group }.forEach { m ->
@@ -174,7 +176,7 @@ private fun ModesHelp(onDismiss: () -> Unit) {
                     }
                 }
             }
-            Text("Это обучающий материал, а не диагностика. Разбирать режимы глубже лучше со специалистом по схема-терапии.",
+            Text(tr("Это обучающий материал, а не диагностика. Разбирать режимы глубже лучше со специалистом по схема-терапии."),
                 style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }

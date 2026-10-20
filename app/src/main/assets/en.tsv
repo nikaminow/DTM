@@ -1,0 +1,881 @@
+Устройство: %1$s %2$s	Device: %1$s %2$s
+Время: %1$s	Time: %1$s
+Вход в DTM	Sign in to DTM
+Приложите палец к сканеру	Place your finger on the sensor
+Ввести PIN	Enter PIN
+Запись_	Recording_
+Фоновая запись недоступна, держите приложение открытым	Background recording is unavailable, keep the app open
+Не удалось начать запись: %1$s	Could not start recording: %1$s
+Не удалось зашифровать запись: %1$s	Could not encrypt the recording: %1$s
+Запись	Recording
+Диктофон	Voice recorder
+Идёт запись	Recording in progress
+Остановить	Stop
+Не удалось запустить запись: %1$s	Could not start recording: %1$s
+Не удалось остановить запись: %1$s	Could not stop recording: %1$s
+Сигнал тревоги	Alert
+Позвони мне	Call me
+Придумай предлог и срочно позвони мне.	Make up an excuse and call me right now.
+Приди ко мне	Come to me
+Можешь прийти ко мне с кем-нибудь? Мне нужна компания прямо сейчас.	Can you come to me with someone? I need company right now.
+Забери меня	Pick me up
+Можешь забрать меня отсюда или вызвать такси? Мне нужно уехать.	Can you pick me up from here or call me a taxi? I need to leave.
+\nГде я: https://maps.google.com/?q=%1$s,%2$s	\nWhere I am: https://maps.google.com/?q=%1$s,%2$s
+\nГеолокация недоступна.	\nLocation unavailable.
+Нет разрешения на СМС.	No permission to send SMS.
+СМС недоступны на этом устройстве. Используйте мессенджеры ниже.	SMS is not available on this device. Use the messengers below.
+СМС отправлено: %1$s	SMS sent: %1$s
+Не удалось: %1$s	Failed: %1$s
+Неверный пароль или повреждённый файл	Wrong password or damaged file
+Не удалось создать файл	Could not create the file
+Не удалось открыть файл	Could not open the file
+Это не резервная копия DTM	This is not a DTM backup
+Без напоминания	No reminder
+В момент события	At the time of the event
+За 15 минут	15 minutes before
+За час	1 hour before
+За день	1 day before
+Напоминания	Reminders
+Сейчас	Now
+Через 15 минут	In 15 minutes
+Через час	In 1 hour
+Завтра	Tomorrow
+Скоро	Soon
+Напоминание	Reminder
+Контакт	Contact
+Плохой	Bad
+Средний	Average
+Супер	Great
+Психологическое	Psychological
+Физическое	Physical
+Угрозы	Threats
+Контроль и слежка	Control and surveillance
+Экономическое	Economic
+Сексуализированное	Sexual
+Другое	Other
+Уязвимый Ребёнок	Vulnerable Child
+Детские режимы	Child modes
+Боль, страх, стыд, одиночество, беспомощность. Чувство, что вас бросили или не любят.	Pain, fear, shame, loneliness, helplessness. Feeling abandoned or unloved.
+Сердитый Ребёнок	Angry Child
+Гнев и обида из-за того, что потребности не удовлетворены или нарушены границы.	Anger and hurt because needs are unmet or boundaries are crossed.
+Импульсивный Ребёнок	Impulsive Child
+Действие на импульсе, «хочу сейчас», без учёта последствий.	Acting on impulse, "I want it now", regardless of consequences.
+Счастливый Ребёнок	Happy Child
+Спокойствие, игра, лёгкость: потребности удовлетворены, вы в безопасности.	Calm, play, lightness: needs are met and you feel safe.
+Отстранённый Защитник	Detached Protector
+Защитные режимы	Protective modes
+Отключение чувств, «пустота», уход в себя, избегание близости, чтобы не было больно.	Shutting off feelings, "emptiness", withdrawing, avoiding closeness so it does not hurt.
+Отстранённый Самоуспокоитель	Detached Self-Soother
+Заглушить чувства едой, работой, сериалами, алкоголем, прокрастинацией.	Numbing feelings with food, work, shows, alcohol or procrastination.
+Уступчивый Капитулянт	Compliant Surrenderer
+Подчиниться, угождать, терпеть, лишь бы избежать конфликта или отвержения.	Giving in, pleasing, enduring — anything to avoid conflict or rejection.
+Гиперкомпенсатор	Overcompensator
+Контроль, нападение, перфекционизм, доказывание — «нападение как защита».	Control, attack, perfectionism, proving yourself — "attack as defense".
+Карающий Родитель	Punitive Parent
+Родительские режимы	Parent modes
+Внутренний голос, который наказывает, стыдит: «ты плохой», «ты виноват», «ты заслужил».	An inner voice that punishes and shames: "you are bad", "it is your fault", "you deserved it".
+Требовательный Родитель	Demanding Parent
+«Ты должен», «недостаточно хорошо», постоянное давление и завышенные требования.	"You must", "not good enough", constant pressure and excessive demands.
+Здоровый Взрослый	Healthy Adult
+Здоровый режим	Healthy mode
+Заботится об Уязвимом Ребёнке, ставит границы, успокаивает, принимает взвешенные решения.	Cares for the Vulnerable Child, sets boundaries, soothes, makes balanced decisions.
+Мне нужна помощь. Это сигнал тревоги.	I need help. This is an alert.
+Тревога	Anxiety
+Страх	Fear
+Гнев	Anger
+Раздражение	Irritation
+Обида	Hurt
+Грусть	Sadness
+Стыд	Shame
+Вина	Guilt
+Беспомощность	Helplessness
+Одиночество	Loneliness
+Отвращение	Disgust
+Растерянность	Confusion
+Отметка состояния	Mood check-in
+Плохо	Bad
+Средне	Okay
+Отлично	Great
+GitHub ответил кодом %1$s	GitHub returned code %1$s
+Не удалось скачать: код %1$s	Download failed: code %1$s
+Главное	Home
+Дневник	Journal
+Сейф	Vault
+Опора	Support
+Прогресс	Progress
+Сны	Dreams
+Режимы	Modes
+СМЭР	Thoughts
+Дыхание	Breathing
+Календарь	Calendar
+Голосовой гид	Voice guide
+Настройки	Settings
+Вернуться в здесь и сейчас	Come back to the here and now
+Устройтесь поудобнее. Мы сделаем это медленно, вместе.	Get comfortable. We will do this slowly, together.
+Найдите глазами пять предметов вокруг. Назовите каждый про себя.	Find five objects around you with your eyes. Name each one to yourself.
+Прислушайтесь. Найдите четыре звука — близких или далёких.	Listen. Find four sounds — near or far.
+Коснитесь трёх предметов. Почувствуйте, тёплые они или холодные, гладкие или шершавые.	Touch three objects. Notice whether they are warm or cold, smooth or rough.
+Найдите два запаха. Любых.	Find two smells. Any smells.
+Обратите внимание на один вкус во рту.	Notice one taste in your mouth.
+Сделайте медленный вдох. Вы здесь. Вы в безопасности в этот момент.	Take a slow breath. You are here. You are safe in this moment.
+Дыхание 4-7-8	4-7-8 breathing
+Успокоить тело	Calm the body
+Сядьте удобно, опустите плечи.	Sit comfortably and lower your shoulders.
+Медленно вдохните носом на четыре счёта. Раз. Два. Три. Четыре.	Slowly breathe in through your nose for four counts. One. Two. Three. Four.
+Задержите дыхание. Раз. Два. Три. Четыре. Пять. Шесть. Семь.	Hold your breath. One. Two. Three. Four. Five. Six. Seven.
+Медленно выдохните ртом на восемь счётов.	Slowly breathe out through your mouth for eight counts.
+Ещё раз. Вдох на четыре.	Once more. Breathe in for four.
+Задержка на семь.	Hold for seven.
+Выдох на восемь. С каждым выдохом тело расслабляется.	Breathe out for eight. With every exhale your body relaxes.
+При флешбэке	During a flashback
+Прошлое осталось в прошлом	The past stays in the past
+То, что вы чувствуете, — это воспоминание. Оно уже закончилось.	What you are feeling is a memory. It is already over.
+Назовите сегодняшнюю дату. Назовите место, где вы сейчас.	Say today's date. Name the place where you are now.
+Оглядитесь и найдите пять вещей, которых не было тогда.	Look around and find five things that were not there back then.
+Почувствуйте опору под ногами. Пошевелите пальцами ног.	Feel the ground under your feet. Wiggle your toes.
+Вы выросли. Сейчас вы в безопасности. Это чувство пройдёт.	You have grown up. You are safe now. This feeling will pass.
+Спокойный голос проведёт вас через упражнение. Руки свободны, можно закрыть глаза.	A calm voice will guide you through the exercise. Hands free, you can close your eyes.
+Стоп	Stop
+Начать	Start
+Готовлю голос…	Preparing the voice…
+Нажмите, чтобы начать	Tap to start
+Если голос не появился, установите «Синтез речи» в настройках телефона (обычно Google TTS).	If there is no voice, install a "Text-to-speech" engine in phone settings (usually Google TTS).
+Резервная копия сохранена.\n\nХраните файл и пароль в разных местах. Без пароля копию не открыть — восстановить его невозможно.	Backup saved.\n\nKeep the file and the password in different places. Without the password the backup cannot be opened, and the password cannot be recovered.
+Не удалось создать копию: %1$s	Could not create the backup: %1$s
+Пароль для копии	Backup password
+Копия будет зашифрована этим паролем. Запомните его: без пароля восстановить данные нельзя.	The backup will be encrypted with this password. Remember it: without it the data cannot be restored.
+Создаю резервную копию…	Creating backup…
+Пароль от копии	Backup password
+Введите пароль, который вы задали при создании копии. Данные из копии добавятся к текущим, совпадающие будут заменены.	Enter the password you set when creating the backup. Data from the backup will be added to the current data; matching items will be replaced.
+Данные восстановлены. Приложение перезапустится — войдите с PIN-кодом из копии.	Data restored. The app will restart — sign in with the PIN from the backup.
+Не удалось восстановить	Could not restore
+Восстанавливаю данные…	Restoring data…
+Пароль (от 6 символов)	Password (6+ characters)
+Пароль	Password
+Повторите пароль	Repeat password
+Пароли не совпадают	Passwords do not match
+Продолжить	Continue
+Отмена	Cancel
+Понятно	Got it
+Квадрат 4-4-4-4	Box 4-4-4-4
+Вдох	Inhale
+Пауза	Hold
+Выдох	Exhale
+Успокоение 4-7-8	Calming 4-7-8
+Мягкое 4-6	Gentle 4-6
+Готово к началу	Ready to start
+Следите за кругом: он растёт на вдохе и сжимается на выдохе.	Follow the circle: it grows as you breathe in and shrinks as you breathe out.
+Циклов: %1$s	Cycles: %1$s
+Завершить	Finish
+%1$s, циклов: %2$s	%1$s, cycles: %2$s
+То, что с вами происходит, — не ваша вина.	What is happening to you is not your fault.
+Ваши чувства настоящие и важные.	Your feelings are real and important.
+Можно отдыхать, даже если не всё сделано.	It is okay to rest even if not everything is done.
+Маленький шаг — тоже шаг.	A small step is still a step.
+Вы заслуживаете безопасности и бережного отношения.	You deserve safety and gentle treatment.
+Сегодня достаточно просто прожить этот день.	Today it is enough to simply get through the day.
+Просить о помощи — это сила.	Asking for help is strength.
+Ваша память и ощущения имеют значение.	Your memory and your feelings matter.
+Вы справлялись с трудным раньше — и это видно.	You have coped with hard things before — and it shows.
+Можно говорить «нет».	It is okay to say "no".
+Свои события и напоминания. Всё хранится зашифрованно на телефоне.	Your own events and reminders. Everything is stored encrypted on the phone.
+Назад	Back
+Вперёд	Forward
+Пн	Mo
+Вт	Tu
+Ср	We
+Чт	Th
+Пт	Fr
+Сб	Sa
+Вс	Su
+Добавить	Add
+В этот день событий нет	No events on this day
+Изменить	Edit
+Удалить	Delete
+Удалить событие?	Delete the event?
+«%1$s» будет удалено вместе с напоминанием.	"%1$s" will be deleted together with its reminder.
+Что запланировано	What is planned
+Заметка	Note
+Время: 	Time:
+Сохранить	Save
+Готово	Done
+Тесты	Tests
+ДПТ	DBT
+КПТ	CBT
+Заземление	Grounding
+Разрыв	Breaking free
+Планы	Plans
+Безопасность	Safety
+До 18	Under 18
+Телефоны	Phones
+Паническая атака	Panic attack
+Сердце колотится, не хватает воздуха	Heart pounding, short of breath
+Это паника. Она неприятна, но не опасна и пройдёт — обычно за 10–20 минут.	This is panic. It is unpleasant but not dangerous and it will pass — usually within 10–20 minutes.
+Выдох длиннее вдоха: вдох на 4 счёта, выдох на 6–8. Повторите 6 раз.	Make the exhale longer than the inhale: breathe in for 4, out for 6–8. Repeat 6 times.
+Поставьте стопы на пол, почувствуйте опору.	Put your feet on the floor and feel the support.
+Назовите вслух 3 предмета вокруг и их цвет.	Name 3 objects around you out loud and their colors.
+Скажите себе: «Я в безопасности прямо сейчас. Это волна, она спадёт».	Tell yourself: "I am safe right now. This is a wave, it will pass."
+Флешбэк	Flashback
+Прошлое ощущается как настоящее	The past feels like the present
+Скажите себе: «Это воспоминание. Оно уже произошло. Сейчас — другое время».	Tell yourself: "This is a memory. It already happened. Now is a different time."
+Назовите сегодняшнюю дату, место, где вы находитесь, и свой возраст.	Say today's date, where you are and how old you are.
+Возьмите в руку что-то холодное или с сильной текстурой.	Hold something cold or strongly textured in your hand.
+Оглядите комнату и найдите 5 вещей, которых не было тогда.	Look around the room and find 5 things that were not there back then.
+Если рядом безопасный человек — попросите поговорить с вами о чём-то нейтральном.	If a safe person is nearby, ask them to talk with you about something neutral.
+Диссоциация	Dissociation
+Ощущение нереальности, «как во сне»	Feeling unreal, "like in a dream"
+Сожмите и разожмите кулаки 10 раз, замечая напряжение.	Clench and unclench your fists 10 times, noticing the tension.
+Умойтесь холодной водой или подержите лёд.	Wash your face with cold water or hold some ice.
+Понюхайте что-то резкое: мяту, кофе, цитрус.	Smell something strong: mint, coffee, citrus.
+Пошевелите пальцами ног и назовите, что чувствуете.	Wiggle your toes and name what you feel.
+Двигайтесь: пройдитесь, потопайте, потянитесь.	Move: walk around, stomp, stretch.
+Сразу после инцидента	Right after an incident
+Что сделать, когда стало чуть безопаснее	What to do once it feels a little safer
+Если есть угроза жизни — 112.	If there is a threat to life — call 112.
+Обратитесь в травмпункт: побои фиксируются в медицинской карте — это важное доказательство.	Go to an emergency clinic: injuries are recorded in medical records — this is important evidence.
+Сфотографируйте повреждения с датой, добавьте фото в Сейф.	Photograph the injuries with the date and add the photos to the Vault.
+Запишите в Дневник: что произошло, когда, где, кто видел. Свежая память точнее.	Write in the Journal: what happened, when, where, who saw it. Fresh memory is more accurate.
+Сохраните угрожающие сообщения — скриншоты тоже в Сейф.	Save threatening messages — screenshots go to the Vault too.
+Свяжитесь с доверенным человеком или кризисным центром.	Contact a trusted person or a crisis center.
+TIPP — быстро снизить накал	TIPP — lower the intensity fast
+Когда эмоция на пределе	When an emotion is at its peak
+T — Температура: опустите лицо в холодную воду на 30 секунд или приложите лёд к глазам и скулам.	T — Temperature: put your face in cold water for 30 seconds or hold ice to your eyes and cheeks.
+I — Интенсивная нагрузка: 1–2 минуты приседаний, бега на месте, прыжков.	I — Intense exercise: 1–2 minutes of squats, running in place or jumping.
+P — Темповое дыхание: выдох длиннее вдоха, около 5–6 вдохов в минуту.	P — Paced breathing: exhale longer than inhale, about 5–6 breaths per minute.
+P — Парное расслабление мышц: напрягите группу мышц на вдохе, расслабьте на выдохе.	P — Paired muscle relaxation: tense a muscle group as you breathe in, relax it as you breathe out.
+Не действовать на импульсе	Do not act on impulse
+S — Стоп. Замрите, ничего не делайте.	S — Stop. Freeze, do nothing.
+T — Шаг назад. Отойдите, сделайте вдох.	T — Take a step back. Step away, take a breath.
+O — Наблюдайте: что происходит вокруг и внутри, без оценки.	O — Observe what is happening around you and inside, without judgment.
+P — Действуйте осознанно: что поможет мне сейчас и в долгосрочной перспективе?	P — Proceed mindfully: what will help me now and in the long run?
+ACCEPTS — переждать бурю	ACCEPTS — ride out the storm
+Отвлечься, чтобы не навредить себе	Distract yourself so you do not hurt yourself
+A — Активности: займитесь чем-то, что требует внимания.	A — Activities: do something that needs your attention.
+C — Вклад: помогите кому-то, сделайте что-то доброе.	C — Contributing: help someone, do something kind.
+C — Сравнение: вспомните трудности, которые уже остались позади.	C — Comparisons: remember difficulties that are already behind you.
+E — Эмоции наоборот: включите смешное видео, спокойную музыку.	E — Emotions, opposite: watch something funny, play calm music.
+P — Отодвинуть: мысленно положите проблему в коробку до завтра.	P — Pushing away: mentally put the problem in a box until tomorrow.
+T — Мысли: считайте до 100, вспоминайте слова песни.	T — Thoughts: count to 100, recall song lyrics.
+S — Ощущения: тёплый душ, плед, кубик льда в руке.	S — Sensations: a warm shower, a blanket, an ice cube in your hand.
+Самоуспокоение 5 чувств	Self-soothing with 5 senses
+Мягко позаботиться о себе	Gently take care of yourself
+Зрение: посмотрите на что-то красивое — небо, растение, фото.	Sight: look at something beautiful — the sky, a plant, a photo.
+Слух: спокойная музыка, звуки природы.	Hearing: calm music, sounds of nature.
+Обоняние: любимый аромат, чай, крем.	Smell: a favorite scent, tea, lotion.
+Вкус: медленно съешьте что-то приятное, замечая вкус.	Taste: slowly eat something pleasant, noticing the taste.
+Осязание: мягкая ткань, тёплая кружка, объятие с подушкой.	Touch: soft fabric, a warm mug, hugging a pillow.
+Радикальное принятие	Radical acceptance
+Когда ситуацию нельзя изменить прямо сейчас	When the situation cannot be changed right now
+Принять — не значит одобрить. Это значит признать: «Так есть сейчас».	Accepting does not mean approving. It means acknowledging: "This is how it is now."
+Заметьте сопротивление: «Это несправедливо», «Так не должно быть».	Notice the resistance: "This is unfair", "It should not be like this."
+Скажите: «Я не могу изменить то, что уже случилось. Я могу выбрать следующий шаг».	Say: "I cannot change what has already happened. I can choose the next step."
+Расслабьте плечи и руки — телу тоже нужно принятие.	Relax your shoulders and hands — the body needs acceptance too.
+Подумайте, какой один маленький шаг доступен сегодня.	Think about one small step that is possible today.
+DEAR MAN — сказать о потребности	DEAR MAN — express a need
+Просить или отказывать уверенно	Ask or say no with confidence
+D — Опишите факты без оценок.	D — Describe the facts without judgment.
+E — Выразите чувства: «Я чувствую…».	E — Express feelings: "I feel…".
+A — Заявите, чего хотите, прямо.	A — Assert what you want, directly.
+R — Подкрепите: объясните, чем это хорошо.	R — Reinforce: explain why it is good.
+M — Сохраняйте фокус, повторяйте просьбу спокойно.	M — Stay mindful, calmly repeat your request.
+A — Держитесь уверенно: голос, осанка.	A — Appear confident: voice, posture.
+N — Договаривайтесь: что вы готовы уступить?	N — Negotiate: what are you willing to give?
+Важно: в опасной ситуации безопасность важнее разговора.	Important: in a dangerous situation, safety matters more than the conversation.
+Дневник мыслей	Thought record
+Разобрать тяжёлую мысль по шагам	Work through a heavy thought step by step
+Ситуация: что произошло? Только факты.	Situation: what happened? Only the facts.
+Автоматическая мысль: что пронеслось в голове?	Automatic thought: what went through your mind?
+Эмоция и её сила от 0 до 100.	Emotion and its strength from 0 to 100.
+Доказательства «за» эту мысль.	Evidence "for" this thought.
+Доказательства «против».	Evidence "against".
+Сбалансированная мысль: как можно посмотреть иначе?	Balanced thought: how else can you look at it?
+Оцените эмоцию снова. Даже −10 — это уже движение.	Rate the emotion again. Even −10 is already movement.
+Когнитивные искажения	Cognitive distortions
+Ловушки мышления, которые усиливает насилие	Thinking traps that abuse reinforces
+Персонализация: «Это моя вина, что со мной так обращаются». Ответственность за насилие — на том, кто его совершает.	Personalization: "It is my fault I am treated this way." Responsibility for abuse lies with the person who commits it.
+Чтение мыслей: «Все считают меня слабым человеком».	Mind reading: "Everyone thinks I am weak."
+Катастрофизация: «Я не справлюсь, всё рухнет».	Catastrophizing: "I will not cope, everything will fall apart."
+Чёрно-белое мышление: «Либо идеально, либо никак».	Black-and-white thinking: "Either perfect or not at all."
+Долженствования: «Мне нужно было терпеть».	Should statements: "I should have put up with it."
+Обесценивание: «Мне не так уж плохо, другим хуже».	Discounting: "It is not that bad for me, others have it worse."
+Подумайте, какие слова поддержки нашлись бы для близкого человека в такой ситуации. Скажите их себе.	Think of the words of support you would find for someone close to you in this situation. Say them to yourself.
+Проверка реальности	Reality check
+Против газлайтинга	Against gaslighting
+Запишите, что вы помните, сразу и с датой — в Дневник.	Write down what you remember right away, with the date — in the Journal.
+Сверьтесь с записями, фото, сообщениями в Сейфе.	Check your recordings, photos and messages in the Vault.
+Вопрос: «Есть ли у меня факты, а не только чужие слова?»	Ask yourself: "Do I have facts, not just someone else's words?"
+Вы имеете право доверять своим ощущениям и памяти.	You have the right to trust your feelings and your memory.
+Обсудите ситуацию с человеком вне этих отношений.	Discuss the situation with someone outside this relationship.
+Декатастрофизация	Decatastrophizing
+Когда тревога рисует худшее	When anxiety paints the worst
+Чего именно я боюсь?	What exactly am I afraid of?
+Какова реальная вероятность от 0 до 100%?	What is the real probability, from 0 to 100%?
+Если это случится — что я смогу сделать? Кто поможет?	If it happens — what can I do? Who will help?
+Какой самый вероятный исход?	What is the most likely outcome?
+Что я могу сделать уже сегодня?	What can I do today?
+Вернуться в «здесь и сейчас»	Come back to the "here and now"
+Назовите 5 вещей, которые видите.	Name 5 things you can see.
+4 — которые можете потрогать.	4 — that you can touch.
+3 — которые слышите.	3 — that you can hear.
+2 — которые чувствуете по запаху.	2 — that you can smell.
+1 — вкус во рту.	1 — a taste in your mouth.
+Медленно выдохните.	Breathe out slowly.
+Квадратное дыхание	Box breathing
+4 стороны по 4 счёта	4 sides of 4 counts
+Вдох — 4 счёта.	Inhale — 4 counts.
+Задержка — 4.	Hold — 4.
+Выдох — 4.	Exhale — 4.
+Повторите 4–6 кругов. Если задержка тяжела — уберите её.	Repeat 4–6 rounds. If holding is hard, skip it.
+Бабочка	Butterfly hug
+Двусторонняя стимуляция для успокоения	Bilateral stimulation to calm down
+Скрестите руки на груди, ладони — на плечах.	Cross your arms over your chest, palms on your shoulders.
+Поочерёдно похлопывайте левой и правой рукой.	Tap left and right in turn.
+Дышите медленно, 1–2 минуты.	Breathe slowly for 1–2 minutes.
+Можно представить безопасное место.	You can imagine a safe place.
+Безопасное место	Safe place
+Образ, к которому можно возвращаться	An image you can return to
+Представьте место, где вам спокойно — реальное или воображаемое.	Imagine a place where you feel calm — real or imagined.
+Что вы там видите? Какие цвета?	What do you see there? What colors?
+Какие звуки? Какая температура воздуха?	What sounds? What is the air temperature?
+Что чувствует тело в этом месте?	What does your body feel in that place?
+Придумайте слово-якорь, чтобы быстро вспоминать это место.	Choose an anchor word to quickly recall this place.
+План безопасности	Safety plan
+Подготовиться заранее	Prepare in advance
+Определите безопасные комнаты дома — с выходом, без острых предметов.	Identify safe rooms at home — with an exit and no sharp objects.
+Договоритесь с доверенным человеком о кодовом слове «мне нужна помощь».	Agree on a code word with a trusted person that means "I need help".
+Запомните наизусть 1–2 важных номера.	Memorize 1–2 important phone numbers.
+Держите телефон заряженным, деньги — в доступном месте.	Keep your phone charged and money within reach.
+Решите заранее, куда можно уйти: друзья, родственники, кризисный центр.	Decide in advance where you can go: friends, relatives, a crisis center.
+Тревожный чемоданчик	Emergency bag
+Что собрать и где спрятать	What to pack and where to hide it
+Документы или их копии: паспорт, СНИЛС, полис, свидетельства, документы детей.	Documents or copies: passport, ID numbers, insurance, certificates, children's documents.
+Деньги, запасная банковская карта.	Money, a spare bank card.
+Ключи, зарядка, лекарства на несколько дней.	Keys, a charger, medicine for a few days.
+Смена одежды.	A change of clothes.
+Храните у доверенного человека или в надёжном месте вне дома.	Keep it with a trusted person or in a safe place outside the home.
+Сканы документов — в Сейфе приложения.	Scans of documents — in the app's Vault.
+Цифровая безопасность	Digital safety
+Чтобы вас не отслеживали	So you cannot be tracked
+Смените пароли от почты и соцсетей, включите двухфакторную защиту.	Change passwords for email and social media, turn on two-factor authentication.
+Проверьте, нет ли на телефоне незнакомых приложений и доступа к геолокации у других.	Check the phone for unfamiliar apps and for location access by others.
+Выйдите из аккаунтов на чужих устройствах.	Sign out of your accounts on other people's devices.
+Проверьте настройки «поделиться геопозицией».	Check "share location" settings.
+Используйте PIN, который никто не знает.	Use a PIN nobody else knows.
+Твои права в семье	Your rights in the family
+Что говорит Семейный кодекс	What the Family Code says (Russia)
+Родители обязаны воспитывать без пренебрежительного, жестокого, грубого и унижающего обращения, оскорблений и эксплуатации (ст. 65 СК РФ).	Parents must raise children without neglect, cruelty, rudeness, humiliation, insults or exploitation (Art. 65, Family Code of Russia).
+У тебя есть право на защиту от злоупотреблений со стороны родителей (ст. 56 СК РФ).	You have the right to protection from abuse by your parents (Art. 56, Family Code of Russia).
+Можно самостоятельно обратиться в орган опеки и попечительства в любом возрасте, а с 14 лет — в суд (ст. 56 СК РФ).	You can contact the guardianship authority on your own at any age, and from 14 — go to court (Art. 56, Family Code of Russia).
+С 10 лет твоё мнение обязаны учитывать при решениях, которые тебя касаются (ст. 57 СК РФ).	From the age of 10 your opinion must be taken into account in decisions that concern you (Art. 57, Family Code of Russia).
+Это общая информация, а не юридическая консультация. Бесплатно помогут юридические клиники вузов и детский телефон доверия.	This is general information, not legal advice. University legal clinics and the children's helpline can help for free.
+Деньги и вещи	Money and belongings
+Экономическое давление	Economic pressure
+С 14 лет свой заработок, стипендию и другие доходы можно тратить самостоятельно (ст. 26 ГК РФ).	From 14 you can spend your own earnings, stipend and other income independently (Art. 26, Civil Code of Russia).
+Родители обязаны содержать детей до 18 лет (ст. 80 СК РФ): еда, одежда, жильё, лечение, учёба.	Parents must support children until they turn 18 (Art. 80, Family Code of Russia): food, clothes, housing, healthcare, education.
+Если деньги или вещи постоянно отбирают в наказание или чтобы контролировать — это может быть формой насилия. Запиши такие случаи в Дневник.	If money or belongings are regularly taken away as punishment or to control you, it may be a form of abuse. Record such cases in the Journal.
+Переписка и телефон	Messages and phone
+Где забота, а где контроль	Where care ends and control begins
+Тайна переписки и телефонных разговоров защищена Конституцией для всех, включая подростков (ст. 23).	Privacy of correspondence and phone calls is protected by the Constitution for everyone, including teenagers (Art. 23).
+Родители отвечают за твою безопасность, поэтому разговор о правилах пользования телефоном — нормален.	Parents are responsible for your safety, so talking about phone rules is normal.
+Тайное чтение переписки, высмеивание её содержимого или постоянная слежка — уже контроль, а не забота.	Secretly reading messages, mocking them or constant surveillance is control, not care.
+Включи блокировку экрана и не сообщай пароли. В приложении есть кнопка быстрого выхода.	Turn on screen lock and do not share passwords. The app has a quick exit button.
+Медицинская и психологическая помощь	Medical and psychological help
+Когда можно обращаться самостоятельно	When you can seek help on your own
+С 15 лет можно самостоятельно давать согласие на медицинскую помощь (ст. 54 ФЗ № 323 «Об основах охраны здоровья»).	From 15 you can consent to medical care on your own (Art. 54, Federal Law No. 323 "On the Fundamentals of Health Protection").
+Это включает приём у врача-психиатра и психотерапевта.	This includes seeing a psychiatrist and a psychotherapist.
+Анонимно поговорить с психологом можно по детскому телефону доверия 8-800-2000-122 в любом возрасте.	You can talk to a psychologist anonymously at the children's helpline 8-800-2000-122 at any age.
+Если выгоняют из дома или опасно оставаться	If you are thrown out or it is unsafe to stay
+Куда идти	Where to go
+При угрозе жизни — 112 или 102.	If there is a threat to life — 112 or 102.
+Социально-реабилитационные центры для несовершеннолетних принимают в том числе по личному обращению самого подростка (ст. 13 ФЗ № 120).	Social rehabilitation centers for minors also accept teenagers who come on their own (Art. 13, Federal Law No. 120).
+Можно обратиться в орган опеки и попечительства своего района.	You can contact the guardianship authority in your district.
+Детский телефон доверия 8-800-2000-122 подскажет ближайший центр помощи.	The children's helpline 8-800-2000-122 can point you to the nearest help center.
+Можно пойти к взрослому, которому доверяешь: родственнику, учителю, школьному психологу.	You can go to an adult you trust: a relative, a teacher, a school psychologist.
+Забрали паспорт или вещи	Your passport or belongings were taken
+Что делать по шагам	What to do step by step
+Паспорт — твой личный документ. Удерживать чужой паспорт против воли его владельца закон не разрешает, даже родителям.	Your passport is your personal document. The law does not allow anyone, even parents, to keep it against your will.
+Сначала спокойно попроси вернуть, лучше при свидетеле: «Верни, пожалуйста, мой паспорт, он мне нужен». Запиши в Дневник дату и ответ.	First calmly ask for it back, ideally with a witness: "Please give me back my passport, I need it." Write the date and the answer in the Journal.
+Если не возвращают — можно подать заявление в полицию об удержании документа. Его обязаны принять и выдать талон-уведомление.	If they do not return it, you can report the withholding of the document to the police. They must accept the report and give you a receipt.
+Если паспорт не вернуть, обратись в МВД (вопросы миграции) или МФЦ: заяви об утрате и подай на новый. На время замены выдают временное удостоверение личности.	If the passport cannot be returned, go to the Interior Ministry (migration issues) or a public service center (MFC): report the loss and apply for a new one. A temporary ID is issued while it is being replaced.
+Вещи, купленные на твой заработок или стипендию, с 14 лет — твои (ст. 26 ГК РФ). Сфотографируй чеки, если они есть, и сохрани в Сейф.	Things bought with your own earnings or stipend from age 14 are yours (Art. 26, Civil Code of Russia). Photograph receipts if you have them and save them to the Vault.
+Не знаешь, с чего начать, — позвони на детский телефон доверия 8-800-2000-122: там помогут составить план.	Not sure where to start? Call the children's helpline 8-800-2000-122: they will help you make a plan.
+Полиция не едет или встаёт на сторону родителей	The police do not come or take your parents' side
+Что говорить и что требовать	What to say and what to ask for
+Звони 112 или 102. Говори коротко: адрес, что происходит прямо сейчас, есть ли побои или угрозы, сколько тебе лет.	Call 112 or 102. Be brief: address, what is happening right now, whether there are injuries or threats, how old you are.
+Фраза, которая работает: «Мне N лет, я несовершеннолетний человек, мне угрожает опасность дома, прошу направить наряд».	A phrase that works: "I am N years old, I am a minor, I am in danger at home, please send officers."
+Спроси фамилию дежурного и номер, под которым зарегистрировано сообщение. Сообщение обязаны зарегистрировать. Запиши всё в Дневник.	Ask for the duty officer's surname and the number your report was registered under. They must register it. Write everything in the Journal.
+Если наряд приехал и не помогает — попроси принять твоё заявление и пригласить инспектора по делам несовершеннолетних (ПДН).	If officers arrive and do not help, ask them to take your statement and to call the juvenile affairs inspector.
+Есть побои — иди в травмпункт: повреждения зафиксируют в медицинских документах.	If you are injured, go to an emergency clinic: the injuries will be recorded in medical documents.
+Если в полиции отказали или ничего не сделали — можно пожаловаться в прокуратуру, в том числе онлайн через сайт прокуратуры. Приложи даты, фамилии и номер сообщения.	If the police refused or did nothing, you can complain to the prosecutor's office, including online on its website. Include dates, surnames and the report number.
+Органы опеки бездействуют	Child services do nothing
+Как добиться ответа	How to get an answer
+Обращайся письменно, а не только устно. Сделай копию и попроси поставить на ней отметку о приёме с датой.	Apply in writing, not only verbally. Make a copy and ask them to stamp it with the date of receipt.
+На письменное обращение обязаны ответить, обычно в течение 30 дней. Отметь дату в Дневнике.	They must answer a written request, usually within 30 days. Note the date in the Journal.
+Если ответа нет или он формальный — пиши руководителю органа опеки, в комиссию по делам несовершеннолетних и защите их прав (КДН) при администрации района и в прокуратуру.	If there is no answer or only a formal one, write to the head of the guardianship authority, to the district commission on juvenile affairs and to the prosecutor's office.
+Есть уполномоченный по правам ребёнка в твоём регионе — ему тоже можно написать, это бесплатно.	There is a children's rights ombudsperson in your region — you can write to them too, for free.
+Опиши факты: что, когда, кто видел. Приложи записи из Дневника и отчёт из приложения.	Describe the facts: what, when, who saw it. Attach Journal entries and the report from the app.
+Помочь составить обращение могут на детском телефоне доверия 8-800-2000-122 и в юридических клиниках вузов.	The children's helpline 8-800-2000-122 and university legal clinics can help you write the request.
+Психологический манифест	Psychological manifesto
+Читать при вспышках вины	Read when guilt flares up
+Мой уход — это не месть и не предательство. Это вынужденная самооборона.	Leaving is not revenge or betrayal. It is necessary self-defense.
+Я не обязан быть хорошим для тех, кто меня разрушал.	I do not have to be good for those who were destroying me.
+Я не отвечаю за чувства, зависимости, бедность или одиночество взрослого человека, который причинял мне вред.	I am not responsible for the feelings, addictions, poverty or loneliness of an adult who hurt me.
+Безопасность моей жизни важнее чужих манипуляций и одобрения.	The safety of my life matters more than other people's manipulation and approval.
+Тянет вернуться — это синдром отмены, а не любовь. Он пройдёт.	The pull to go back is withdrawal, not love. It will pass.
+Метод «серого камня»	The "grey rock" method
+Если контакта не избежать	If contact cannot be avoided
+Станьте максимально скучным и предсказуемым собеседником. Агрессор питается эмоциями — без них он теряет интерес.	Become as boring and predictable as possible. An abuser feeds on emotions — without them they lose interest.
+Отвечайте тихо, монотонно, одним-двумя словами.	Answer quietly, flatly, in one or two words.
+Готовые фразы: «Да». «Нет». «Хорошо». «Я услышал(а)».	Ready phrases: "Yes." "No." "Okay." "I heard you."
+Не спорьте, не оправдывайтесь, не доказывайте правоту, не плачьте на виду.	Do not argue, justify yourself, prove you are right or cry in front of them.
+Ваши аргументы и эмоции могут использовать против вас. Берегите их.	Your arguments and emotions can be used against you. Protect them.
+Откат: тянет вернуться	Relapse: the pull to go back
+Когда страшно и одиноко	When it is scary and lonely
+Заземление: умойтесь ледяной водой, подышите — вдох на 4, выдох на 7. Это гасит панику.	Grounding: wash your face with ice-cold water, breathe — in for 4, out for 7. This calms panic.
+Факты: перечитайте в Дневнике список причин, по которым вы ушли. Память стирает плохое — список вернёт к реальности.	Facts: reread the list of reasons you left in the Journal. Memory erases the bad — the list brings you back to reality.
+Импульс: если рука тянется разблокировать агрессора — займите тело на 15 минут (20 приседаний, мытьё посуды, быстрая прогулка).	Impulse: if your hand reaches to unblock the abuser, keep your body busy for 15 minutes (20 squats, washing dishes, a brisk walk).
+Через 15 минут пик аффекта спадёт. Решения принимайте после этого.	After 15 minutes the peak of the urge will pass. Make decisions after that.
+Телефон доверия	Helpline
+Бесплатно, анонимно, круглосуточно	Free, anonymous, 24/7
+Можно звонить, даже если не знаете, что сказать.	You can call even if you do not know what to say.
+Общероссийский телефон доверия	Russian national helpline
+Техники для трудных минут. Выберите то, что подходит сейчас.	Techniques for hard moments. Choose what fits right now.
+Отмечайте пункты — прогресс сохраняется.	Check off items — progress is saved.
+Тесты помогают взглянуть со стороны. Это не диагноз, ответы нигде не сохраняются.	Tests help you see things from the outside. This is not a diagnosis, answers are not saved anywhere.
+Позвонить	Call
+Собрать заранее и спрятать	Pack in advance and hide
+Паспорт и оригиналы документов (СНИЛС, полис, свидетельства, документы детей)	Passport and original documents (ID numbers, insurance, certificates, children's documents)
+Банковская карта и немного наличных	A bank card and some cash
+Запасные ключи	Spare keys
+Зарядка и внешний аккумулятор	Charger and power bank
+Наушники	Headphones
+Лекарства на несколько дней	Medicine for a few days
+Смена одежды	A change of clothes
+Бутылка воды	A bottle of water
+Рюкзак спрятан вне поля зрения или у доверенного человека	The bag is hidden out of sight or kept with a trusted person
+Отрезать каналы слежки	Cut off tracking channels
+Сменить пароли: почта, Госуслуги, Apple ID / Google, соцсети	Change passwords: email, government services, Apple ID / Google, social media
+Включить двухфакторную защиту через приложение-аутентификатор, а не СМС	Turn on two-factor authentication with an authenticator app, not SMS
+Выйти из аккаунтов на всех чужих и домашних устройствах	Sign out of accounts on all other and shared home devices
+Проверить телефон на незнакомые приложения и доступ к геолокации	Check the phone for unfamiliar apps and location access
+Отключить общий доступ к местоположению	Turn off location sharing
+Поставить PIN или пароль, который никто не знает	Set a PIN or password nobody else knows
+Финансовая автономия	Financial independence
+Свои деньги под своим контролем	Your money under your control
+Открыть счёт в банке, о котором не знают	Open an account at a bank nobody knows about
+Переводить доходы на этот счёт	Transfer your income to that account
+Заблокировать или закрыть общие карты	Block or close shared cards
+Сохранить доступ к онлайн-банку только со своего устройства	Keep online banking access only on your own device
+Разрыв контакта	Ending contact
+Протокол «No Contact»	The "No Contact" protocol
+Не предупреждать о намерении уйти или расстаться	Do not announce your intention to leave or break up
+Уходить в отсутствие агрессора, собраться быстро, позвать помощь	Leave while the abuser is away, pack fast, ask for help
+Не сообщать новый адрес никому из «сочувствующих» посредников	Do not share your new address with any "sympathetic" go-betweens
+Внести в чёрный список контакты агрессора и его родственников — звонки, мессенджеры, соцсети	Block the abuser and their relatives everywhere — calls, messengers, social media
+Новая SIM для доверенного круга, старую отключить	Get a new SIM for your trusted circle and disable the old one
+Не проверять страницы агрессора и не читать заблокированные сообщения	Do not check the abuser's pages or read blocked messages
+%1$s из %2$s · %3$s	%1$s of %2$s · %3$s
+Это было непросто, но шаг сделан	That was not easy, but a step has been taken
+Действия	Actions
+Отправить	Send
+%.1f МБ	%.1f MB
+%.0f КБ	%.0f KB
+%1$s Б	%1$s B
+Заметки	Notes
+Список дел, мысли, заметки…	To-do list, thoughts, notes…
+DTM — вспомогательный инструмент. Он помогает, но не может гарантировать безопасность.	DTM is a support tool. It helps, but it cannot guarantee safety.
+Приложение не гарантирует 100% отправку сигналов SOS и сообщений. Доставка зависит от связи, 	The app does not guarantee 100% delivery of SOS alerts and messages. Delivery depends on network coverage,
+разрешений и настроек телефона, а также от работы SMS, WhatsApp и Telegram.	permissions and phone settings, and on how SMS, WhatsApp and Telegram work.
+DTM не заменяет работу с психотерапевтом, психологом или врачом и не является медицинской помощью.	DTM does not replace a psychotherapist, psychologist or doctor and is not medical care.
+При угрозе жизни звоните 112.	If your life is in danger, call 112.
+Данные хранятся только на этом устройстве. Чтобы не потерять их, делайте резервные копии в настройках.	Data is stored only on this device. To avoid losing it, create backups in settings.
+Перед началом	Before you start
+Пожалуйста, прочитайте — это важно	Please read — this is important
+Мне понятно, что DTM — вспомогательный инструмент	I understand that DTM is a support tool
+Дневник снов	Dream diary
+Запишите сон и оцените его. Со временем видно, как меняется ваш сон.	Write down a dream and rate it. Over time you will see how your sleep changes.
+Записать сон	Record a dream
+Снов пока нет	No dreams yet
+Записывайте сны сразу после пробуждения — они быстро забываются. Записи шифруются.	Write dreams down right after waking up — they are forgotten quickly. Entries are encrypted.
+Без описания	No description
+Удалить сон?	Delete the dream?
+Запись будет удалена без возможности восстановления.	The entry will be deleted permanently.
+Новый сон	New dream
+Сон	Dream
+Что приснилось	What did you dream about
+Образы, чувства, что запомнилось…	Images, feelings, what you remember…
+Оцените сон	Rate the dream
+Как вы сейчас	How you are now
+Тёплые слова	Kind words
+Быстрые действия	Quick actions
+Дневники и практики	Journals and practices
+Карта реальности	Reality card
+Счётчики	Counters
+Ваша реальность имеет значение	Your reality matters
+Подсказка о быстром доступе	Quick access tip
+Нужен доступ к микрофону	Microphone access is needed
+Привет 👋	Hi 👋
+Привет, %1$s 👋	Hi, %1$s 👋
+Здесь всё под вашим контролем. Ничего не покидает устройство без вашего решения.	You are in control here. Nothing leaves the device without your decision.
+Настроить главный экран	Customize home screen
+Быстрый выход	Quick exit
+Нажмите, чтобы увидеть ещё	Tap to see another
+доверенный контакт	trusted contact
+доверенных контакта	trusted contacts
+доверенных контактов	trusted contacts
+Добавьте доверенный контакт	Add a trusted contact
+Записать	Record
+Событие	Event
+график и практики	chart and practices
+дневник снов	dream diary
+дневник режимов	modes diary
+мысли → эмоции	thoughts → feelings
+успокоиться за минуту	calm down in a minute
+события и напоминания	events and reminders
+заземление голосом	grounding by voice
+запись	recording
+записи	recordings
+записей	recordings
+событие	event
+события	events
+событий	events
+документ	document
+документа	documents
+документов	documents
+Записи, события и документы хранятся зашифрованно, с датой и цифровым отпечатком. 	Recordings, events and documents are stored encrypted, with a date and a digital fingerprint.
+Если кто-то убеждает, что «этого не было», — у вас есть опора.	If someone insists "it never happened", you have something to rely on.
+Быстрый доступ	Quick access
+Удерживайте значок приложения на рабочем столе: «Запись» начнёт запись сразу. 	Long-press the app icon on the home screen: "Record" starts recording right away.
+Кнопка ⇥ вверху мгновенно закрывает приложение и убирает его из недавних.	The ⇥ button at the top instantly closes the app and removes it from recents.
+Как вы сейчас?	How are you now?
+Последняя отметка: %1$s · %2$s. Можно отмечать сколько угодно раз.	Last check-in: %1$s · %2$s. You can check in as often as you like.
+Главный экран	Home screen
+Включайте нужные блоки и меняйте порядок стрелками.	Turn the blocks you need on and change their order with the arrows.
+Выше	Up
+Ниже	Down
+Фиксируйте, что произошло, когда и кто это видел. Записи с датой помогают доверять своей памяти и пригодятся юристу или в полиции.	Record what happened, when and who saw it. Dated entries help you trust your memory and can be useful to a lawyer or the police.
+Сформировать отчёт	Create report
+Новое событие	New event
+Пока пусто	Nothing here yet
+Опишите событие своими словами — даже коротко. Можно указать прошедшую дату. 	Describe the event in your own words — even briefly. You can set a past date.
+Записи шифруются и видны только после ввода PIN-кода.	Entries are encrypted and visible only after entering the PIN.
+Свидетели: %1$s	Witnesses: %1$s
+Свидетелей не указано	No witnesses specified
+Отчёт для юриста или полиции	Report for a lawyer or the police
+Будет собран текстовый отчёт: все события дневника, список записей с отпечатками SHA-256 и список документов сейфа. 	A text report will be created: all journal events, a list of recordings with SHA-256 fingerprints and a list of vault documents.
+Отчёт передаётся в выбранное приложение в открытом виде — отправляйте его только тем, кому доверяете.	The report is shared with the chosen app unencrypted — send it only to people you trust.
+Отправить отчёт	Send report
+Сформировать	Create
+Что это было	What kind of abuse
+Что произошло	What happened
+Слова, действия, угрозы. Как вы себя чувствовали.	Words, actions, threats. How you felt.
+Свидетели, если были	Witnesses, if any
+ОТЧЁТ О СОБЫТИЯХ	INCIDENT REPORT
+Сформирован: %1$s	Created: %1$s
+Источник: приложение DTM (данные хранились зашифрованно на устройстве)	Source: the DTM app (data was stored encrypted on the device)
+1. ХРОНОЛОГИЯ СОБЫТИЙ (%1$s)	1. TIMELINE OF EVENTS (%1$s)
+Вложения: %1$s (фото/видео/аудио, хранятся в приложении)	Attachments: %1$s (photo/video/audio, stored in the app)
+2. АУДИОЗАПИСИ (%1$s)	2. AUDIO RECORDINGS (%1$s)
+сетевое время	network time
+время устройства	device time
+%1$s. %2$s (%3$s), длительность %4$s, частей: %5$s	%1$s. %2$s (%3$s), duration %4$s, parts: %5$s
+   Координаты: %1$s, %2$s	   Coordinates: %1$s, %2$s
+   Часть %1$s (%2$s) SHA-256: %3$s	   Part %1$s (%2$s) SHA-256: %3$s
+3. ДОКУМЕНТЫ И ФОТО (%1$s)	3. DOCUMENTS AND PHOTOS (%1$s)
+%1$s. %2$s — добавлен %3$s	%1$s. %2$s — added %3$s
+Отпечаток SHA-256 вычислен в момент окончания записи. Совпадение отпечатка у переданного файла подтверждает, что файл не изменялся.	The SHA-256 fingerprint was computed when the recording ended. A matching fingerprint on a shared file confirms that the file has not been changed.
+Отчёт_%1$s.txt	Report_%1$s.txt
+PIN-коды не совпали. Попробуйте ещё раз	The PINs did not match. Try again
+Слишком много попыток	Too many attempts
+Неверный PIN-код	Wrong PIN
+Придумайте PIN-код	Create a PIN
+Повторите PIN-код	Repeat the PIN
+Введите PIN-код	Enter your PIN
+Повторить можно через %1$s с	You can try again in %1$s s
+6 цифр — их будете знать только вы	6 digits — only you will know them
+пространство, где вы в безопасности	a space where you are safe
+Восстановить из резервной копии	Restore from backup
+Вход по отпечатку	Sign in with fingerprint
+Стереть	Erase
+Фото 	Photo
+Заметка 	Note
+Вложения	Attachments
+Камера	Camera
+Файл	File
+Голос	Voice
+Убрать	Remove
+Дневник режимов	Modes diary
+Какой режим включился, что его запустило и что ответил бы Здоровый Взрослый. Из схема-терапии.	Which mode switched on, what triggered it and what the Healthy Adult would say. From schema therapy.
+О режимах	About modes
+Отметить режим	Log a mode
+Записей пока нет	No entries yet
+Замечайте, когда внутри включается «режим» — например, Карающий Родитель или Отстранённый Защитник. 	Notice when a "mode" switches on inside — for example, the Punitive Parent or the Detached Protector.
+Называя режим, легче вернуть управление Здоровому Взрослому. Нажмите ⓘ вверху для описаний.	Naming the mode makes it easier to hand control back to the Healthy Adult. Tap ⓘ at the top for descriptions.
+Режим не выбран	No mode selected
+Без описания ситуации	No situation described
+Здоровый Взрослый: %1$s	Healthy Adult: %1$s
+Удалить запись?	Delete the entry?
+Какой режим включился?	Which mode switched on?
+Режим	Mode
+Что запустило режим	What triggered the mode
+Ситуация, слова, событие	Situation, words, event
+Что он говорит или делает	What it says or does
+Мысли, чувства, побуждения этого режима	Thoughts, feelings, urges of this mode
+Ответ Здорового Взрослого	The Healthy Adult's answer
+Что сказал бы заботливый и мудрый взрослый?	What would a caring and wise adult say?
+Это обучающий материал, а не диагностика. Разбирать режимы глубже лучше со специалистом по схема-терапии.	This is educational material, not a diagnosis. It is best to explore modes in depth with a schema therapist.
+Как менялось ваше состояние и что вы делали для себя.	How your state has changed and what you have done for yourself.
+Дневник практик · %1$s	Practice log · %1$s
+Здесь будут ваши практики	Your practices will appear here
+Отметки состояния, упражнения и техники, которые вы выполняете, автоматически попадают сюда.	Mood check-ins, exercises and techniques you complete appear here automatically.
+Состояние за 2 недели	Mood over 2 weeks
+среднее за 30 дней	30-day average
+дней подряд с отметкой	days in a row with a check-in
+Токсичные отношения или норма?	Toxic relationship or normal?
+Отметьте, что бывает в ваших отношениях — с партнёром, другом или в семье.	Mark what happens in your relationship — with a partner, friend or family.
+Мне приходится следить за словами, чтобы не вызвать вспышку злости.	I have to watch my words so I do not trigger an outburst of anger.
+Мне говорят, что я всё придумываю и неправильно всё помню.	I am told I make things up and remember everything wrong.
+Меня высмеивают или унижают, в том числе при других.	I am mocked or humiliated, including in front of others.
+Мне запрещают общаться с друзьями или родными.	I am forbidden to see friends or family.
+Проверяют мой телефон, переписку, требуют отчёта, где я.	My phone and messages are checked, and I must report where I am.
+После ссор я чувствую, что виновато всегда только я.	After arguments I feel it is always only my fault.
+Мне угрожали — словами, жестами или силой.	I have been threatened — with words, gestures or force.
+Я отказываюсь от своих планов и желаний, лишь бы не было конфликта.	I give up my plans and wishes just to avoid conflict.
+Похоже на нездоровые отношения	This looks like an unhealthy relationship
+Многое из отмеченного — признаки контроля и насилия, а не любви. Вы не виноваты в чужой агрессии. 	Much of what you marked are signs of control and abuse, not love. You are not to blame for someone else's aggression.
+Посмотрите карточки в разделах «Безопасность» и «Телефоны», подумайте о разговоре с доверенным человеком или специалистом.	Look at the cards in "Safety" and "Phones", and consider talking to a trusted person or a specialist.
+Есть тревожные сигналы	There are warning signs
+Отдельные пункты стоит воспринять серьёзно. Понаблюдайте, как часто это повторяется, и фиксируйте случаи в Дневнике. 	Some items are worth taking seriously. Notice how often this happens and record cases in the Journal.
+Нормальные отношения не строятся на страхе и контроле.	Healthy relationships are not built on fear and control.
+Явных признаков контроля немного	Few clear signs of control
+Это хороший знак. Если что-то всё же тревожит — доверяйте своим ощущениям, они важны.	That is a good sign. If something still worries you, trust your feelings — they matter.
+Забота или контроль?	Care or control?
+Про отношения с родителями или опекунами.	About relationships with parents or guardians.
+Запрещают выходить из дома без реальной причины, кроме «я так сказал».	I am not allowed to leave home for no real reason other than "because I said so".
+Читают переписку и высмеивают её.	My messages are read and mocked.
+Отбирают деньги или вещи в наказание.	Money or belongings are taken away as punishment.
+Оскорбляют, кричат, называют обидными словами.	I am insulted, shouted at, called hurtful names.
+Угрожают выгнать из дома или причинить вред.	I am threatened with being thrown out or harmed.
+Запрещают общаться с друзьями.	I am forbidden to see friends.
+Применяют физическую силу.	Physical force is used against me.
+Это выходит за рамки заботы	This goes beyond care
+Забота защищает, а не унижает и не пугает. Отмеченное может быть насилием. 	Care protects; it does not humiliate or frighten. What you marked may be abuse.
+В разделе «До 18» есть ваши права, в «Телефонах» — куда можно обратиться анонимно.	"Under 18" lists your rights, and "Phones" shows where you can turn anonymously.
+Стоит присмотреться	Worth a closer look
+Граница между заботой и контролем — в уважении к вам. Фиксируйте в Дневнике то, что ранит, и при случае обсудите со взрослым, которому доверяете.	The line between care and control is respect for you. Record what hurts in the Journal and, when you can, talk to an adult you trust.
+Больше похоже на заботу	More like care
+Правила и беспокойство родителей — это нормально, когда они не держатся на страхе. Если что-то тревожит, вы всегда можете позвонить на телефон доверия.	Parents' rules and worries are normal when they are not based on fear. If something worries you, you can always call a helpline.
+Что делать, если родители залезли в телефон?	What if my parents went through my phone?
+Короткая самопроверка: готовы ли вы к такой ситуации.	A short self-check: how prepared are you for this.
+На телефоне стоит блокировка экрана, и пароль знаю только я.	My phone has a screen lock and only I know the password.
+Я знаю про кнопку быстрого выхода в этом приложении.	I know about the quick exit button in this app.
+Важные скриншоты и документы я храню в Сейфе, а не в галерее.	I keep important screenshots and documents in the Vault, not in the gallery.
+У меня есть взрослый или друг, к которому можно обратиться.	I have an adult or a friend I can turn to.
+Я знаю телефон доверия наизусть или записал его в надёжном месте.	I know the helpline number by heart or have it saved somewhere safe.
+Вы хорошо подготовлены	You are well prepared
+Отлично. На всякий случай ещё раз загляните в «Цифровую безопасность» в разделе «Безопасность».	Great. Just in case, take another look at "Digital safety" in the "Safety" section.
+Частично готовы	Partly prepared
+Стоит закрыть пробелы: поставить блокировку, перенести важное в Сейф, запомнить телефон доверия. Карточки в «Безопасности» помогут.	It is worth closing the gaps: set a screen lock, move important things to the Vault, remember the helpline number. The "Safety" cards will help.
+Есть над чем поработать	There is work to do
+Начните с простого: блокировка экрана и Сейф для важных файлов. Раздел «Безопасность» подскажет шаги.	Start simple: a screen lock and the Vault for important files. The "Safety" section will suggest the steps.
+Да	Yes
+Иногда	Sometimes
+Нет	No
+%1$s вопросов · 1 минута	%1$s questions · 1 minute
+Показать результат	Show result
+Ответьте на все вопросы (%1$s/%2$s)	Answer all questions (%1$s/%2$s)
+Пройти заново	Take again
+Прочитайте, когда накрывает вина	Read it when guilt hits
+Составьте текст, который напомнит вам правду в трудный момент: что держать дистанцию — 	Write a text that will remind you of the truth in a hard moment: that keeping distance is
+это защита, а не жестокость. Можно начать с готового примера и переписать под себя.	protection, not cruelty. You can start from the example and rewrite it for yourself.
+Создать карту	Create a card
+Пишите от первого лица, своими словами. Этот текст видите только вы.	Write in the first person, in your own words. Only you can see this text.
+Текст карты	Card text
+Вернуть пример	Restore example
+Это упражнение из схема-терапии, а не медицинская помощь. Если накрывают тяжёлые мысли — загляните в «Телефоны».	This is a schema-therapy exercise, not medical care. If heavy thoughts come, look at "Phones".
+Нет доступа к микрофону. Разрешите его в настройках телефона.	No microphone access. Allow it in phone settings.
+Одно касание — и запись идёт, даже при погашенном экране. Каждой записи присваивается цифровой отпечаток SHA-256.	One tap and recording starts, even with the screen off. Each recording gets a SHA-256 digital fingerprint.
+Коснитесь, чтобы остановить	Tap to stop
+Коснитесь, чтобы начать	Tap to start
+Записи хранятся зашифрованно и не попадают в галерею или файловый менеджер. 	Recordings are stored encrypted and do not appear in the gallery or file manager.
+Отпечаток SHA-256 подтверждает, что файл не меняли после записи.	The SHA-256 fingerprint confirms the file was not changed after recording.
+Сохранённые записи · %1$s	Saved recordings · %1$s
+Не удалось открыть запись	Could not open the recording
+часть	part
+части	parts
+частей	parts
+\n🕑 сетевое время	\n🕑 network time
+\n🕑 время устройства	\n🕑 device time
+ · 📍 есть координаты	 · 📍 has coordinates
+Слушать	Listen
+Поделиться	Share
+Отправить запись	Send recording
+Не удалось подготовить файлы	Could not prepare files
+Отпечатки и время	Fingerprints and time
+Запись от %1$s и все её части будут удалены без возможности восстановления.	The recording from %1$s and all its parts will be deleted permanently.
+Запись от %1$s	Recording from %1$s
+сетевое (SNTP)	network (SNTP)
+устройства	device
+Координаты: %1$s, %2$s	Coordinates: %1$s, %2$s
+Часть %1$s: %2$s	Part %1$s: %2$s
+Манифест записи	Recording manifest
+Копировать всё	Copy all
+Закрыть	Close
+Время получено с сервера точного времени (SNTP) и не зависит от настроек телефона.\n\n	Time was obtained from a time server (SNTP) and does not depend on phone settings.\n\n
+Сетевое время получить не удалось, указано время устройства.\n\n	Network time was unavailable; device time is shown.\n\n
+Отпечаток SHA-256 у каждой части подтверждает, что файл не меняли после записи:	The SHA-256 fingerprint of each part confirms the file was not changed after recording:
+Часть %1$s · %2$s	Part %1$s · %2$s
+Остановить запись	Stop recording
+Начать запись	Start recording
+Профиль	Profile
+Как к вам обращаться	What should we call you
+Любое имя или ник — видно только вам	Any name or nickname — visible only to you
+Доверенные контакты	Trusted contacts
+Без имени	No name
+СМС	SMS
+Добавить контакт	Add contact
+Номер телефона и каналы связи	Phone number and channels
+Сигнал SOS	SOS alert
+Текст сигнала	Alert text
+Включать запись при SOS	Start recording on SOS
+Звук начнёт записываться сразу после сигнала	Audio recording starts right after the alert
+Быстро и без ввода PIN	Fast, without entering the PIN
+На устройстве нет настроенного отпечатка	No fingerprint is set up on this device
+Скрывать содержимое	Hide content
+Запрет скриншотов и пустая миниатюра в списке недавних приложений	Block screenshots and show a blank preview in recent apps
+Работа в фоне	Background operation
+Энергосбережение не ограничивает DTM	Battery saving does not restrict DTM
+Разрешите работу без ограничений, чтобы запись, SOS и напоминания не останавливались системой	Allow unrestricted operation so recording, SOS and reminders are not stopped by the system
+Сменить PIN-код	Change PIN
+4–8 цифр	4–8 digits
+Тревожный PIN включён	Duress PIN is on
+Тревожный PIN	Duress PIN
+Открывает безобидный блокнот вместо настоящих данных. Введите его, если заставляют показать приложение	Opens a harmless notepad instead of your real data. Enter it if someone forces you to show the app
+Тревожный PIN удалён	Duress PIN removed
+Оформление	Appearance
+Тема	Theme
+Тёмная	Dark
+Как в системе	System
+Светлая	Light
+Резервная копия	Backup
+Создать резервную копию	Create backup
+Все данные в один файл, зашифрованный вашим паролем. Сохраните его вне телефона — тогда после удаления приложения всё можно вернуть	All data in one file encrypted with your password. Keep it off the phone — then everything can be restored after the app is removed
+Восстановить из копии	Restore from backup
+Выбрать файл копии и ввести пароль	Choose a backup file and enter the password
+Удаление данных	Data deletion
+Удалить все данные	Delete all data
+Записи, дневник, сейф, контакты и PIN-код будут стёрты без возможности восстановления	Recordings, journal, vault, contacts and PIN will be erased permanently
+Диагностика	Diagnostics
+Отправить отчёт об ошибке	Send error report
+Приложение недавно аварийно закрылось. Отправьте отчёт разработчику — это поможет починить	The app recently crashed. Send a report to the developer — it helps fix it
+Отчёт об ошибке	Error report
+О приложении	About
+Проверить обновления	Check for updates
+Новые версии публикуются на GitHub	New versions are published on GitHub
+Предлагать обновления автоматически	Offer updates automatically
+При каждом входе. Приложение обращается только к github.com	On every launch. The app only contacts github.com
+Важная информация	Important information
+Ограничения приложения	App limitations
+Все данные хранятся только на этом устройстве в зашифрованном виде. Резервное копирование в облако отключено. 	All data is stored only on this device, encrypted. Cloud backup is disabled.
+Удаление приложения безвозвратно удалит все записи.	Uninstalling the app permanently deletes all entries.
+Контакт сохранён	Contact saved
+Имя или ник	Name or nickname
+Удалить все данные?	Delete all data?
+Будут удалены все записи, события дневника, файлы сейфа, контакты и настройки. Восстановить их будет невозможно.	All recordings, journal events, vault files, contacts and settings will be deleted. They cannot be recovered.
+Удалить всё	Delete everything
+Ссылка на геолокацию добавится автоматически.	A location link will be added automatically.
+Этот PIN откроет безобидный блокнот вместо настоящего приложения. 	This PIN opens a harmless notepad instead of the real app.
+Он должен отличаться от основного и состоять из %1$s цифр — как основной.	It must differ from the main PIN and have %1$s digits — like the main one.
+Тревожный PIN (%1$s цифр)	Duress PIN (%1$s digits)
+Повторите	Repeat
+Должен отличаться от основного PIN	Must differ from the main PIN
+Тревожный PIN сохранён	Duress PIN saved
+Новый PIN-код	New PIN
+PIN (4–8 цифр)	PIN (4–8 digits)
+Повторите PIN	Repeat PIN
+PIN-коды не совпадают	PINs do not match
+PIN-код обновлён. Тревожный PIN сброшен — задайте его заново той же длины	PIN updated. Duress PIN was reset — set it again with the same length
+PIN-код обновлён	PIN updated
+Новый контакт	New contact
+Выбрать из телефонной книги	Choose from contacts
+Имя	Name
+Телефон	Phone
+Куда отправлять сигнал	Where to send the alert
+Уходит автоматически	Sent automatically
+Откроется чат с готовым текстом	Opens a chat with the text ready
+Готовый текст, нужно выбрать чат	Text ready, choose a chat
+Удалить контакт	Delete contact
+Дневник СМЭР	Thought record
+Ситуация → Мысли → Эмоции → Реакции тела и поведения. Помогает увидеть, как мысль запускает чувство и действие.	Situation → Thoughts → Emotions → Body and behavior reactions. Helps you see how a thought triggers a feeling and an action.
+Новая запись	New entry
+Пример	Example
+Ситуация: стою в пробке в автобусе.\n	Situation: I am stuck in traffic on a bus.\n
+Мысли: «Если ещё постоим — я запаникую, все заметят и решат, что я псих».\n	Thoughts: "If we wait any longer I will panic, everyone will notice and decide I am crazy."\n
+Эмоции: тревога.\n	Emotions: anxiety.\n
+Тело: жар в груди, тремор, сердцебиение.\n	Body: heat in the chest, trembling, racing heart.\n
+Поведение: звоню брату, отвлекаюсь разговором.	Behavior: I call my brother and distract myself with the conversation.
+Эмоции не указаны	No emotions listed
+Мысли: %1$s	Thoughts: %1$s
+Новая запись СМЭР	New thought record
+Запись СМЭР	Thought record
+С — Ситуация	S — Situation
+Что произошло, где, когда	What happened, where, when
+М — Мысли	T — Thoughts
+Что пронеслось в голове? Запишите дословно	What went through your mind? Write it word for word
+Э — Эмоции	E — Emotions
+Другая эмоция	Another emotion
+Р — Реакции	R — Reactions
+Тело	Body
+Жар, дрожь, напряжение, сердцебиение…	Heat, trembling, tension, racing heart…
+Поведение	Behavior
+Что вы сделали или захотелось сделать	What you did or wanted to do
+Определяю местоположение…	Getting location…
+Ниже — мессенджеры: откроется чат с готовым текстом, останется нажать «Отправить».	Messengers below: a chat opens with the text ready, just tap "Send".
+Запись звука включена.	Audio recording is on.
+Удерживайте кнопку 1,5 секунды. СМС с геолокацией уйдёт сразу, сообщения в мессенджеры будут готовы к отправке.	Hold the button for 1.5 seconds. An SMS with your location is sent immediately; messenger messages will be ready to send.
+Что отправить	What to send
+отправка…	sending…
+отправлено	sent
+удерживайте	hold
+Доверенные контакты не указаны	No trusted contacts set
+Получатели: 	Recipients:
+WhatsApp не установлен	WhatsApp is not installed
+Telegram не установлен. Текст скопирован.	Telegram is not installed. The text has been copied.
+Telegram: выбрать чат	Telegram: choose a chat
+Если есть угроза жизни	If your life is in danger
+Звонок бесплатный, работает без SIM-карты и денег на счёте.	The call is free and works without a SIM card or credit.
+Позвонить 112	Call 112
+У вас последняя версия (%1$s).	You have the latest version (%1$s).
+Не удалось проверить обновления. Проверьте интернет.\n\n%1$s	Could not check for updates. Check your internet connection.\n\n%1$s
+Чтобы установить обновление, разрешите DTM установку приложений. 	To install the update, allow DTM to install apps.
+Откроются настройки — включите переключатель и вернитесь, затем нажмите «Проверить обновления» ещё раз.	Settings will open — turn on the switch and come back, then tap "Check for updates" again.
+Проверяю обновления…	Checking for updates…
+Доступна версия %1$s	Version %1$s is available
+Сейчас установлена %1$s. Данные сохранятся.	Currently installed: %1$s. Your data will be kept.
+Не удалось скачать обновление: %1$s	Could not download the update: %1$s
+Скачать и установить	Download and install
+Позже	Later
+Скачиваю обновление	Downloading update
+Добавлено: %1$s. %2$s	Added: %1$s. %2$s
+Не удалось добавить файлы	Could not add files
+Не удалось сохранить фото	Could not save the photo
+Документы, фото повреждений, скриншоты переписки. Всё шифруется AES-256 и не попадает в галерею.	Documents, injury photos, screenshots of messages. Everything is encrypted with AES-256 and stays out of the gallery.
+Файлы	Files
+Камера недоступна	Camera unavailable
+Паспорт, свидетельства, полисы, медицинские справки, фото повреждений, скриншоты угроз — всё, что важно сохранить. 	Passport, certificates, insurance, medical notes, injury photos, screenshots of threats — everything worth keeping.
+Снимки с камеры сразу попадают сюда, минуя галерею.	Camera photos go straight here, bypassing the gallery.
+Файлы · %1$s	Files · %1$s
+Нет приложения, чтобы открыть этот файл	No app to open this file
+Открыть	Open
+Отправить файл	Send file
+Не удалось подготовить файл	Could not prepare the file
+Подлинность	Authenticity
+Удалить файл?	Delete the file?
+«%1$s» будет удалён без возможности восстановления.	"%1$s" will be deleted permanently.
+Подлинность фото	Photo authenticity
+Снято %1$s	Taken %1$s
+Время получено из сети (SNTP) — его нельзя подделать настройками телефона.	Time was obtained from the network (SNTP) — it cannot be faked through phone settings.
+Время устройства (сеть была недоступна).	Device time (the network was unavailable).
+Совпадение отпечатка у переданного файла доказывает, что снимок не редактировали после съёмки.	A matching fingerprint on a shared file proves the photo was not edited after it was taken.
+Копировать отпечаток	Copy fingerprint
+Сейчас мне кажется, что я виноват и поступаю жестоко. Но это не так.\nТак говорит моя травма, а не реальность.\n\nНа самом деле я защищаю себя. Со мной обращались жестоко, унижали и не защищали.\nЭто общение разрушает меня и доводит до тяжёлых мыслей.\n\nДержать дистанцию — это не злость, это необходимая самооборона.\nЯ имею полное право не отвечать, чтобы сохранить себя.	Right now it feels like I am guilty and being cruel. But that is not true.\nThat is my trauma talking, not reality.\n\nIn fact I am protecting myself. I was treated cruelly, humiliated and not protected.\nThis contact destroys me and leads me to dark thoughts.\n\nKeeping my distance is not anger, it is necessary self-defense.\nI have every right not to answer, to protect myself.

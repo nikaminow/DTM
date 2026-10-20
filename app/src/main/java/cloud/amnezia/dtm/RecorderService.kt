@@ -58,7 +58,7 @@ class RecorderService : Service() {
         try {
             startForegroundCompat()
         } catch (e: Exception) {
-            Recorder.lastError = "Фоновая запись недоступна, держите приложение открытым"
+            Recorder.lastError = tr("Фоновая запись недоступна, держите приложение открытым")
         }
         sessionId = System.currentTimeMillis()
         writingPart = 0
@@ -79,7 +79,7 @@ class RecorderService : Service() {
             recorder = null
             first.delete()
             Recorder.isRecording = false
-            Recorder.lastError = "Не удалось начать запись: ${e.message ?: e.javaClass.simpleName}"
+            Recorder.lastError = tr("Не удалось начать запись: %1\$s", e.message ?: e.javaClass.simpleName)
             finish()
         }
     }
@@ -142,7 +142,7 @@ class RecorderService : Service() {
                 if (ok && plain.length() > 0)
                     Recorder.finalizeChunk(applicationContext, plain, sessionId, part, start, NetworkTime.now(), la, lo)
                 else plain.delete()
-            }.onFailure { Recorder.lastError = "Не удалось зашифровать запись: ${it.message}" }
+            }.onFailure { Recorder.lastError = tr("Не удалось зашифровать запись: %1\$s", it.message) }
             finish()
         }
     }
@@ -180,7 +180,7 @@ class RecorderService : Service() {
     private fun startForegroundCompat() {
         val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL, "Запись", NotificationManager.IMPORTANCE_LOW).apply {
+            NotificationChannel(CHANNEL, tr("Запись"), NotificationManager.IMPORTANCE_LOW).apply {
                 setShowBadge(false)
                 lockscreenVisibility = Notification.VISIBILITY_SECRET
             }
@@ -195,11 +195,11 @@ class RecorderService : Service() {
         )
         // Нейтральный текст: уведомление не выдаёт назначение приложения.
         val notif = Notification.Builder(this, CHANNEL)
-            .setContentTitle("Диктофон")
-            .setContentText("Идёт запись")
+            .setContentTitle(tr("Диктофон"))
+            .setContentText(tr("Идёт запись"))
             .setSmallIcon(R.drawable.ic_stat_rec)
             .setContentIntent(open)
-            .addAction(Notification.Action.Builder(null, "Остановить", stop).build())
+            .addAction(Notification.Action.Builder(null, tr("Остановить"), stop).build())
             .setOngoing(true)
             .setVisibility(Notification.VISIBILITY_SECRET)
             .build()
@@ -219,7 +219,7 @@ class RecorderService : Service() {
             try {
                 context.startForegroundService(Intent(context, RecorderService::class.java).setAction(ACTION_START))
             } catch (e: Exception) {
-                Recorder.lastError = "Не удалось запустить запись: ${e.message}"
+                Recorder.lastError = tr("Не удалось запустить запись: %1\$s", e.message)
             }
         }
 
@@ -227,7 +227,7 @@ class RecorderService : Service() {
             try {
                 context.startService(Intent(context, RecorderService::class.java).setAction(ACTION_STOP))
             } catch (e: Exception) {
-                Recorder.lastError = "Не удалось остановить запись: ${e.message}"
+                Recorder.lastError = tr("Не удалось остановить запись: %1\$s", e.message)
             }
         }
     }

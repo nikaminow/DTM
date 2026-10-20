@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import android.content.Intent
 import android.webkit.MimeTypeMap
@@ -59,7 +61,7 @@ import java.util.Date
 import java.util.Locale
 
 /** Поддерживающая фраза после важного действия — без указания рода. */
-const val STEP_DONE = "Это было непросто, но шаг сделан"
+val STEP_DONE = tr("Это было непросто, но шаг сделан")
 
 val LocalSnackbar = staticCompositionLocalOf<SnackbarHostState> { error("no snackbar") }
 
@@ -91,7 +93,7 @@ fun ScreenScaffold(
                                 .clip(androidx.compose.foundation.shape.CircleShape)
                                 .background(cs.surfaceContainerHigh),
                             contentAlignment = androidx.compose.ui.Alignment.Center,
-                        ) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад") }
+                        ) { Icon(Icons.AutoMirrored.Filled.ArrowBack, tr("Назад")) }
                     }
                     androidx.compose.foundation.layout.Spacer(Modifier.weight(1f))
                     actions()
@@ -149,7 +151,7 @@ fun ItemCard(
                 Box(
                     Modifier.size(40.dp).softClickable { menu = true },
                     contentAlignment = androidx.compose.ui.Alignment.Center,
-                ) { Icon(Icons.Filled.MoreVert, "Действия", tint = cs.onSurfaceVariant) }
+                ) { Icon(Icons.Filled.MoreVert, tr("Действия"), tint = cs.onSurfaceVariant) }
                 DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                     actions.forEach { a ->
                         val c = if (a.destructive) cs.error else cs.onSurface
@@ -182,7 +184,7 @@ fun ConfirmDialog(title: String, text: String, confirm: String, onConfirm: () ->
                 Text(confirm, color = MaterialTheme.colorScheme.error)
             }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("Отмена") } },
+        dismissButton = { TextButton(onClick = onDismiss) { Text(tr("Отмена")) } },
     )
 }
 
@@ -200,7 +202,7 @@ fun openFile(context: Context, file: File): Boolean {
     return try { context.startActivity(intent); true } catch (_: Exception) { false }
 }
 
-fun shareFiles(context: Context, files: List<File>, title: String = "Отправить") {
+fun shareFiles(context: Context, files: List<File>, title: String = tr("Отправить")) {
     if (files.size == 1) { shareFile(context, files[0], title); return }
     val uris = ArrayList(files.map { FileProvider.getUriForFile(context, AUTHORITY, it) })
     val send = Intent(Intent.ACTION_SEND_MULTIPLE).setType("audio/mp4")
@@ -209,7 +211,7 @@ fun shareFiles(context: Context, files: List<File>, title: String = "Отпра�
     context.startActivity(Intent.createChooser(send, title).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
 }
 
-fun shareFile(context: Context, file: File, title: String = "Отправить") {
+fun shareFile(context: Context, file: File, title: String = tr("Отправить")) {
     val uri = FileProvider.getUriForFile(context, AUTHORITY, file)
     val send = Intent(Intent.ACTION_SEND).setType(mimeOf(file))
         .putExtra(Intent.EXTRA_STREAM, uri)
@@ -219,7 +221,7 @@ fun shareFile(context: Context, file: File, title: String = "Отправить"
 
 // ---------- Форматирование ----------
 
-private val RU = Locale("ru")
+private val RU = java.util.Locale.getDefault()
 
 fun prettyDate(ms: Long): String = SimpleDateFormat("d MMMM yyyy, HH:mm", RU).format(Date(ms))
 fun shortDate(ms: Long): String = SimpleDateFormat("d MMM, HH:mm", RU).format(Date(ms))
@@ -230,9 +232,9 @@ fun formatDuration(sec: Long): String =
     else "%02d:%02d".format(sec / 60, sec % 60)
 
 fun formatSize(bytes: Long): String = when {
-    bytes >= 1_000_000 -> "%.1f МБ".format(bytes / 1_000_000.0)
-    bytes >= 1_000 -> "%.0f КБ".format(bytes / 1_000.0)
-    else -> "$bytes Б"
+    bytes >= 1_000_000 -> tr("%.1f МБ").format(bytes / 1_000_000.0)
+    bytes >= 1_000 -> tr("%.0f КБ").format(bytes / 1_000.0)
+    else -> tr("%1\$s Б", bytes)
 }
 
 fun plural(n: Int, one: String, few: String, many: String): String {

@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,20 +54,20 @@ fun ProgressScreen(onBack: () -> Unit) {
     }
 
     ScreenScaffold(
-        title = "Прогресс",
-        subtitle = "Как менялось ваше состояние и что вы делали для себя.",
+        title = tr("Прогресс"),
+        subtitle = tr("Как менялось ваше состояние и что вы делали для себя."),
         onBack = onBack,
     ) {
         item { MoodChartCard(moods) }
         item { MoodStats(moods) }
 
         if (logs.isNotEmpty()) {
-            item { SectionLabel("Дневник практик · ${logs.size}") }
+            item { SectionLabel(tr("Дневник практик · %1\$s", logs.size)) }
             items(logs, key = { it.time }) { e -> LogRow(e) }
         } else {
             item {
-                InfoCard(Icons.Filled.Check, "Здесь будут ваши практики",
-                    "Отметки состояния, упражнения и техники, которые вы выполняете, автоматически попадают сюда.")
+                InfoCard(Icons.Filled.Check, tr("Здесь будут ваши практики"),
+                    tr("Отметки состояния, упражнения и техники, которые вы выполняете, автоматически попадают сюда."))
             }
         }
     }
@@ -91,7 +93,7 @@ private fun MoodChartCard(moods: List<MoodEntry>) {
         }
     }
     val avgDay = FloatArray(days) { if (cnt[it] > 0) sum[it].toFloat() / cnt[it] else 0f }
-    val dayFmt = SimpleDateFormat("d", Locale("ru"))
+    val dayFmt = SimpleDateFormat("d", java.util.Locale.getDefault())
 
     Card(
         modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(),
@@ -99,7 +101,7 @@ private fun MoodChartCard(moods: List<MoodEntry>) {
         shape = MaterialTheme.shapes.large,
     ) {
         Column(Modifier.padding(18.dp)) {
-            Text("Состояние за 2 недели", style = MaterialTheme.typography.titleMedium)
+            Text(tr("Состояние за 2 недели"), style = MaterialTheme.typography.titleMedium)
             Spacer(Modifier.height(16.dp))
             Row(
                 Modifier.fillMaxWidth().height(140.dp),
@@ -128,7 +130,7 @@ private fun MoodChartCard(moods: List<MoodEntry>) {
             }
             Spacer(Modifier.height(14.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                Legend(cs.error, "Плохо"); Legend(cs.tertiary, "Средне"); Legend(cs.primary, "Отлично")
+                Legend(cs.error, tr("Плохо")); Legend(cs.tertiary, tr("Средне")); Legend(cs.primary, tr("Отлично"))
             }
         }
     }
@@ -150,8 +152,8 @@ private fun MoodStats(moods: List<MoodEntry>) {
     val avg = if (last30.isNotEmpty()) last30.map { it.value }.average() else 0.0
     val streak = calcStreak(moods)
     Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        StatBox(if (avg > 0) "%.1f".format(avg) else "—", "среднее за 30 дней", Modifier.weight(1f))
-        StatBox("$streak", "дней подряд с отметкой", Modifier.weight(1f))
+        StatBox(if (avg > 0) "%.1f".format(avg) else "—", tr("среднее за 30 дней"), Modifier.weight(1f))
+        StatBox("$streak", tr("дней подряд с отметкой"), Modifier.weight(1f))
     }
 }
 

@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -35,9 +37,9 @@ import kotlinx.coroutines.launch
 private data class BreathMode(val title: String, val phases: List<Pair<String, Int>>)
 
 private val MODES = listOf(
-    BreathMode("Квадрат 4-4-4-4", listOf("Вдох" to 4, "Пауза" to 4, "Выдох" to 4, "Пауза" to 4)),
-    BreathMode("Успокоение 4-7-8", listOf("Вдох" to 4, "Пауза" to 7, "Выдох" to 8)),
-    BreathMode("Мягкое 4-6", listOf("Вдох" to 4, "Выдох" to 6)),
+    BreathMode(tr("Квадрат 4-4-4-4"), listOf(tr("Вдох") to 4, tr("Пауза") to 4, tr("Выдох") to 4, tr("Пауза") to 4)),
+    BreathMode(tr("Успокоение 4-7-8"), listOf(tr("Вдох") to 4, tr("Пауза") to 7, tr("Выдох") to 8)),
+    BreathMode(tr("Мягкое 4-6"), listOf(tr("Вдох") to 4, tr("Выдох") to 6)),
 )
 
 @Composable
@@ -47,7 +49,7 @@ fun BreathScreen(onBack: () -> Unit) {
     val cs = MaterialTheme.colorScheme
     var mode by remember { mutableIntStateOf(0) }
     var running by remember { mutableStateOf(false) }
-    var phase by remember { mutableStateOf("Готово к началу") }
+    var phase by remember { mutableStateOf(tr("Готово к началу")) }
     var left by remember { mutableIntStateOf(0) }
     var cycles by remember { mutableIntStateOf(0) }
     val scale = remember { Animatable(0.55f) }
@@ -57,7 +59,7 @@ fun BreathScreen(onBack: () -> Unit) {
         while (running) {
             for ((name, sec) in MODES[mode].phases) {
                 phase = name
-                val target = when (name) { "Вдох" -> 1f; "Выдох" -> 0.55f; else -> scale.value }
+                val target = when (name) { tr("Вдох") -> 1f; tr("Выдох") -> 0.55f; else -> scale.value }
                 launch { scale.animateTo(target, tween(sec * 1000, easing = LinearEasing)) }
                 for (s in sec downTo 1) { left = s; delay(1000) }
             }
@@ -65,7 +67,7 @@ fun BreathScreen(onBack: () -> Unit) {
         }
     }
 
-    ScreenScaffold(title = "Дыхание", subtitle = "Следите за кругом: он растёт на вдохе и сжимается на выдохе.", onBack = onBack, bottomSpace = false) {
+    ScreenScaffold(title = tr("Дыхание"), subtitle = tr("Следите за кругом: он растёт на вдохе и сжимается на выдохе."), onBack = onBack, bottomSpace = false) {
         item {
             Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 MODES.forEachIndexed { i, m -> SoftChip(m.title, mode == i) { mode = i; cycles = 0 } }
@@ -83,13 +85,13 @@ fun BreathScreen(onBack: () -> Unit) {
         }
         item {
             Column(Modifier.padding(horizontal = 16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                Text("Циклов: $cycles", style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant)
+                Text(tr("Циклов: %1\$s", cycles), style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant)
                 PillButton(
-                    if (running) "Завершить" else "Начать",
+                    if (running) tr("Завершить") else tr("Начать"),
                     {
-                        if (running && cycles > 0) scope.launch { Tracker.addLog(context, "Дыхание", "${MODES[mode].title}, циклов: $cycles") }
+                        if (running && cycles > 0) scope.launch { Tracker.addLog(context, tr("Дыхание"), tr("%1\$s, циклов: %2\$s", MODES[mode].title, cycles)) }
                         running = !running
-                        if (!running) phase = "Готово к началу"
+                        if (!running) phase = tr("Готово к началу")
                     },
                     Modifier.fillMaxWidth().padding(top = 12.dp),
                 )
@@ -99,14 +101,14 @@ fun BreathScreen(onBack: () -> Unit) {
 }
 
 val WARM_WORDS = listOf(
-    "То, что с вами происходит, — не ваша вина.",
-    "Ваши чувства настоящие и важные.",
-    "Можно отдыхать, даже если не всё сделано.",
-    "Маленький шаг — тоже шаг.",
-    "Вы заслуживаете безопасности и бережного отношения.",
-    "Сегодня достаточно просто прожить этот день.",
-    "Просить о помощи — это сила.",
-    "Ваша память и ощущения имеют значение.",
-    "Вы справлялись с трудным раньше — и это видно.",
-    "Можно говорить «нет».",
+    tr("То, что с вами происходит, — не ваша вина."),
+    tr("Ваши чувства настоящие и важные."),
+    tr("Можно отдыхать, даже если не всё сделано."),
+    tr("Маленький шаг — тоже шаг."),
+    tr("Вы заслуживаете безопасности и бережного отношения."),
+    tr("Сегодня достаточно просто прожить этот день."),
+    tr("Просить о помощи — это сила."),
+    tr("Ваша память и ощущения имеют значение."),
+    tr("Вы справлялись с трудным раньше — и это видно."),
+    tr("Можно говорить «нет»."),
 )

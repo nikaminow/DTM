@@ -75,18 +75,18 @@ object Sos {
 
     /** Готовые тексты сигнала. Первый — основной (из настроек), остальные — «безопасный круг». */
     fun presets(context: Context): List<Pair<String, String>> = listOf(
-        "Сигнал тревоги" to SecureStore.getSosText(context),
-        "Позвони мне" to "Придумай предлог и срочно позвони мне.",
-        "Приди ко мне" to "Можешь прийти ко мне с кем-нибудь? Мне нужна компания прямо сейчас.",
-        "Забери меня" to "Можешь забрать меня отсюда или вызвать такси? Мне нужно уехать.",
+        tr("Сигнал тревоги") to SecureStore.getSosText(context),
+        tr("Позвони мне") to tr("Придумай предлог и срочно позвони мне."),
+        tr("Приди ко мне") to tr("Можешь прийти ко мне с кем-нибудь? Мне нужна компания прямо сейчас."),
+        tr("Забери меня") to tr("Можешь забрать меня отсюда или вызвать такси? Мне нужно уехать."),
     )
 
     fun buildText(context: Context, loc: Location?, baseText: String = SecureStore.getSosText(context)): String {
         val geo = if (loc != null) {
             val lat = "%.5f".format(java.util.Locale.US, loc.latitude)
             val lon = "%.5f".format(java.util.Locale.US, loc.longitude)
-            "\nГде я: https://maps.google.com/?q=$lat,$lon"
-        } else "\nГеолокация недоступна."
+            tr("\nГде я: https://maps.google.com/?q=%1\$s,%2\$s", lat, lon)
+        } else tr("\nГеолокация недоступна.")
         return baseText + geo
     }
 
@@ -95,11 +95,11 @@ object Sos {
         val targets = Contacts.load(context).filter { it.sms && it.phone.isNotBlank() }
         if (targets.isEmpty()) return Result(0, 0, "")
         if (!hasPerm(context, Manifest.permission.SEND_SMS)) {
-            return Result(0, targets.size, "Нет разрешения на СМС.")
+            return Result(0, targets.size, tr("Нет разрешения на СМС."))
         }
         var ok = 0; var fail = 0
         val sms = runCatching { smsManager(context) }.getOrNull()
-            ?: return Result(0, targets.size, "СМС недоступны на этом устройстве. Используйте мессенджеры ниже.")
+            ?: return Result(0, targets.size, tr("СМС недоступны на этом устройстве. Используйте мессенджеры ниже."))
         targets.forEach { c ->
             try {
                 sms.sendMultipartTextMessage(c.phone, null, sms.divideMessage(text), null, null)
@@ -107,8 +107,8 @@ object Sos {
             } catch (_: Exception) { fail++ }
         }
         val msg = buildString {
-            if (ok > 0) append("СМС отправлено: $ok")
-            if (fail > 0) { if (ok > 0) append(". "); append("Не удалось: $fail") }
+            if (ok > 0) append(tr("СМС отправлено: %1\$s", ok))
+            if (fail > 0) { if (ok > 0) append(". "); append(tr("Не удалось: %1\$s", fail)) }
         }
         return Result(ok, fail, msg)
     }

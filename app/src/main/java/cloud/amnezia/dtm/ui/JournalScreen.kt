@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -100,39 +102,39 @@ fun JournalScreen() {
     val list = entries.orEmpty()
 
     ScreenScaffold(
-        title = "Дневник",
-        subtitle = "Фиксируйте, что произошло, когда и кто это видел. Записи с датой помогают доверять своей памяти и пригодятся юристу или в полиции.",
+        title = tr("Дневник"),
+        subtitle = tr("Фиксируйте, что произошло, когда и кто это видел. Записи с датой помогают доверять своей памяти и пригодятся юристу или в полиции."),
         actions = {
-            IconButton(onClick = { reportAsk = true }) { Icon(Icons.Outlined.Description, "Сформировать отчёт") }
+            IconButton(onClick = { reportAsk = true }) { Icon(Icons.Outlined.Description, tr("Сформировать отчёт")) }
         },
     ) {
         item {
             FilledTonalButton(
                 onClick = { editing = newEntry() },
                 modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth().height(56.dp),
-            ) { Icon(Icons.AutoMirrored.Filled.NoteAdd, null); Spacer(Modifier.width(8.dp)); Text("Новое событие") }
+            ) { Icon(Icons.AutoMirrored.Filled.NoteAdd, null); Spacer(Modifier.width(8.dp)); Text(tr("Новое событие")) }
         }
         if (entries != null && list.isEmpty()) item {
-            InfoCard(Icons.Outlined.EditNote, "Пока пусто",
-                "Опишите событие своими словами — даже коротко. Можно указать прошедшую дату. " +
-                    "Записи шифруются и видны только после ввода PIN-кода.")
+            InfoCard(Icons.Outlined.EditNote, tr("Пока пусто"),
+                tr("Опишите событие своими словами — даже коротко. Можно указать прошедшую дату. ") +
+                    tr("Записи шифруются и видны только после ввода PIN-кода."))
         }
         val byDay = list.groupBy { dayKey(it.time) }
         byDay.forEach { (_, dayEntries) ->
             item(key = "d" + dayKey(dayEntries.first().time)) { SectionLabel(dayTitle(dayEntries.first().time)) }
             items(dayEntries, key = { it.id }) { e ->
                 ItemCard(
-                    overline = e.kind + " · " + SimpleDateFormat("HH:mm", Locale("ru")).format(Date(e.time)),
-                    headline = e.text.ifBlank { "Без описания" },
+                    overline = e.kind + " · " + SimpleDateFormat("HH:mm", java.util.Locale.getDefault()).format(Date(e.time)),
+                    headline = e.text.ifBlank { tr("Без описания") },
                     supporting = buildString {
-                        append(if (e.witnesses.isNotBlank()) "Свидетели: ${e.witnesses}" else "Свидетелей не указано")
+                        append(if (e.witnesses.isNotBlank()) tr("Свидетели: %1\$s", e.witnesses) else tr("Свидетелей не указано"))
                         if (e.attachments.isNotEmpty()) append(" · 📎 ${e.attachments.size}")
                     },
                     icon = Icons.Filled.EditNote,
                     onClick = { editing = e },
                     actions = listOf(
-                        MenuAction("Изменить", Icons.Filled.Edit) { editing = e },
-                        MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = e },
+                        MenuAction(tr("Изменить"), Icons.Filled.Edit) { editing = e },
+                        MenuAction(tr("Удалить"), Icons.Filled.Delete, destructive = true) { toDelete = e },
                     ),
                 )
             }
@@ -153,28 +155,28 @@ fun JournalScreen() {
     }
 
     toDelete?.let { e ->
-        ConfirmDialog("Удалить событие?", "Запись будет удалена без возможности восстановления.", "Удалить",
+        ConfirmDialog(tr("Удалить событие?"), tr("Запись будет удалена без возможности восстановления."), tr("Удалить"),
             onConfirm = { persist(list.filter { it.id != e.id }) }, onDismiss = { toDelete = null })
     }
 
     if (reportAsk) AlertDialog(
         onDismissRequest = { reportAsk = false },
         icon = { Icon(Icons.Filled.Share, null) },
-        title = { Text("Отчёт для юриста или полиции") },
+        title = { Text(tr("Отчёт для юриста или полиции")) },
         text = {
-            Text("Будет собран текстовый отчёт: все события дневника, список записей с отпечатками SHA-256 и список документов сейфа. " +
-                "Отчёт передаётся в выбранное приложение в открытом виде — отправляйте его только тем, кому доверяете.")
+            Text(tr("Будет собран текстовый отчёт: все события дневника, список записей с отпечатками SHA-256 и список документов сейфа. ") +
+                tr("Отчёт передаётся в выбранное приложение в открытом виде — отправляйте его только тем, кому доверяете."))
         },
         confirmButton = {
             TextButton(onClick = {
                 reportAsk = false
                 scope.launch {
                     val f = withContext(Dispatchers.IO) { buildReport(context, list) }
-                    shareFile(context, f, "Отправить отчёт")
+                    shareFile(context, f, tr("Отправить отчёт"))
                 }
-            }) { Text("Сформировать") }
+            }) { Text(tr("Сформировать")) }
         },
-        dismissButton = { TextButton(onClick = { reportAsk = false }) { Text("Отмена") } },
+        dismissButton = { TextButton(onClick = { reportAsk = false }) { Text(tr("Отмена")) } },
     )
 }
 
@@ -199,29 +201,29 @@ private fun EntryEditor(initial: JournalEntry, isNew: Boolean, onSave: (JournalE
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Text(if (isNew) "Новое событие" else "Событие", style = MaterialTheme.typography.headlineSmall)
+            Text(if (isNew) tr("Новое событие") else tr("Событие"), style = MaterialTheme.typography.headlineSmall)
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                AssistChip(onClick = { pickDate = true }, label = { Text(SimpleDateFormat("d MMMM yyyy", Locale("ru")).format(Date(time))) },
+                AssistChip(onClick = { pickDate = true }, label = { Text(SimpleDateFormat("d MMMM yyyy", java.util.Locale.getDefault()).format(Date(time))) },
                     leadingIcon = { Icon(Icons.Filled.CalendarToday, null) })
-                AssistChip(onClick = { pickTime = true }, label = { Text(SimpleDateFormat("HH:mm", Locale("ru")).format(Date(time))) },
+                AssistChip(onClick = { pickTime = true }, label = { Text(SimpleDateFormat("HH:mm", java.util.Locale.getDefault()).format(Date(time))) },
                     leadingIcon = { Icon(Icons.Filled.Schedule, null) })
             }
 
-            Text("Что это было", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+            Text(tr("Что это было"), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
             Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 Journal.KINDS.forEach { k -> FilterChip(selected = kind == k, onClick = { kind = k }, label = { Text(k) }) }
             }
 
             OutlinedTextField(
                 value = text, onValueChange = { text = it },
-                label = { Text("Что произошло") },
-                placeholder = { Text("Слова, действия, угрозы. Как вы себя чувствовали.") },
+                label = { Text(tr("Что произошло")) },
+                placeholder = { Text(tr("Слова, действия, угрозы. Как вы себя чувствовали.")) },
                 minLines = 5, modifier = Modifier.fillMaxWidth(),
             )
             OutlinedTextField(
                 value = witnesses, onValueChange = { witnesses = it },
-                label = { Text("Свидетели, если были") },
+                label = { Text(tr("Свидетели, если были")) },
                 modifier = Modifier.fillMaxWidth(),
             )
             AttachmentsEditor(atts)
@@ -229,7 +231,7 @@ private fun EntryEditor(initial: JournalEntry, isNew: Boolean, onSave: (JournalE
                 onClick = { onSave(initial.copy(time = time, kind = kind, text = text.trim(), witnesses = witnesses.trim(), attachments = atts.toList())) },
                 enabled = text.isNotBlank() || atts.isNotEmpty(),
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Сохранить") }
+            ) { Text(tr("Сохранить")) }
         }
     }
 
@@ -241,9 +243,9 @@ private fun EntryEditor(initial: JournalEntry, isNew: Boolean, onSave: (JournalE
                 TextButton(onClick = {
                     state.selectedDateMillis?.let { time = withDate(time, it) }
                     pickDate = false
-                }) { Text("Готово") }
+                }) { Text(tr("Готово")) }
             },
-            dismissButton = { TextButton(onClick = { pickDate = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { pickDate = false }) { Text(tr("Отмена")) } },
         ) { DatePicker(state) }
     }
     if (pickTime) {
@@ -259,9 +261,9 @@ private fun EntryEditor(initial: JournalEntry, isNew: Boolean, onSave: (JournalE
                         set(Calendar.HOUR_OF_DAY, state.hour); set(Calendar.MINUTE, state.minute)
                     }.timeInMillis
                     pickTime = false
-                }) { Text("Готово") }
+                }) { Text(tr("Готово")) }
             },
-            dismissButton = { TextButton(onClick = { pickTime = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { pickTime = false }) { Text(tr("Отмена")) } },
         )
     }
 }
@@ -283,42 +285,42 @@ private fun withDate(local: Long, utcMidnight: Long): Long {
 }
 
 private suspend fun buildReport(context: Context, entries: List<JournalEntry>): File {
-    val ru = Locale("ru")
+    val ru = java.util.Locale.getDefault()
     val full = SimpleDateFormat("dd.MM.yyyy HH:mm", ru)
     val recs = Recorder.list(context)
     val docs = Vault.list(context)
     val text = buildString {
-        appendLine("ОТЧЁТ О СОБЫТИЯХ")
-        appendLine("Сформирован: ${full.format(Date())}")
-        appendLine("Источник: приложение DTM (данные хранились зашифрованно на устройстве)")
+        appendLine(tr("ОТЧЁТ О СОБЫТИЯХ"))
+        appendLine(tr("Сформирован: %1\$s", full.format(Date())))
+        appendLine(tr("Источник: приложение DTM (данные хранились зашифрованно на устройстве)"))
         appendLine()
-        appendLine("1. ХРОНОЛОГИЯ СОБЫТИЙ (${entries.size})")
+        appendLine(tr("1. ХРОНОЛОГИЯ СОБЫТИЙ (%1\$s)", entries.size))
         appendLine("-".repeat(40))
         entries.sortedBy { it.time }.forEachIndexed { i, e ->
             appendLine("${i + 1}. ${full.format(Date(e.time))} — ${e.kind}")
             appendLine(e.text)
-            if (e.witnesses.isNotBlank()) appendLine("Свидетели: ${e.witnesses}")
-            if (e.attachments.isNotEmpty()) appendLine("Вложения: ${e.attachments.size} (фото/видео/аудио, хранятся в приложении)")
+            if (e.witnesses.isNotBlank()) appendLine(tr("Свидетели: %1\$s", e.witnesses))
+            if (e.attachments.isNotEmpty()) appendLine(tr("Вложения: %1\$s (фото/видео/аудио, хранятся в приложении)", e.attachments.size))
             appendLine()
         }
-        appendLine("2. АУДИОЗАПИСИ (${recs.size})")
+        appendLine(tr("2. АУДИОЗАПИСИ (%1\$s)", recs.size))
         appendLine("-".repeat(40))
         recs.sortedBy { it.startUtc }.forEachIndexed { i, r ->
-            val timeKind = if (r.networkTime) "сетевое время" else "время устройства"
-            appendLine("${i + 1}. ${full.format(Date(r.startUtc))} ($timeKind), длительность ${formatDuration(r.durationSec)}, частей: ${r.chunks.size}")
-            if (r.lat != null && r.lon != null) appendLine("   Координаты: ${"%.5f".format(r.lat)}, ${"%.5f".format(r.lon)}")
-            r.chunks.forEach { c -> appendLine("   Часть ${c.part + 1} (${c.plainName}) SHA-256: ${c.sha256}") }
+            val timeKind = if (r.networkTime) tr("сетевое время") else tr("время устройства")
+            appendLine(tr("%1\$s. %2\$s (%3\$s), длительность %4\$s, частей: %5\$s", i + 1, full.format(Date(r.startUtc)), timeKind, formatDuration(r.durationSec), r.chunks.size))
+            if (r.lat != null && r.lon != null) appendLine(tr("   Координаты: %1\$s, %2\$s", "%.5f".format(r.lat), "%.5f".format(r.lon)))
+            r.chunks.forEach { c -> appendLine(tr("   Часть %1\$s (%2\$s) SHA-256: %3\$s", c.part + 1, c.plainName, c.sha256)) }
         }
         appendLine()
-        appendLine("3. ДОКУМЕНТЫ И ФОТО (${docs.size})")
+        appendLine(tr("3. ДОКУМЕНТЫ И ФОТО (%1\$s)", docs.size))
         appendLine("-".repeat(40))
         docs.sortedBy { it.added }.forEachIndexed { i, d ->
-            appendLine("${i + 1}. ${d.name} — добавлен ${full.format(Date(d.added))}")
+            appendLine(tr("%1\$s. %2\$s — добавлен %3\$s", i + 1, d.name, full.format(Date(d.added))))
         }
         appendLine()
-        appendLine("Отпечаток SHA-256 вычислен в момент окончания записи. Совпадение отпечатка у переданного файла подтверждает, что файл не изменялся.")
+        appendLine(tr("Отпечаток SHA-256 вычислен в момент окончания записи. Совпадение отпечатка у переданного файла подтверждает, что файл не изменялся."))
     }
-    val f = File(Crypto.viewDir(context), "Отчёт_${SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())}.txt")
+    val f = File(Crypto.viewDir(context), tr("Отчёт_%1\$s.txt", SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())))
     f.writeText(text)
     return f
 }

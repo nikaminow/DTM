@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
@@ -52,7 +54,7 @@ object Tracker {
                 Crypto.writeText(context, moodFile(context), arr.toString())
             }
         }
-        addLog(context, "Отметка состояния", moodWord(value))
+        addLog(context, tr("Отметка состояния"), moodWord(value))
     }
 
     suspend fun hasMoodToday(context: Context): Boolean =
@@ -80,7 +82,7 @@ object Tracker {
 
     suspend fun logCount(context: Context): Int = logs(context).size
 
-    fun moodWord(v: Int) = when (v) { 1 -> "Плохо"; 2 -> "Средне"; else -> "Отлично" }
+    fun moodWord(v: Int) = when (v) { 1 -> tr("Плохо"); 2 -> tr("Средне"); else -> tr("Отлично") }
 
     private fun sameDay(a: Long, b: Long): Boolean {
         val ca = Calendar.getInstance().apply { timeInMillis = a }

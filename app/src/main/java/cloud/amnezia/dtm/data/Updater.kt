@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -58,7 +60,7 @@ object Updater {
         try {
             val code = conn.responseCode
             if (code == 404) return null // релизов ещё нет
-            if (code !in 300..399) error("GitHub ответил кодом $code")
+            if (code !in 300..399) error(tr("GitHub ответил кодом %1\$s", code))
             val location = conn.getHeaderField("Location").orEmpty()
             // …/releases/tag/v5.2 — без релизов GitHub отправляет на /releases
             return location.substringAfter("/releases/tag/", "").substringBefore('?').ifBlank { null }
@@ -121,7 +123,7 @@ object Updater {
             if (code in 300..399 && hops < 5) {
                 url = URL(url, conn.getHeaderField("Location")); conn.disconnect(); hops++; continue
             }
-            if (code != 200) error("Не удалось скачать: код $code")
+            if (code != 200) error(tr("Не удалось скачать: код %1\$s", code))
             break
         }
         val total = conn.contentLengthLong.takeIf { it > 0 } ?: release.sizeBytes

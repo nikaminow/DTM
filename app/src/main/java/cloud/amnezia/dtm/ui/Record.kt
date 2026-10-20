@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -87,12 +89,12 @@ fun RecordScreen() {
 
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { res ->
         if (res[Manifest.permission.RECORD_AUDIO] == true) { justSaved = false; RecorderService.start(context) }
-        else Recorder.lastError = "Нет доступа к микрофону. Разрешите его в настройках телефона."
+        else Recorder.lastError = tr("Нет доступа к микрофону. Разрешите его в настройках телефона.")
     }
 
     ScreenScaffold(
-        title = "Запись",
-        subtitle = "Одно касание — и запись идёт, даже при погашенном экране. Каждой записи присваивается цифровой отпечаток SHA-256.",
+        title = tr("Запись"),
+        subtitle = tr("Одно касание — и запись идёт, даже при погашенном экране. Каждой записи присваивается цифровой отпечаток SHA-256."),
     ) {
         item {
             Column(Modifier.fillMaxWidth().padding(vertical = 8.dp), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -107,9 +109,9 @@ fun RecordScreen() {
                 Spacer(Modifier.height(8.dp))
                 if (Recorder.isRecording) {
                     Text(formatDuration(elapsed), style = TimerStyle, color = cs.onSurface)
-                    Text("Коснитесь, чтобы остановить", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+                    Text(tr("Коснитесь, чтобы остановить"), style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
                 } else {
-                    Text("Коснитесь, чтобы начать", style = MaterialTheme.typography.titleMedium, color = cs.onSurface)
+                    Text(tr("Коснитесь, чтобы начать"), style = MaterialTheme.typography.titleMedium, color = cs.onSurface)
                 }
                 val err = Recorder.lastError
                 when {
@@ -123,18 +125,18 @@ fun RecordScreen() {
 
         if (items.isEmpty()) {
             item {
-                InfoCard(Icons.Outlined.Fingerprint, "Записей пока нет",
-                    "Записи хранятся зашифрованно и не попадают в галерею или файловый менеджер. " +
-                        "Отпечаток SHA-256 подтверждает, что файл не меняли после записи.")
+                InfoCard(Icons.Outlined.Fingerprint, tr("Записей пока нет"),
+                    tr("Записи хранятся зашифрованно и не попадают в галерею или файловый менеджер. ") +
+                        tr("Отпечаток SHA-256 подтверждает, что файл не меняли после записи."))
             }
         } else {
-            item { SectionLabel("Сохранённые записи · ${items.size}") }
+            item { SectionLabel(tr("Сохранённые записи · %1\$s", items.size)) }
             items(items, key = { it.sessionId }) { r ->
                 val first = r.chunks.first()
                 val play: () -> Unit = {
                     scope.launch {
                         val f = runCatching { Recorder.decryptChunk(context, first) }.getOrNull()
-                        if (f == null || !openFile(context, f)) snack.showSnackbar("Не удалось открыть запись")
+                        if (f == null || !openFile(context, f)) snack.showSnackbar(tr("Не удалось открыть запись"))
                     }
                 }
                 ItemCard(
@@ -142,24 +144,24 @@ fun RecordScreen() {
                     supporting = buildString {
                         if (r.durationSec > 0) append(formatDuration(r.durationSec)).append(" · ")
                         append(formatSize(r.size))
-                        if (r.chunks.size > 1) append(" · ${r.chunks.size} ${plural(r.chunks.size, "часть", "части", "частей")}")
-                        append(if (r.networkTime) "\n🕑 сетевое время" else "\n🕑 время устройства")
-                        if (r.lat != null && r.lon != null) append(" · 📍 есть координаты")
+                        if (r.chunks.size > 1) append(" · ${r.chunks.size} ${plural(r.chunks.size, tr("часть"), tr("части"), tr("частей"))}")
+                        append(if (r.networkTime) tr("\n🕑 сетевое время") else tr("\n🕑 время устройства"))
+                        if (r.lat != null && r.lon != null) append(tr(" · 📍 есть координаты"))
                     },
                     icon = Icons.Filled.GraphicEq,
                     onClick = play,
                     actions = buildList {
-                        add(MenuAction("Слушать", Icons.Filled.PlayArrow, onClick = play))
-                        add(MenuAction("Поделиться", Icons.Filled.Share) {
+                        add(MenuAction(tr("Слушать"), Icons.Filled.PlayArrow, onClick = play))
+                        add(MenuAction(tr("Поделиться"), Icons.Filled.Share) {
                             scope.launch {
                                 runCatching {
                                     val files = r.chunks.map { Recorder.decryptChunk(context, it) }
-                                    shareFiles(context, files, "Отправить запись")
-                                }.onFailure { snack.showSnackbar("Не удалось подготовить файлы") }
+                                    shareFiles(context, files, tr("Отправить запись"))
+                                }.onFailure { snack.showSnackbar(tr("Не удалось подготовить файлы")) }
                             }
                         })
-                        add(MenuAction("Отпечатки и время", Icons.Filled.Info) { details = r })
-                        add(MenuAction("Удалить", Icons.Filled.Delete, destructive = true) { toDelete = r })
+                        add(MenuAction(tr("Отпечатки и время"), Icons.Filled.Info) { details = r })
+                        add(MenuAction(tr("Удалить"), Icons.Filled.Delete, destructive = true) { toDelete = r })
                     },
                 )
             }
@@ -170,9 +172,9 @@ fun RecordScreen() {
 
     toDelete?.let { r ->
         ConfirmDialog(
-            "Удалить запись?",
-            "Запись от ${prettyDate(r.startUtc)} и все её части будут удалены без возможности восстановления.",
-            "Удалить",
+            tr("Удалить запись?"),
+            tr("Запись от %1\$s и все её части будут удалены без возможности восстановления.", prettyDate(r.startUtc)),
+            tr("Удалить"),
             onConfirm = { Recorder.delete(context, r); refresh++ },
             onDismiss = { toDelete = null },
         )
@@ -187,34 +189,34 @@ private fun RecordDetailsDialog(item: Recorder.Item, onDismiss: () -> Unit) {
         confirmButton = {
             androidx.compose.material3.TextButton(onClick = {
                 val text = buildString {
-                    appendLine("Запись от ${prettyDate(item.startUtc)}")
-                    appendLine("Время: ${if (item.networkTime) "сетевое (SNTP)" else "устройства"}")
-                    if (item.lat != null && item.lon != null) appendLine("Координаты: ${"%.5f".format(item.lat)}, ${"%.5f".format(item.lon)}")
+                    appendLine(tr("Запись от %1\$s", prettyDate(item.startUtc)))
+                    appendLine(tr("Время: %1\$s", if (item.networkTime) tr("сетевое (SNTP)") else tr("устройства")))
+                    if (item.lat != null && item.lon != null) appendLine(tr("Координаты: %1\$s, %2\$s", "%.5f".format(item.lat), "%.5f".format(item.lon)))
                     appendLine()
                     item.chunks.forEach { c ->
-                        appendLine("Часть ${c.part + 1}: ${c.plainName}")
+                        appendLine(tr("Часть %1\$s: %2\$s", c.part + 1, c.plainName))
                         appendLine("  SHA-256: ${c.sha256}")
                     }
                 }
-                copyText(context, "Манифест записи", text)
+                copyText(context, tr("Манифест записи"), text)
                 onDismiss()
-            }) { androidx.compose.material3.Text("Копировать всё") }
+            }) { androidx.compose.material3.Text(tr("Копировать всё")) }
         },
-        dismissButton = { androidx.compose.material3.TextButton(onClick = onDismiss) { androidx.compose.material3.Text("Закрыть") } },
-        title = { androidx.compose.material3.Text("Отпечатки и время") },
+        dismissButton = { androidx.compose.material3.TextButton(onClick = onDismiss) { androidx.compose.material3.Text(tr("Закрыть")) } },
+        title = { androidx.compose.material3.Text(tr("Отпечатки и время")) },
         text = {
             androidx.compose.foundation.layout.Column(
                 Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())
             ) {
                 androidx.compose.material3.Text(
-                    (if (item.networkTime) "Время получено с сервера точного времени (SNTP) и не зависит от настроек телефона.\n\n"
-                    else "Сетевое время получить не удалось, указано время устройства.\n\n") +
-                        "Отпечаток SHA-256 у каждой части подтверждает, что файл не меняли после записи:",
+                    (if (item.networkTime) tr("Время получено с сервера точного времени (SNTP) и не зависит от настроек телефона.\n\n")
+                    else tr("Сетевое время получить не удалось, указано время устройства.\n\n")) +
+                        tr("Отпечаток SHA-256 у каждой части подтверждает, что файл не меняли после записи:"),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Spacer(Modifier.height(8.dp))
                 item.chunks.forEach { c ->
-                    androidx.compose.material3.Text("Часть ${c.part + 1} · ${formatDuration(c.durationSec)}",
+                    androidx.compose.material3.Text(tr("Часть %1\$s · %2\$s", c.part + 1, formatDuration(c.durationSec)),
                         style = MaterialTheme.typography.titleSmall)
                     androidx.compose.material3.Text(c.sha256,
                         style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -244,7 +246,7 @@ private fun RecordButton(recording: Boolean, onClick: () -> Unit) {
         ) {
             Box(contentAlignment = Alignment.Center) {
                 Icon(if (recording) Icons.Filled.Stop else Icons.Filled.Mic,
-                    if (recording) "Остановить запись" else "Начать запись", Modifier.size(64.dp))
+                    if (recording) tr("Остановить запись") else tr("Начать запись"), Modifier.size(64.dp))
             }
         }
     }

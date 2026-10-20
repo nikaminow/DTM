@@ -1,5 +1,7 @@
 package cloud.amnezia.dtm.data
 
+import cloud.amnezia.dtm.tr
+
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -41,5 +43,5 @@ object Dreams {
 
     suspend fun count(context: Context): Int = load(context).size
 
-    fun word(r: Int) = when (r) { 1 -> "Плохой"; 2 -> "Средний"; else -> "Супер" }
+    fun word(r: Int) = when (r) { 1 -> tr("Плохой"); 2 -> tr("Средний"); else -> tr("Супер") }
 }

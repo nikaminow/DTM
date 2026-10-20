@@ -2,6 +2,8 @@
 
 package cloud.amnezia.dtm.ui
 
+import cloud.amnezia.dtm.tr
+
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
@@ -118,58 +120,58 @@ fun SettingsScreen(onBack: () -> Unit) {
     }
     fun say(msg: String) { scope.launch { snack.showSnackbar(msg) } }
 
-    ScreenScaffold(title = "Настройки", onBack = onBack, bottomSpace = false) {
-        item { SectionLabel("Профиль") }
+    ScreenScaffold(title = tr("Настройки"), onBack = onBack, bottomSpace = false) {
+        item { SectionLabel(tr("Профиль")) }
         item {
             SettingsGroup {
-                Row0(Icons.Filled.Face, "Как к вам обращаться",
-                    nick.ifBlank { "Любое имя или ник — видно только вам" },
+                Row0(Icons.Filled.Face, tr("Как к вам обращаться"),
+                    nick.ifBlank { tr("Любое имя или ник — видно только вам") },
                     onClick = { editNick = true })
             }
         }
 
-        item { SectionLabel("Доверенные контакты") }
+        item { SectionLabel(tr("Доверенные контакты")) }
         item {
             SettingsGroup {
                 contacts.forEachIndexed { i, c ->
                     Row0(
                         icon = Icons.Filled.Person,
-                        title = c.name.ifBlank { c.phone.ifBlank { "Без имени" } },
+                        title = c.name.ifBlank { c.phone.ifBlank { tr("Без имени") } },
                         subtitle = listOfNotNull(c.phone.takeIf { it.isNotBlank() },
-                            listOfNotNull("СМС".takeIf { c.sms }, "WhatsApp".takeIf { c.whatsapp }, "Telegram".takeIf { c.tg })
+                            listOfNotNull(tr("СМС").takeIf { c.sms }, "WhatsApp".takeIf { c.whatsapp }, "Telegram".takeIf { c.tg })
                                 .joinToString(", ")).joinToString(" · "),
                         onClick = { editIndex = i },
                     )
                     HorizontalDivider(Modifier.padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.outlineVariant)
                 }
-                Row0(Icons.Filled.PersonAdd, "Добавить контакт", "Номер телефона и каналы связи", onClick = { editIndex = -1 })
+                Row0(Icons.Filled.PersonAdd, tr("Добавить контакт"), tr("Номер телефона и каналы связи"), onClick = { editIndex = -1 })
             }
         }
 
-        item { SectionLabel("Сигнал SOS") }
+        item { SectionLabel(tr("Сигнал SOS")) }
         item {
             SettingsGroup {
-                Row0(Icons.Filled.TextSnippet, "Текст сигнала", SecureStore.getSosText(context), onClick = { editText = true })
-                Row0(Icons.Filled.Mic, "Включать запись при SOS", "Звук начнёт записываться сразу после сигнала",
+                Row0(Icons.Filled.TextSnippet, tr("Текст сигнала"), SecureStore.getSosText(context), onClick = { editText = true })
+                Row0(Icons.Filled.Mic, tr("Включать запись при SOS"), tr("Звук начнёт записываться сразу после сигнала"),
                     trailing = { Switch(sosRec, { sosRec = it; SecureStore.setSosRecord(context, it) }) },
                     onClick = { sosRec = !sosRec; SecureStore.setSosRecord(context, sosRec) })
             }
         }
 
-        item { SectionLabel("Безопасность") }
+        item { SectionLabel(tr("Безопасность")) }
         item {
             SettingsGroup {
-                Row0(Icons.Filled.Fingerprint, "Вход по отпечатку",
-                    if (bioHardware) "Быстро и без ввода PIN" else "На устройстве нет настроенного отпечатка",
+                Row0(Icons.Filled.Fingerprint, tr("Вход по отпечатку"),
+                    if (bioHardware) tr("Быстро и без ввода PIN") else tr("На устройстве нет настроенного отпечатка"),
                     trailing = { Switch(bio, { bio = it; SecureStore.setBiometricEnabled(context, it) }, enabled = bioHardware) },
                     onClick = { if (bioHardware) { bio = !bio; SecureStore.setBiometricEnabled(context, bio) } })
-                Row0(Icons.Filled.VisibilityOff, "Скрывать содержимое",
-                    "Запрет скриншотов и пустая миниатюра в списке недавних приложений",
+                Row0(Icons.Filled.VisibilityOff, tr("Скрывать содержимое"),
+                    tr("Запрет скриншотов и пустая миниатюра в списке недавних приложений"),
                     trailing = { Switch(secure, { secure = it; SecureStore.setSecureScreen(context, it); activity?.applySecureFlag() }) },
                     onClick = { secure = !secure; SecureStore.setSecureScreen(context, secure); activity?.applySecureFlag() })
-                Row0(Icons.Filled.BatteryChargingFull, "Работа в фоне",
-                    if (bgOk) "Энергосбережение не ограничивает DTM"
-                    else "Разрешите работу без ограничений, чтобы запись, SOS и напоминания не останавливались системой",
+                Row0(Icons.Filled.BatteryChargingFull, tr("Работа в фоне"),
+                    if (bgOk) tr("Энергосбережение не ограничивает DTM")
+                    else tr("Разрешите работу без ограничений, чтобы запись, SOS и напоминания не останавливались системой"),
                     onClick = {
                         runCatching {
                             context.startActivity(android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
@@ -178,30 +180,30 @@ fun SettingsScreen(onBack: () -> Unit) {
                             runCatching { context.startActivity(android.content.Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
                         }
                     })
-                Row0(Icons.Filled.Password, "Сменить PIN-код", "4–8 цифр", onClick = { changePin = true })
+                Row0(Icons.Filled.Password, tr("Сменить PIN-код"), tr("4–8 цифр"), onClick = { changePin = true })
                 Row0(Icons.Filled.Warning,
-                    if (duressSet) "Тревожный PIN включён" else "Тревожный PIN",
-                    "Открывает безобидный блокнот вместо настоящих данных. Введите его, если заставляют показать приложение",
+                    if (duressSet) tr("Тревожный PIN включён") else tr("Тревожный PIN"),
+                    tr("Открывает безобидный блокнот вместо настоящих данных. Введите его, если заставляют показать приложение"),
                     trailing = if (duressSet) ({
                         androidx.compose.material3.TextButton(onClick = {
-                            SecureStore.setDuressPin(context, null); duressSet = false; say("Тревожный PIN удалён")
-                        }) { Text("Убрать") }
+                            SecureStore.setDuressPin(context, null); duressSet = false; say(tr("Тревожный PIN удалён"))
+                        }) { Text(tr("Убрать")) }
                     }) else null,
                     onClick = { setDuress = true })
             }
         }
 
-        item { SectionLabel("Оформление") }
+        item { SectionLabel(tr("Оформление")) }
         item {
             SettingsGroup {
                 Column(Modifier.padding(16.dp)) {
                     Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
                         Icon(Icons.Filled.Palette, null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         Spacer(Modifier.width(16.dp))
-                        Text("Тема", style = MaterialTheme.typography.bodyLarge)
+                        Text(tr("Тема"), style = MaterialTheme.typography.bodyLarge)
                     }
                     Spacer(Modifier.height(12.dp))
-                    val labels = listOf("Тёмная", "Как в системе", "Светлая")
+                    val labels = listOf(tr("Тёмная"), tr("Как в системе"), tr("Светлая"))
                     SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
                         labels.forEachIndexed { i, l ->
                             SegmentedButton(
@@ -215,64 +217,64 @@ fun SettingsScreen(onBack: () -> Unit) {
             }
         }
 
-        item { SectionLabel("Резервная копия") }
+        item { SectionLabel(tr("Резервная копия")) }
         item {
             SettingsGroup {
                 ExportAction { start ->
-                    Row0(Icons.Filled.CloudUpload, "Создать резервную копию",
-                        "Все данные в один файл, зашифрованный вашим паролем. Сохраните его вне телефона — тогда после удаления приложения всё можно вернуть",
+                    Row0(Icons.Filled.CloudUpload, tr("Создать резервную копию"),
+                        tr("Все данные в один файл, зашифрованный вашим паролем. Сохраните его вне телефона — тогда после удаления приложения всё можно вернуть"),
                         onClick = start)
                 }
                 RestoreAction(onRestored = { activity?.restartApp() }) { start ->
-                    Row0(Icons.Filled.CloudDownload, "Восстановить из копии",
-                        "Выбрать файл копии и ввести пароль", onClick = start)
+                    Row0(Icons.Filled.CloudDownload, tr("Восстановить из копии"),
+                        tr("Выбрать файл копии и ввести пароль"), onClick = start)
                 }
             }
         }
 
-        item { SectionLabel("Удаление данных") }
+        item { SectionLabel(tr("Удаление данных")) }
         item {
             SettingsGroup {
-                Row0(Icons.Filled.DeleteForever, "Удалить все данные",
-                    "Записи, дневник, сейф, контакты и PIN-код будут стёрты без возможности восстановления",
+                Row0(Icons.Filled.DeleteForever, tr("Удалить все данные"),
+                    tr("Записи, дневник, сейф, контакты и PIN-код будут стёрты без возможности восстановления"),
                     onClick = { wipeAsk = true })
             }
         }
 
         if (cloud.amnezia.dtm.CrashLogger.hasCrash(context)) {
-            item { SectionLabel("Диагностика") }
+            item { SectionLabel(tr("Диагностика")) }
             item {
                 SettingsGroup {
-                    Row0(Icons.Filled.BugReport, "Отправить отчёт об ошибке",
-                        "Приложение недавно аварийно закрылось. Отправьте отчёт разработчику — это поможет починить",
+                    Row0(Icons.Filled.BugReport, tr("Отправить отчёт об ошибке"),
+                        tr("Приложение недавно аварийно закрылось. Отправьте отчёт разработчику — это поможет починить"),
                         onClick = {
                             runCatching {
                                 val src = cloud.amnezia.dtm.CrashLogger.logFile(context)
                                 val out = java.io.File(cloud.amnezia.dtm.data.Crypto.viewDir(context), "crash.txt")
                                 src.copyTo(out, overwrite = true)
                                 cloud.amnezia.dtm.CrashLogger.clear(context) // пункт исчезнет до следующего сбоя
-                                shareFile(context, out, "Отчёт об ошибке")
+                                shareFile(context, out, tr("Отчёт об ошибке"))
                             }
                         })
                 }
             }
         }
 
-        item { SectionLabel("О приложении") }
+        item { SectionLabel(tr("О приложении")) }
         item {
             SettingsGroup {
                 UpdateAction { start ->
-                    Row0(Icons.Filled.SystemUpdate, "Проверить обновления",
-                        "Новые версии публикуются на GitHub", onClick = start)
+                    Row0(Icons.Filled.SystemUpdate, tr("Проверить обновления"),
+                        tr("Новые версии публикуются на GitHub"), onClick = start)
                 }
-                Row0(Icons.Filled.SystemUpdate, "Предлагать обновления автоматически",
-                    "При каждом входе. Приложение обращается только к github.com",
+                Row0(Icons.Filled.SystemUpdate, tr("Предлагать обновления автоматически"),
+                    tr("При каждом входе. Приложение обращается только к github.com"),
                     trailing = { Switch(autoUpdate, { autoUpdate = it; cloud.amnezia.dtm.data.Updater.setAuto(context, it) }) },
                     onClick = { autoUpdate = !autoUpdate; cloud.amnezia.dtm.data.Updater.setAuto(context, autoUpdate) })
-                Row0(Icons.Filled.Warning, "Важная информация", "Ограничения приложения", onClick = { showDisclaimer = true })
+                Row0(Icons.Filled.Warning, tr("Важная информация"), tr("Ограничения приложения"), onClick = { showDisclaimer = true })
                 Row0(Icons.Filled.Info, "DTM ${BuildConfig.VERSION_NAME}",
-                    "Все данные хранятся только на этом устройстве в зашифрованном виде. Резервное копирование в облако отключено. " +
-                        "Удаление приложения безвозвратно удалит все записи.")
+                    tr("Все данные хранятся только на этом устройстве в зашифрованном виде. Резервное копирование в облако отключено. ") +
+                        tr("Удаление приложения безвозвратно удалит все записи."))
             }
         }
     }
@@ -284,7 +286,7 @@ fun SettingsScreen(onBack: () -> Unit) {
             onSave = { c ->
                 persist(if (idx >= 0) contacts.toMutableList().also { it[idx] = c } else contacts + c)
                 editIndex = null
-                say("Контакт сохранён")
+                say(tr("Контакт сохранён"))
             },
             onDelete = { persist(contacts.filterIndexed { j, _ -> j != idx }); editIndex = null },
             onDismiss = { editIndex = null },
@@ -293,36 +295,36 @@ fun SettingsScreen(onBack: () -> Unit) {
 
     if (showDisclaimer) AlertDialog(
         onDismissRequest = { showDisclaimer = false },
-        title = { Text("Важная информация") },
+        title = { Text(tr("Важная информация")) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 DISCLAIMER_POINTS.forEach { Text("• $it", style = MaterialTheme.typography.bodyMedium) }
             }
         },
-        confirmButton = { TextButton(onClick = { showDisclaimer = false }) { Text("Понятно") } },
+        confirmButton = { TextButton(onClick = { showDisclaimer = false }) { Text(tr("Понятно")) } },
     )
 
     if (editNick) {
         var t by remember { mutableStateOf(nick) }
         AlertDialog(
             onDismissRequest = { editNick = false },
-            title = { Text("Как к вам обращаться") },
+            title = { Text(tr("Как к вам обращаться")) },
             text = {
                 OutlinedTextField(t, { if (it.length <= 40) t = it }, singleLine = true,
-                    placeholder = { Text("Имя или ник") }, modifier = Modifier.fillMaxWidth())
+                    placeholder = { Text(tr("Имя или ник")) }, modifier = Modifier.fillMaxWidth())
             },
             confirmButton = {
-                TextButton(onClick = { SecureStore.setNick(context, t); nick = t.trim(); editNick = false }) { Text("Сохранить") }
+                TextButton(onClick = { SecureStore.setNick(context, t); nick = t.trim(); editNick = false }) { Text(tr("Сохранить")) }
             },
-            dismissButton = { TextButton(onClick = { editNick = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { editNick = false }) { Text(tr("Отмена")) } },
         )
     }
 
     if (wipeAsk) {
         ConfirmDialog(
-            "Удалить все данные?",
-            "Будут удалены все записи, события дневника, файлы сейфа, контакты и настройки. Восстановить их будет невозможно.",
-            "Удалить всё",
+            tr("Удалить все данные?"),
+            tr("Будут удалены все записи, события дневника, файлы сейфа, контакты и настройки. Восстановить их будет невозможно."),
+            tr("Удалить всё"),
             onConfirm = { activity?.wipeAndRestart() },
             onDismiss = { wipeAsk = false },
         )
@@ -332,18 +334,18 @@ fun SettingsScreen(onBack: () -> Unit) {
         var t by remember { mutableStateOf(SecureStore.getSosText(context)) }
         AlertDialog(
             onDismissRequest = { editText = false },
-            title = { Text("Текст сигнала") },
+            title = { Text(tr("Текст сигнала")) },
             text = {
                 Column {
                     OutlinedTextField(t, { t = it }, minLines = 3, modifier = Modifier.fillMaxWidth())
                     Spacer(Modifier.height(8.dp))
-                    Text("Ссылка на геолокацию добавится автоматически.", style = MaterialTheme.typography.bodySmall)
+                    Text(tr("Ссылка на геолокацию добавится автоматически."), style = MaterialTheme.typography.bodySmall)
                 }
             },
             confirmButton = {
-                TextButton(onClick = { SecureStore.setSosText(context, t.ifBlank { SecureStore.DEFAULT_SOS_TEXT }); editText = false }) { Text("Сохранить") }
+                TextButton(onClick = { SecureStore.setSosText(context, t.ifBlank { SecureStore.DEFAULT_SOS_TEXT }); editText = false }) { Text(tr("Сохранить")) }
             },
-            dismissButton = { TextButton(onClick = { editText = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { editText = false }) { Text(tr("Отмена")) } },
         )
     }
 
@@ -359,24 +361,24 @@ fun SettingsScreen(onBack: () -> Unit) {
         val valid = p1.length == need && p1 == p2 && !sameAsReal
         AlertDialog(
             onDismissRequest = { setDuress = false },
-            title = { Text("Тревожный PIN") },
+            title = { Text(tr("Тревожный PIN")) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("Этот PIN откроет безобидный блокнот вместо настоящего приложения. " +
-                        "Он должен отличаться от основного и состоять из $need цифр — как основной.",
+                    Text(tr("Этот PIN откроет безобидный блокнот вместо настоящего приложения. ") +
+                        tr("Он должен отличаться от основного и состоять из %1\$s цифр — как основной.", need),
                         style = MaterialTheme.typography.bodyMedium)
-                    PinField(p1, { if (it.length <= need) p1 = it }, "Тревожный PIN ($need цифр)")
-                    PinField(p2, { if (it.length <= need) p2 = it }, "Повторите")
-                    if (sameAsReal) Text("Должен отличаться от основного PIN", color = MaterialTheme.colorScheme.error,
+                    PinField(p1, { if (it.length <= need) p1 = it }, tr("Тревожный PIN (%1\$s цифр)", need))
+                    PinField(p2, { if (it.length <= need) p2 = it }, tr("Повторите"))
+                    if (sameAsReal) Text(tr("Должен отличаться от основного PIN"), color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.bodySmall)
                 }
             },
             confirmButton = {
                 TextButton(enabled = valid, onClick = {
-                    SecureStore.setDuressPin(context, p1); duressSet = true; setDuress = false; say("Тревожный PIN сохранён")
-                }) { Text("Сохранить") }
+                    SecureStore.setDuressPin(context, p1); duressSet = true; setDuress = false; say(tr("Тревожный PIN сохранён"))
+                }) { Text(tr("Сохранить")) }
             },
-            dismissButton = { TextButton(onClick = { setDuress = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { setDuress = false }) { Text(tr("Отмена")) } },
         )
     }
 
@@ -386,13 +388,13 @@ fun SettingsScreen(onBack: () -> Unit) {
         val valid = p1.length in 4..8 && p1 == p2
         AlertDialog(
             onDismissRequest = { changePin = false },
-            title = { Text("Новый PIN-код") },
+            title = { Text(tr("Новый PIN-код")) },
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    PinField(p1, { p1 = it }, "PIN (4–8 цифр)")
-                    PinField(p2, { p2 = it }, "Повторите PIN")
+                    PinField(p1, { p1 = it }, tr("PIN (4–8 цифр)"))
+                    PinField(p2, { p2 = it }, tr("Повторите PIN"))
                     if (p2.length >= p1.length && p2.isNotEmpty() && p1 != p2)
-                        Text("PIN-коды не совпадают", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
+                        Text(tr("PIN-коды не совпадают"), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
                 }
             },
             confirmButton = {
@@ -405,12 +407,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                         // Тревожный PIN другой длины или совпадающий с новым основным — убираем и предупреждаем.
                         if (duressSet && (p1.length != oldLen || clash)) {
                             SecureStore.setDuressPin(context, null); duressSet = false
-                            snack.showSnackbar("PIN-код обновлён. Тревожный PIN сброшен — задайте его заново той же длины")
-                        } else snack.showSnackbar("PIN-код обновлён")
+                            snack.showSnackbar(tr("PIN-код обновлён. Тревожный PIN сброшен — задайте его заново той же длины"))
+                        } else snack.showSnackbar(tr("PIN-код обновлён"))
                     }
-                }) { Text("Сохранить") }
+                }) { Text(tr("Сохранить")) }
             },
-            dismissButton = { TextButton(onClick = { changePin = false }) { Text("Отмена") } },
+            dismissButton = { TextButton(onClick = { changePin = false }) { Text(tr("Отмена")) } },
         )
     }
 }
@@ -489,31 +491,31 @@ private fun ContactSheet(
                 .padding(horizontal = 20.dp).padding(bottom = 20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(if (canDelete) "Контакт" else "Новый контакт", style = MaterialTheme.typography.headlineSmall)
+            Text(if (canDelete) tr("Контакт") else tr("Новый контакт"), style = MaterialTheme.typography.headlineSmall)
             OutlinedButton(
                 onClick = {
                     runCatching { pick.launch(Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI)) }
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { Icon(Icons.Filled.Contacts, null); Spacer(Modifier.width(8.dp)); Text("Выбрать из телефонной книги") }
-            OutlinedTextField(name, { name = it }, label = { Text("Имя") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+            ) { Icon(Icons.Filled.Contacts, null); Spacer(Modifier.width(8.dp)); Text(tr("Выбрать из телефонной книги")) }
+            OutlinedTextField(name, { name = it }, label = { Text(tr("Имя")) }, singleLine = true, modifier = Modifier.fillMaxWidth())
             OutlinedTextField(
-                phone, { phone = it }, label = { Text("Телефон") }, placeholder = { Text("+7 900 000-00-00") },
+                phone, { phone = it }, label = { Text(tr("Телефон")) }, placeholder = { Text("+7 900 000-00-00") },
                 singleLine = true, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 modifier = Modifier.fillMaxWidth(),
             )
-            Text("Куда отправлять сигнал", style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
-            ChannelRow(Icons.Filled.Sms, "СМС", "Уходит автоматически", sms) { sms = it }
-            ChannelRow(Icons.AutoMirrored.Filled.Send, "WhatsApp", "Откроется чат с готовым текстом", wa) { wa = it }
-            ChannelRow(Icons.AutoMirrored.Filled.Send, "Telegram", "Готовый текст, нужно выбрать чат", tg) { tg = it }
+            Text(tr("Куда отправлять сигнал"), style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.primary)
+            ChannelRow(Icons.Filled.Sms, tr("СМС"), tr("Уходит автоматически"), sms) { sms = it }
+            ChannelRow(Icons.AutoMirrored.Filled.Send, "WhatsApp", tr("Откроется чат с готовым текстом"), wa) { wa = it }
+            ChannelRow(Icons.AutoMirrored.Filled.Send, "Telegram", tr("Готовый текст, нужно выбрать чат"), tg) { tg = it }
             Button(
                 onClick = { onSave(TrustedContact(name.trim(), phone.trim(), sms = sms, whatsapp = wa, tg = tg)) },
                 enabled = valid,
                 modifier = Modifier.fillMaxWidth().height(52.dp),
-            ) { Text("Сохранить") }
+            ) { Text(tr("Сохранить")) }
             if (canDelete) TextButton(onClick = onDelete, modifier = Modifier.fillMaxWidth()) {
                 Icon(Icons.Filled.Delete, null, tint = MaterialTheme.colorScheme.error); Spacer(Modifier.width(8.dp))
-                Text("Удалить контакт", color = MaterialTheme.colorScheme.error)
+                Text(tr("Удалить контакт"), color = MaterialTheme.colorScheme.error)
             }
         }
     }

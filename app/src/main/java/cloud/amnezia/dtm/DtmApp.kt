@@ -7,6 +7,7 @@ import cloud.amnezia.dtm.data.SecureStore
 class DtmApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        I18n.app = this
         CrashLogger.install(this)
         // Открываем Keystore и стираем старые временные копии в фоне, пока рисуется первый кадр.
         Thread {

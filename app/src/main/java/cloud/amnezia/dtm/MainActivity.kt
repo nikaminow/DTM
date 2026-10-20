@@ -154,9 +154,9 @@ class MainActivity : FragmentActivity() {
             })
         prompt.authenticate(
             BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Вход в DTM")
-                .setSubtitle("Приложите палец к сканеру")
-                .setNegativeButtonText("Ввести PIN")
+                .setTitle(tr("Вход в DTM"))
+                .setSubtitle(tr("Приложите палец к сканеру"))
+                .setNegativeButtonText(tr("Ввести PIN"))
                 .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
                 .build()
         )
