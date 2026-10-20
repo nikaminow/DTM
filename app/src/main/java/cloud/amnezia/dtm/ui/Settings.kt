@@ -24,6 +24,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.BatteryChargingFull
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.CloudUpload
@@ -106,6 +107,7 @@ fun SettingsScreen(onBack: () -> Unit) {
     var nick by remember { mutableStateOf(SecureStore.nick(context)) }
     var editNick by remember { mutableStateOf(false) }
     var showDisclaimer by remember { mutableStateOf(false) }
+    val bgOk = remember { context.getSystemService(android.os.PowerManager::class.java).isIgnoringBatteryOptimizations(context.packageName) }
     var autoUpdate by remember { mutableStateOf(cloud.amnezia.dtm.data.Updater.isAuto(context)) }
     val bioHardware = remember { activity?.biometricHardware() == true }
 
@@ -165,6 +167,17 @@ fun SettingsScreen(onBack: () -> Unit) {
                     "Запрет скриншотов и пустая миниатюра в списке недавних приложений",
                     trailing = { Switch(secure, { secure = it; SecureStore.setSecureScreen(context, it); activity?.applySecureFlag() }) },
                     onClick = { secure = !secure; SecureStore.setSecureScreen(context, secure); activity?.applySecureFlag() })
+                Row0(Icons.Filled.BatteryChargingFull, "Работа в фоне",
+                    if (bgOk) "Энергосбережение не ограничивает DTM"
+                    else "Разрешите работу без ограничений, чтобы запись, SOS и напоминания не останавливались системой",
+                    onClick = {
+                        runCatching {
+                            context.startActivity(android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                                android.net.Uri.parse("package:" + context.packageName)))
+                        }.onFailure {
+                            runCatching { context.startActivity(android.content.Intent(android.provider.Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)) }
+                        }
+                    })
                 Row0(Icons.Filled.Password, "Сменить PIN-код", "4–8 цифр", onClick = { changePin = true })
                 Row0(Icons.Filled.Warning,
                     if (duressSet) "Тревожный PIN включён" else "Тревожный PIN",

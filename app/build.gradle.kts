@@ -5,7 +5,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-// Ключ подписи хранится вне репозитория: keystore.properties в корне проекта.
 val keystoreProps = Properties().apply {
     val f = rootProject.file("keystore.properties")
     if (f.exists()) f.inputStream().use { load(it) }
@@ -19,8 +18,8 @@ android {
         applicationId = "cloud.amnezia.dtm"
         minSdk = 26
         targetSdk = 34
-        versionCode = 21
-        versionName = "5.7"
+        versionCode = 22
+        versionName = "5.8"
         resourceConfigurations += listOf("ru", "en")
     }
 
@@ -35,7 +34,6 @@ android {
 
     buildTypes {
         release {
-            // R8 отключён: он ломал шифрование файлов (Tink). Приложение небольшое, это не критично.
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -77,8 +75,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("androidx.biometric:biometric:1.1.0")
-    // biometric тянет старый fragment 1.2.4 — он ломает запрос разрешений в Compose
-    // («Can only use lower 16 bits for requestCode»). Поднимаем до совместимого.
     implementation("androidx.fragment:fragment:1.8.2")
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 }

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DTM — a space where you are safe</title>
+<meta name="description" content="DTM is a free Android app for people experiencing domestic abuse: SOS with location, an encrypted vault for evidence, journals and support tools. All data stays on the phone.">
+<meta name="referrer" content="no-referrer">
+<meta property="og:title" content="DTM — a space where you are safe">
+<meta property="og:description" content="Free Android app: SOS, an encrypted evidence vault, journals and support. No accounts, ads or servers.">
+<meta property="og:image" content="https://nikaminow.github.io/DTM/logo.png">
+<link rel="alternate" hreflang="ru" href="https://nikaminow.github.io/DTM/">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="exit" id="exit" type="button">Quick exit <small>Esc</small></button>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#"><img src="logo.svg" alt=""> DTM</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+      <a href="#arch">Security</a>
+    </nav>
+    <a class="langsw" href="index.html" hreflang="ru">RU</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="pill">Free · no ads · open source</span>
+      <h1>A space where you are <em>safe</em></h1>
+      <p class="lead">DTM helps people experiencing domestic abuse: send an alert to people they trust, keep evidence and find support in a hard moment. Everything stays only on your phone.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/nikaminow/DTM/releases/latest/download/DTM.apk">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>
+          Download for Android
+        </a>
+        <a class="btn btn-soft" href="https://github.com/nikaminow/DTM">Source code</a>
+      </div>
+      <p class="meta">Android 8.0+ · updates arrive inside the app · interface currently in Russian</p>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <h4>Hi 👋</h4>
+        <p class="sub">You are in control here. Nothing leaves the device without your decision.</p>
+        <div class="m-card"><b>How are you now?</b>
+          <div class="m-mood"><span>🙁</span><span class="on">😐</span><span>🙂</span></div>
+        </div>
+        <div class="m-card m-sos"><i>SOS</i><div><b>Alert</b><small>2 trusted contacts</small></div></div>
+        <div class="m-row">
+          <div class="m-tile"><b>Progress</b><small>chart</small></div>
+          <div class="m-tile"><b>Dreams</b><small>dream diary</small></div>
+          <div class="m-tile"><b>Modes</b><small>schema therapy</small></div>
+          <div class="m-tile"><b>Thoughts</b><small>situation → feelings</small></div>
+        </div>
+        <div class="m-bar"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust reveal">
+    <span>🔒 AES-256 encryption</span>
+    <span>📵 No accounts</span>
+    <span>🚫 No ads or analytics</span>
+    <span>🖥️ No servers</span>
+    <span>💚 Open source (GPL v3)</span>
+  </div>
+
+  <section id="features">
+    <div class="kicker">Features</div>
+    <h2>Everything important in one calm place</h2>
+    <p class="section-lead">Tools for hard moments and for everyday self-care. No pressure.</p>
+    <div class="grid">
+      <article class="card reveal"><div class="ico clay">🛡️</div><h3>Alert</h3>
+        <p>Hold the SOS button and trusted people get a text message with your location. Ready messages for WhatsApp and Telegram, emergency call in one tap.</p></article>
+      <article class="card reveal"><div class="ico sage">🎙️</div><h3>Evidence</h3>
+        <p>Background voice recorder, a vault for documents and injury photos, an incident journal with attachments. Each file gets a date, a SHA-256 fingerprint and coordinates.</p></article>
+      <article class="card reveal"><div class="ico slate">🗝️</div><h3>Privacy from prying eyes</h3>
+        <p>PIN and fingerprint login, a duress PIN that opens a harmless notepad, quick exit and screenshot blocking.</p></article>
+      <article class="card reveal"><div class="ico sage">🌿</div><h3>Support</h3>
+        <p>DBT and CBT cards, grounding, help with panic and flashbacks, a voice guide, breathing exercises and a safety plan.</p></article>
+      <article class="card reveal"><div class="ico slate">📔</div><h3>Journals</h3>
+        <p>Mood check-ins with a chart, a dream diary, a schema-therapy modes diary, a thought record and a calendar with reminders.</p></article>
+      <article class="card reveal"><div class="ico clay">⚖️</div><h3>Rights under 18</h3>
+        <p>Step-by-step guides for teenagers in Russia: if a passport was taken, if the police do not help, if child services do nothing.</p></article>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <div class="split">
+      <div class="card reveal">
+        <div class="kicker">Privacy</div>
+        <h2>Your data belongs only to you</h2>
+        <p>We cannot see anything you store in DTM — there are simply no servers for it to go to.</p>
+      </div>
+      <div class="card reveal">
+        <ul class="check">
+          <li>Recordings, documents and journals stay on the phone, encrypted with a key from Android's secure storage.</li>
+          <li>No sign-up, phone number or email.</li>
+          <li>Android cloud backup is disabled — data never goes to Google.</li>
+          <li>Backups are created only by you and encrypted with your password.</li>
+          <li>The code is open, so anyone can verify what the app does.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="kicker">Install</div>
+    <h2>Three steps to your own space</h2>
+    <p class="section-lead">The app is distributed directly, without an app store.</p>
+    <div class="steps">
+      <div class="card step reveal"><h3>Download</h3><p>Tap “Download for Android”. The file <b>DTM.apk</b> will download.</p></div>
+      <div class="card step reveal"><h3>Allow install</h3><p>Open the file. Android will ask to allow installs from this source — allow it.</p></div>
+      <div class="card step reveal"><h3>Set a PIN</h3><p>Read the important notice and choose a PIN only you know.</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="kicker">FAQ</div>
+    <h2>Questions</h2>
+    <details class="reveal"><summary>Is it free?</summary><p>Yes, completely. No ads, subscriptions or paid features.</p></details>
+    <details class="reveal"><summary>Is there an English interface?</summary><p>Not yet — the app is in Russian for now. English localization is planned.</p></details>
+    <details class="reveal"><summary>What happens to my data if I uninstall?</summary><p>It is deleted with the app. Create a backup in settings and keep the file outside the phone.</p></details>
+    <details class="reveal"><summary>Can recordings be used as evidence?</summary><p>DTM records network time, coordinates and a SHA-256 fingerprint of each file and builds a report for a lawyer. Whether materials are accepted is decided by a court or investigators. Ask a lawyer.</p></details>
+    <details class="reveal"><summary>Is there an iPhone version?</summary><p>Not yet — Android 8.0 and newer only.</p></details>
+  </section>
+
+  <section id="arch">
+    <div class="kicker">Architecture &amp; security</div>
+    <h2>Zero-server: there is nowhere for your data to leak</h2>
+    <p class="section-lead">DTM has no servers, accounts or analytics. Everything runs and is stored on the phone, and the source code is open for review.</p>
+    <div class="grid">
+      <article class="card reveal"><div class="ico sage">🔑</div><h3>Key in Android Keystore</h3>
+        <p>An AES-256-GCM master key is generated on the device and kept in Android Keystore — hardware-backed on supported phones. It cannot be extracted.</p></article>
+      <article class="card reveal"><div class="ico slate">🗄️</div><h3>Everything encrypted</h3>
+        <p>Files: AES-256-GCM with HKDF in 4 KB segments (Google Tink). Settings: AES-256-SIV for keys and AES-256-GCM for values. No plaintext copies on disk.</p></article>
+      <article class="card reveal"><div class="ico clay">🔢</div><h3>PIN</h3>
+        <p>Stored only as a hash: random salt and 20,000 SHA-256 iterations. After 5 wrong attempts login is locked with a growing delay.</p></article>
+      <article class="card reveal"><div class="ico sage">💾</div><h3>Backups</h3>
+        <p>Key derived from your password with PBKDF2-HMAC-SHA256, 150,000 iterations; data encrypted with AES-256-GCM in 64 KB chunks. Without the password nobody can open it, including the developer.</p></article>
+      <article class="card reveal"><div class="ico slate">🧾</div><h3>Evidence integrity</h3>
+        <p>Each recording and photo gets a SHA-256 fingerprint, time from a network time server (SNTP) and coordinates. Changing a single byte changes the fingerprint.</p></article>
+      <article class="card reveal"><div class="ico clay">🌐</div><h3>Network only when needed</h3>
+        <p>The app goes online only for accurate time, when sending SOS and when checking GitHub for updates. Android cloud backup and screenshots are blocked.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <div class="card important reveal">
+      <h2 style="margin-top:0">Important</h2>
+      <ul>
+        <li>DTM is a support tool. It helps but cannot guarantee safety.</li>
+        <li>SOS delivery is not guaranteed: it depends on network coverage, phone settings and SMS, WhatsApp and Telegram.</li>
+        <li>DTM does not replace a psychotherapist, psychologist or doctor and is not medical or legal advice.</li>
+        <li>Whether recordings, photos and reports are accepted as evidence is decided by a court or investigators. The fingerprint and time prove a file is unchanged, not that it will be accepted.</li>
+        <li>Laws on recording conversations differ between countries. Check what is allowed where you live.</li>
+        <li>Location may be inaccurate or unavailable. Without internet, device time is used instead of network time.</li>
+        <li>The software is provided “as is”, without warranty of any kind (GNU GPL v3). The developers are not liable for consequences of its use.</li>
+      </ul>
+      <div class="phones">
+        <a href="tel:112"><small>Emergency</small><b>112</b><small>EU, Russia and many other countries</small></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="final reveal">
+    <img src="logo.svg" alt="">
+    <h2>You are not alone</h2>
+    <p class="section-lead" style="margin:0 auto 28px">Taking the first step is hard. Let there be something that supports you.</p>
+    <a class="btn btn-primary" href="https://github.com/nikaminow/DTM/releases/latest/download/DTM.apk">Download DTM</a>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© DTM · GNU GPL v3</span>
+    <span><a href="https://github.com/nikaminow/DTM">GitHub</a> · <a href="https://github.com/nikaminow/DTM/releases">All versions</a></span>
+  </div>
+</footer>
+
+<script>
+  function leave() { window.location.replace("https://www.bbc.com/weather"); }
+  document.getElementById("exit").addEventListener("click", leave);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") leave(); });
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (items) {
+    items.forEach(function (it) { if (it.isIntersecting) { it.target.classList.add("in"); io.unobserve(it.target); } });
+  }, { threshold: 0.12 }) : null;
+  document.querySelectorAll(".reveal").forEach(function (el) { io ? io.observe(el) : el.classList.add("in"); });
+</script>
+</body>
+</html>
