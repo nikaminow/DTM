@@ -49,13 +49,13 @@
   .exit small { font-weight: 600; opacity: .7; }
 
   header.top { padding: 18px 0; }
-  .nav { display: flex; align-items: center; gap: 24px; padding-right: 170px; }
+  .nav { display: flex; align-items: center; gap: 24px; padding-right: 240px; }
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 22px; text-decoration: none; }
   .brand img { width: 40px; height: 40px; }
   .nav nav { display: flex; gap: 20px; margin-left: auto; }
   .nav nav a { text-decoration: none; color: var(--muted); font-weight: 700; font-size: 15px; }
   .nav nav a:hover { color: var(--ink); }
-  @media (max-width: 860px) { .nav nav { display: none; } .nav { padding-right: 150px; } }
+  @media (max-width: 860px) { .nav nav { display: none; } .nav { padding-right: 200px; } }
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -79,7 +79,7 @@
     .cta .btn { flex: 1 1 100%; }
     .exit { padding: 10px 14px; }
     .exit small { display: none; }
-    .nav { padding-right: 130px; }
+    .nav { padding-right: 170px; }
   }
   .pill {
     display: inline-flex; gap: 8px; align-items: center; padding: 8px 14px; border-radius: 999px;
@@ -191,5 +191,5 @@
   .lang { position: fixed; top: 14px; left: 14px; z-index: 50; display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px; box-shadow: var(--shadow); }
   .lang button { border: 0; background: transparent; cursor: pointer; font: 800 13px/1 "Nunito", sans-serif; color: var(--muted); padding: 7px 12px; border-radius: 999px; }
   .lang button.on { background: var(--sage); color: var(--bg); }
-.langsw{margin-left:auto;text-decoration:none;font-weight:800;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
+.topright{position:fixed;top:14px;right:14px;z-index:50;display:flex;gap:8px;align-items:center}.topright .exit{position:static}.langsw{color:var(--ink);box-shadow:var(--shadow);text-decoration:none;font-weight:800;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
 .nav nav{margin-left:24px}

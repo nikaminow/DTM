@@ -39,7 +39,7 @@
 | **Teens** | Step-by-step legal guides for Russia |
 | **Other** | Password-encrypted backup/restore, in-app updates from GitHub Releases, customizable home screen, light/dark theme |
 
-The interface is currently in **Russian**. English localization is planned.
+The interface is available in **English** and **Russian** (follows the system language).
 
 ## Security architecture
 
