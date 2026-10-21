@@ -128,7 +128,7 @@ val TimerStyle = TextStyle(fontFamily = Nunito, fontSize = 52.sp, fontWeight = F
 
 /** Настройки оформления. 0 — тёмная, 1 — как в системе, 2 — светлая. */
 object UiPrefs {
-    var themeMode by mutableIntStateOf(2)
+    var themeMode by mutableIntStateOf(0)
     var dynamic by mutableStateOf(false)
 }
 

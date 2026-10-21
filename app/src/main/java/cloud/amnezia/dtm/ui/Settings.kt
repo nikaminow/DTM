@@ -28,6 +28,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.BatteryChargingFull
 import androidx.compose.material.icons.filled.BugReport
+import androidx.compose.material.icons.filled.Copyright
+import androidx.compose.material.icons.filled.Tune
 import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.Face
@@ -295,6 +297,11 @@ fun SettingsScreen(onBack: () -> Unit) {
                     trailing = { Switch(autoUpdate, { autoUpdate = it; cloud.amnezia.dtm.data.Updater.setAuto(context, it) }) },
                     onClick = { autoUpdate = !autoUpdate; cloud.amnezia.dtm.data.Updater.setAuto(context, autoUpdate) })
                 Row0(Icons.Filled.Warning, tr("Важная информация"), tr("Ограничения приложения"), onClick = { showDisclaimer = true })
+                Row0(Icons.Filled.Tune, tr("Начальная настройка"), tr("Язык, имя, гендер, тема и главный экран"), onClick = {
+                    context.getSharedPreferences("ui", android.content.Context.MODE_PRIVATE).edit().putBoolean("onboarded", false).commit()
+                    activity?.restartApp()
+                })
+                Row0(Icons.Filled.Copyright, "© 2026 DTM", tr("Свободное ПО под лицензией GNU GPL v3. Исходный код: github.com/nikaminow/DTM"))
                 Row0(Icons.Filled.Info, "DTM ${BuildConfig.VERSION_NAME}",
                     tr("Все данные хранятся только на этом устройстве в зашифрованном виде. Резервное копирование в облако отключено. ") +
                         tr("Удаление приложения безвозвратно удалит все записи."))

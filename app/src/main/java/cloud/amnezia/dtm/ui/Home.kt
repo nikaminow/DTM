@@ -116,7 +116,8 @@ object HomeLayout {
             b to (part.substringAfter(':', "1") == "1")
         }
         // Новые блоки, которых ещё нет в сохранённой раскладке, добавляем в конец.
-        val missing = HomeBlock.entries.filter { b -> saved.none { it.first == b } }.map { it to true }
+        val defaults = setOf(HomeBlock.DBT, HomeBlock.MOOD, HomeBlock.SOS, HomeBlock.QUICK, HomeBlock.TOOLS)
+        val missing = HomeBlock.entries.filter { b -> saved.none { it.first == b } }.map { it to (it in defaults) }
         return missing.filter { it.first == HomeBlock.DBT } + saved + missing.filter { it.first != HomeBlock.DBT }
     }
 

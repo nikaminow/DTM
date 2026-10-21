@@ -154,7 +154,7 @@ object SecureStore {
     fun isSosRecord(context: Context) = prefs(context).getBoolean(K_SOS_RECORD, true)
     fun setSosRecord(context: Context, v: Boolean) = prefs(context).edit().putBoolean(K_SOS_RECORD, v).apply()
 
-    fun themeMode(context: Context) = prefs(context).getInt(K_THEME, 2) // по умолчанию — светлая
+    fun themeMode(context: Context) = prefs(context).getInt(K_THEME, 0) // по умолчанию — светлая
     fun setThemeMode(context: Context, v: Int) = prefs(context).edit().putInt(K_THEME, v).apply()
 
     fun isDynamic(context: Context) = prefs(context).getBoolean(K_DYNAMIC, false)

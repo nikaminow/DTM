@@ -110,6 +110,7 @@ private fun DbtHome(tick: Int, onBack: (() -> Unit)?, openModule: (Int) -> Unit,
         onBack = onBack,
     ) {
         item(key = "hero") { DbtHero(tick, onContinue = { l -> openLesson(l) }, onDiary = openDiary, onCharts = openChart) }
+        item(key = "finder") { SkillFinder(openLesson) }
         items(Dbt.MODULES, key = { it.id }) { m ->
             val (d, t) = Dbt.progress(context, m.id)
             SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth(), onClick = { openModule(m.id) }) {
@@ -155,7 +156,7 @@ private fun DbtLessonView(l: DbtLesson, onBack: () -> Unit, onDone: () -> Unit) 
     var before by remember(l.id) { mutableIntStateOf(5) }
     var after by remember(l.id) { mutableIntStateOf(5) }
 
-    ScreenScaffold(title = l.title, subtitle = l.summary, onBack = onBack, bottomSpace = false) {
+    ScreenScaffold(title = l.title, subtitle = l.summary, onBack = onBack) {
         item { SectionLabel(tr("Теория")) }
         items(l.theory) { p ->
             SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
@@ -249,7 +250,7 @@ private fun DbtDiaryView(onBack: () -> Unit) {
     ScreenScaffold(
         title = tr("Дневник навыков"),
         subtitle = tr("Отмечайте раз в день: эмоции, побуждения и какие навыки применяли. Со временем виден прогресс."),
-        onBack = onBack, bottomSpace = false,
+        onBack = onBack,
     ) {
         item {
             SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {

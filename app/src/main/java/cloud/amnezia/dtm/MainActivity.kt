@@ -29,6 +29,7 @@ class MainActivity : FragmentActivity() {
     private var unlocked by mutableStateOf(false)
     private var decoy by mutableStateOf(false)
     private var disclaimerOk by mutableStateOf(true)
+    private var onboarded by mutableStateOf(true)
     private var requested by mutableStateOf<Route?>(null)
     private var pendingRecord = false
     private var stoppedAt = 0L
@@ -39,6 +40,7 @@ class MainActivity : FragmentActivity() {
         unlocked = savedInstanceState?.getBoolean(KEY_UNLOCKED) ?: false
         UiPrefs.themeMode = SecureStore.themeMode(this)
         disclaimerOk = SecureStore.getBool(this, "disclaimer_ok")
+        onboarded = cloud.amnezia.dtm.ui.Onboard.done(this)
         applySecureFlag()
         if (savedInstanceState == null) handleIntent(intent)
 
@@ -49,6 +51,7 @@ class MainActivity : FragmentActivity() {
                         SecureStore.putBool(this, "disclaimer_ok", true)
                         disclaimerOk = true
                     })
+                    !onboarded -> cloud.amnezia.dtm.ui.OnboardingScreen(onDone = { onboarded = true })
                     decoy -> DecoyScreen()
                     unlocked -> DtmAppUi(
                         requested = requested,
