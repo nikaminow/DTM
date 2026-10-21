@@ -45,6 +45,7 @@ import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Psychology
+import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.SelfImprovement
 import androidx.compose.material.icons.outlined.RecordVoiceOver
 import androidx.compose.material.icons.outlined.ShowChart
@@ -229,6 +230,10 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                             NavTile(tr("Голосовой гид"), tr("заземление голосом"), Icons.Outlined.RecordVoiceOver, Modifier.weight(1f)) { go(Route.AUDIOGUIDE) }
                             NavTile(tr("Медитации"), tr("шум и практики"), Icons.Outlined.SelfImprovement, Modifier.weight(1f)) { go(Route.MEDITATION) }
+                        }
+                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            NavTile(tr("Курс ДПТ"), tr("навыки и дневник"), Icons.Outlined.School, Modifier.weight(1f)) { go(Route.DBT) }
+                            Spacer(Modifier.weight(1f))
                         }
                     }
                     HomeBlock.REALITY -> RealityCard()

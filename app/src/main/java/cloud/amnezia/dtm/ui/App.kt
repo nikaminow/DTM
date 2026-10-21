@@ -85,6 +85,7 @@ enum class Route(val label: String, val icon: ImageVector, val selectedIcon: Ima
     CALENDAR(tr("Календарь"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     AUDIOGUIDE(tr("Голосовой гид"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     MEDITATION(tr("Медитации"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
+    DBT(tr("Курс ДПТ"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     SETTINGS(tr("Настройки"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
 }
 
@@ -133,6 +134,7 @@ fun DtmAppUi(requested: Route?, onRequestHandled: () -> Unit, onQuickExit: () ->
                         Route.CALENDAR -> CalendarScreen(onBack = { route = lastTab })
                         Route.AUDIOGUIDE -> AudioGuideScreen(onBack = { route = lastTab })
                         Route.MEDITATION -> MeditationScreen(onBack = { route = lastTab }, openVoice = { route = Route.AUDIOGUIDE })
+                        Route.DBT -> DbtScreen(onBack = { route = lastTab })
                         Route.SETTINGS -> SettingsScreen(onBack = { route = lastTab })
                     }
                 }
