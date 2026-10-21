@@ -8,6 +8,7 @@ class DtmApp : Application() {
     override fun onCreate() {
         super.onCreate()
         I18n.app = this
+        I18n.apply(this)
         CrashLogger.install(this)
         // Открываем Keystore и стираем старые временные копии в фоне, пока рисуется первый кадр.
         Thread {

@@ -4,6 +4,7 @@ import cloud.amnezia.dtm.tr
 
 import android.speech.tts.TextToSpeech
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -60,6 +61,29 @@ private val GUIDES = listOf(
         tr("Почувствуйте опору под ногами. Пошевелите пальцами ног."),
         tr("Вы выросли. Сейчас вы в безопасности. Это чувство пройдёт."),
     )),
+    Guide(tr("От руминаций"), tr("Когда мысли крутятся по кругу"), listOf(
+        tr("Заметьте: мысли снова пошли по кругу. Это не решение проблемы, а мысленная жвачка."),
+        tr("Скажите себе мягко: стоп."),
+        tr("Почувствуйте стопы на полу и вес тела на сиденье."),
+        tr("Вдох на четыре счёта. Задержка на четыре. Долгий выдох на семь."),
+        tr("Ещё раз. Вдох. Задержка. Выдох."),
+        tr("Представьте, что мысль — это облако. Вы не прогоняете её, просто смотрите, как она проплывает."),
+        tr("Скажите себе: об этом подумано достаточно. Базовый вывод сделан."),
+        tr("Часть неопределённости остаётся. Я могу её выдержать."),
+        tr("Верните внимание к тому, что вы делали. Мысль может вернуться — и вы снова её отпустите."),
+    )),
+    Guide(tr("Простить себя"), tr("Бережно к прошлому себе"), listOf(
+        tr("Устройтесь удобно и закройте глаза, если так спокойнее."),
+        tr("Вспомните себя ребёнком в тот трудный период. Посмотрите на этого ребёнка со стороны."),
+        tr("Этот ребёнок жил среди страха и боли. Жестокость, которую он видел, не была его выбором."),
+        tr("Подойдите к нему из сегодняшнего дня — взрослым, сильным, заботливым."),
+        tr("Обнимите его. Скажите: ты не виноват. Тебе было очень страшно."),
+        tr("Скажите: я здесь. Я забираю тебя оттуда. Ты хороший."),
+        tr("Сегодняшняя ваша доброта и забота о других — доказательство того, кто вы на самом деле."),
+        tr("Наказывать себя дальше не нужно. Это не изменит прошлое, а только ранит вас сейчас."),
+        tr("Скажите себе: я прощаю себя. Война окончена."),
+        tr("Сделайте медленный вдох и выдох. Когда будете готовы, откройте глаза."),
+    )),
 )
 
 @Composable
@@ -111,7 +135,7 @@ fun AudioGuideScreen(onBack: () -> Unit) {
     ) {
         item {
             androidx.compose.foundation.layout.Row(
-                Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                Modifier.horizontalScroll(androidx.compose.foundation.rememberScrollState()).padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 GUIDES.forEachIndexed { i, g -> SoftChip(g.title, selected == i) { if (!speaking) selected = i } }
             }

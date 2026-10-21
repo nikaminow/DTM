@@ -217,6 +217,29 @@ fun SettingsScreen(onBack: () -> Unit) {
             }
         }
 
+        item { SectionLabel(tr("Язык")) }
+        item {
+            SettingsGroup {
+                val cur = remember { cloud.amnezia.dtm.I18n.lang(context) }
+                androidx.compose.foundation.layout.Row(
+                    Modifier.padding(16.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    listOf("" to tr("Как в системе"), "ru" to "Русский", "en" to "English").forEach { (code, label) ->
+                        SoftChip(label, cur == code) {
+                            if (cur != code) {
+                                cloud.amnezia.dtm.I18n.set(context, code)
+                                activity?.let { a ->
+                                    a.startActivity(android.content.Intent(a, cloud.amnezia.dtm.MainActivity::class.java)
+                                        .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK))
+                                    android.os.Process.killProcess(android.os.Process.myPid())
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         item { SectionLabel(tr("Резервная копия")) }
         item {
             SettingsGroup {

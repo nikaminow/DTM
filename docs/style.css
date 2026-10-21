@@ -193,3 +193,12 @@
   .lang button.on { background: var(--sage); color: var(--bg); }
 .topright{position:fixed;top:14px;right:14px;z-index:50;display:flex;gap:8px;align-items:center}.topright .exit{position:static}.langsw{color:var(--ink);box-shadow:var(--shadow);text-decoration:none;font-weight:800;font-size:14px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line)}
 .nav nav{margin-left:24px}
+html,body{overflow-x:clip;max-width:100%}
+header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);padding:12px 0}
+.nav{padding-right:20px !important;gap:18px}
+.topright{position:static;margin-left:auto;flex:none}
+.nav nav{margin-left:8px}
+@media (max-width:860px){.nav nav{display:none}}
+@media (max-width:520px){.phone{transform:none;width:min(300px,100%)}.brand{font-size:20px}.brand img{width:34px;height:34px}.topright{gap:6px}.langsw{padding:8px 11px}}@media (max-width:520px){.wrap{padding:0 16px}.nav{gap:10px}.topright .exit{padding:9px 13px;font-size:14px}.topright .exit small{display:none}.langsw{padding:8px 10px;font-size:13px}.brand{gap:8px}}
+.nav{min-width:0}.brand{flex:none}
+@media (max-width:520px){.nav{padding-right:16px !important}}

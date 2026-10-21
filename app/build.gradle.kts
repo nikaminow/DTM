@@ -18,8 +18,8 @@ android {
         applicationId = "cloud.amnezia.dtm"
         minSdk = 26
         targetSdk = 34
-        versionCode = 23
-        versionName = "6.0"
+        versionCode = 24
+        versionName = "6.1"
         resourceConfigurations += listOf("ru", "en")
     }
 

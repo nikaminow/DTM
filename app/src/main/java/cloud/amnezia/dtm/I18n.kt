@@ -5,6 +5,17 @@ import android.content.Context
 object I18n {
     lateinit var app: Context
     val ru: Boolean get() = java.util.Locale.getDefault().language == "ru"
+
+    fun lang(context: Context): String = context.getSharedPreferences("ui", Context.MODE_PRIVATE).getString("lang", "") ?: ""
+
+    fun apply(context: Context) {
+        val l = lang(context)
+        if (l.isNotEmpty()) java.util.Locale.setDefault(java.util.Locale(l))
+    }
+
+    fun set(context: Context, l: String) {
+        context.getSharedPreferences("ui", Context.MODE_PRIVATE).edit().putString("lang", l).commit()
+    }
     val en: Map<String, String> by lazy {
         runCatching {
             app.assets.open("en.tsv").bufferedReader(Charsets.UTF_8).useLines { lines ->
