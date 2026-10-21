@@ -46,6 +46,7 @@ import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material.icons.outlined.Psychology
 import androidx.compose.material.icons.outlined.School
+import androidx.compose.material.icons.outlined.Spa
 import androidx.compose.material.icons.outlined.SelfImprovement
 import androidx.compose.material.icons.outlined.RecordVoiceOver
 import androidx.compose.material.icons.outlined.ShowChart
@@ -92,6 +93,7 @@ import java.util.Locale
 
 /** Блоки главного экрана — их можно скрывать и переставлять. */
 enum class HomeBlock(val title: String) {
+    DBT(tr("Навыки ДПТ")),
     MOOD(tr("Как вы сейчас")),
     WARM(tr("Тёплые слова")),
     SOS(tr("Сигнал тревоги")),
@@ -114,7 +116,8 @@ object HomeLayout {
             b to (part.substringAfter(':', "1") == "1")
         }
         // Новые блоки, которых ещё нет в сохранённой раскладке, добавляем в конец.
-        return saved + HomeBlock.entries.filter { b -> saved.none { it.first == b } }.map { it to true }
+        val missing = HomeBlock.entries.filter { b -> saved.none { it.first == b } }.map { it to true }
+        return missing.filter { it.first == HomeBlock.DBT } + saved + missing.filter { it.first != HomeBlock.DBT }
     }
 
     fun save(context: Context, list: List<Pair<HomeBlock, Boolean>>) {
@@ -177,6 +180,10 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                             lastMood = Tracker.moods(context).lastOrNull()
                         }
                     }
+                    HomeBlock.DBT -> DbtHero(0,
+                        onContinue = { l -> NavFlags.dbtLesson = l.id; go(Route.DBT) },
+                        onDiary = { NavFlags.dbtDiary = true; go(Route.DBT) },
+                        onCharts = { go(Route.DBT) })
                     HomeBlock.WARM -> {
                         var i by remember { mutableIntStateOf(WARM_WORDS.indices.random()) }
                         SoftCard(
@@ -232,7 +239,7 @@ fun HomeScreen(go: (Route) -> Unit, onQuickExit: () -> Unit) {
                             NavTile(tr("Медитации"), tr("шум и практики"), Icons.Outlined.SelfImprovement, Modifier.weight(1f)) { go(Route.MEDITATION) }
                         }
                         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                            NavTile(tr("Курс ДПТ"), tr("навыки и дневник"), Icons.Outlined.School, Modifier.weight(1f)) { go(Route.DBT) }
+                            NavTile(tr("Опора"), tr("карточки и техники"), Icons.Outlined.Spa, Modifier.weight(1f)) { go(Route.SUPPORT) }
                             Spacer(Modifier.weight(1f))
                         }
                     }

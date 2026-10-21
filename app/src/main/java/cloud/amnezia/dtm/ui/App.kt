@@ -42,6 +42,8 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.Spa
+import androidx.compose.material.icons.filled.School
+import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Book
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Lock
@@ -72,10 +74,11 @@ import cloud.amnezia.dtm.Recorder
 
 enum class Route(val label: String, val icon: ImageVector, val selectedIcon: ImageVector, val inBar: Boolean = true) {
     HOME(tr("Главное"), Icons.Outlined.Home, Icons.Filled.Home),
+    DBT(tr("Навыки"), Icons.Outlined.School, Icons.Filled.School),
     RECORD(tr("Запись"), Icons.Outlined.Mic, Icons.Filled.Mic),
     JOURNAL(tr("Дневник"), Icons.Outlined.Book, Icons.Filled.Book),
     VAULT(tr("Сейф"), Icons.Outlined.Lock, Icons.Filled.Lock),
-    SUPPORT(tr("Опора"), Icons.Outlined.Spa, Icons.Filled.Spa),
+    SUPPORT(tr("Опора"), Icons.Outlined.Spa, Icons.Filled.Spa, inBar = false),
     SOS("SOS", Icons.Filled.Shield, Icons.Filled.Shield, inBar = false),
     PROGRESS(tr("Прогресс"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     DREAMS(tr("Сны"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
@@ -85,13 +88,14 @@ enum class Route(val label: String, val icon: ImageVector, val selectedIcon: Ima
     CALENDAR(tr("Календарь"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     AUDIOGUIDE(tr("Голосовой гид"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     MEDITATION(tr("Медитации"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
-    DBT(tr("Курс ДПТ"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
     SETTINGS(tr("Настройки"), Icons.Filled.Home, Icons.Filled.Home, inBar = false),
 }
 
 /** Одноразовые команды между экранами. */
 object NavFlags {
     var openJournalEditor by mutableStateOf(false)
+    var dbtLesson by mutableStateOf<String?>(null)
+    var dbtDiary by mutableStateOf(false)
 }
 
 @Composable
@@ -124,7 +128,7 @@ fun DtmAppUi(requested: Route?, onRequestHandled: () -> Unit, onQuickExit: () ->
                         Route.RECORD -> RecordScreen()
                         Route.JOURNAL -> JournalScreen()
                         Route.VAULT -> VaultScreen()
-                        Route.SUPPORT -> SupportScreen()
+                        Route.SUPPORT -> SupportScreen(onBack = { route = lastTab })
                         Route.SOS -> SosScreen(onBack = { route = lastTab }, openSettings = { go(Route.SETTINGS) })
                         Route.PROGRESS -> ProgressScreen(onBack = { route = lastTab })
                         Route.DREAMS -> DreamScreen(onBack = { route = lastTab })
@@ -134,7 +138,7 @@ fun DtmAppUi(requested: Route?, onRequestHandled: () -> Unit, onQuickExit: () ->
                         Route.CALENDAR -> CalendarScreen(onBack = { route = lastTab })
                         Route.AUDIOGUIDE -> AudioGuideScreen(onBack = { route = lastTab })
                         Route.MEDITATION -> MeditationScreen(onBack = { route = lastTab }, openVoice = { route = Route.AUDIOGUIDE })
-                        Route.DBT -> DbtScreen(onBack = { route = lastTab })
+                        Route.DBT -> DbtScreen(onBack = null)
                         Route.SETTINGS -> SettingsScreen(onBack = { route = lastTab })
                     }
                 }

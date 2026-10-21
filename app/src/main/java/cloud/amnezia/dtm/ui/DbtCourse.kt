@@ -75,16 +75,21 @@ private sealed class DbtView {
 }
 
 @Composable
-fun DbtScreen(onBack: () -> Unit) {
+fun DbtScreen(onBack: (() -> Unit)?) {
     var view by remember { mutableStateOf<DbtView>(DbtView.Home) }
     var tick by remember { mutableIntStateOf(0) }
+    LaunchedEffect(NavFlags.dbtLesson, NavFlags.dbtDiary) {
+        NavFlags.dbtLesson?.let { id -> Dbt.LESSONS.firstOrNull { it.id == id }?.let { view = DbtView.Lesson(it) }; NavFlags.dbtLesson = null }
+        if (NavFlags.dbtDiary) { view = DbtView.Diary; NavFlags.dbtDiary = false }
+    }
     androidx.activity.compose.BackHandler(view !is DbtView.Home) {
         view = if (view is DbtView.Lesson) DbtView.Module((view as DbtView.Lesson).lesson.module) else DbtView.Home
     }
     AnimatedContent(view, transitionSpec = { fadeIn(tween(200)) togetherWith fadeOut(tween(120)) }, label = "dbt") { v ->
         when (v) {
             is DbtView.Home -> DbtHome(tick, onBack,
-                openModule = { view = DbtView.Module(it) }, openDiary = { view = DbtView.Diary }, openChart = { view = DbtView.Chart })
+                openModule = { view = DbtView.Module(it) }, openDiary = { view = DbtView.Diary }, openChart = { view = DbtView.Chart },
+                openLesson = { view = DbtView.Lesson(it) })
             is DbtView.Module -> DbtModuleView(v.id, onBack = { view = DbtView.Home }, open = { view = DbtView.Lesson(it) })
             is DbtView.Lesson -> DbtLessonView(v.lesson, onBack = { view = DbtView.Module(v.lesson.module) }, onDone = { tick++; view = DbtView.Module(v.lesson.module) })
             is DbtView.Diary -> DbtDiaryView(onBack = { view = DbtView.Home })
@@ -94,7 +99,7 @@ fun DbtScreen(onBack: () -> Unit) {
 }
 
 @Composable
-private fun DbtHome(tick: Int, onBack: () -> Unit, openModule: (Int) -> Unit, openDiary: () -> Unit, openChart: () -> Unit) {
+private fun DbtHome(tick: Int, onBack: (() -> Unit)?, openModule: (Int) -> Unit, openDiary: () -> Unit, openChart: () -> Unit, openLesson: (DbtLesson) -> Unit) {
     val context = LocalContext.current
     val cs = MaterialTheme.colorScheme
     val done = remember(tick) { Dbt.done(context) }
@@ -104,26 +109,7 @@ private fun DbtHome(tick: Int, onBack: () -> Unit, openModule: (Int) -> Unit, op
         subtitle = tr("Самостоятельный курс навыков: осознанность, стрессоустойчивость, эмоции и отношения. Проходите в своём темпе."),
         onBack = onBack,
     ) {
-        item {
-            SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth(), color = cs.primaryContainer, contentColor = cs.onPrimaryContainer) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Ring(done.size.toFloat() / total, 64.dp, cs.onPrimaryContainer, cs.primary) {
-                        Text("${done.size}/$total", style = MaterialTheme.typography.labelLarge)
-                    }
-                    Spacer(Modifier.width(16.dp))
-                    Column(Modifier.weight(1f)) {
-                        Text(tr("Ваш прогресс"), style = MaterialTheme.typography.titleLarge)
-                        Text(tr("Пройдено уроков: %1\$s из %2\$s", done.size, total), style = MaterialTheme.typography.bodyMedium)
-                    }
-                }
-            }
-        }
-        item {
-            Row(Modifier.padding(horizontal = 16.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                PillButton(tr("Дневник навыков"), openDiary, Modifier.weight(1f), style = PillStyle.Soft)
-                PillButton(tr("Графики"), openChart, Modifier.weight(1f), style = PillStyle.Soft)
-            }
-        }
+        item(key = "hero") { DbtHero(tick, onContinue = { l -> openLesson(l) }, onDiary = openDiary, onCharts = openChart) }
         items(Dbt.MODULES, key = { it.id }) { m ->
             val (d, t) = Dbt.progress(context, m.id)
             SoftCard(Modifier.padding(horizontal = 16.dp).fillMaxWidth(), onClick = { openModule(m.id) }) {

@@ -369,13 +369,14 @@ val HELP_CARDS = listOf(
 )
 
 @Composable
-fun SupportScreen() {
+fun SupportScreen(onBack: (() -> Unit)? = null) {
     var group by rememberSaveable { mutableStateOf(CardGroup.CRISIS) }
     val cards = remember(group) { HELP_CARDS.filter { it.group == group } }
 
     ScreenScaffold(
         title = tr("Опора"),
         subtitle = tr("Техники для трудных минут. Выберите то, что подходит сейчас."),
+        onBack = onBack,
     ) {
         item {
             Row(
